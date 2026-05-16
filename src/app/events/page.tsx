@@ -70,13 +70,13 @@ export default function EventsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
         >
-          <span className="text-primary mb-6 block uppercase tracking-[0.4em]" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>
+          <span className="text-primary mb-6 block uppercase tracking-[0.4em] text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
             Merkanto Studios Presents
           </span>
           <h1 className="text-on-surface mb-8" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(36px, 8vw, 72px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
             Couture Celebrations. <br />Global Precision.
           </h1>
-          <p className="text-on-surface-variant max-w-2xl mx-auto mb-10" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", md: { fontSize: "18px" }, lineHeight: 1.6 }}>
+          <p className="text-on-surface-variant max-w-2xl mx-auto mb-10 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
             Architectural event design for the world's most discerning visionaries. From high-stakes institutional galas to intimate destination unions.
           </p>
           <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-6">
@@ -100,7 +100,7 @@ export default function EventsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <span className="text-primary uppercase tracking-widest mb-4 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>
+            <span className="text-primary uppercase tracking-widest mb-4 block text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
               01 / Curated Unions
             </span>
             <h2 className="mb-6" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
@@ -113,7 +113,7 @@ export default function EventsPage() {
               {["Bespoke Architectural Altars", "Global Concierge for High-Net-Worth Guests", "Michelin-Level Culinary Choreography"].map((item) => (
                 <li key={item} className="flex items-center gap-4 text-on-surface">
                   <span className="material-symbols-outlined text-primary" style={{ fontSize: "20px", fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", md: { fontSize: "16px" } }}>{item}</span>
+                  <span className="text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{item}</span>
                 </li>
               ))}
             </ul>
@@ -137,8 +137,8 @@ export default function EventsPage() {
               />
             </div>
             <div className="absolute -bottom-10 -left-6 md:-left-10 glass-card p-6 md:p-8 max-w-[280px] md:max-w-xs border border-primary/10">
-              <div className="text-primary mb-2 uppercase tracking-wider" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>LATEST WORK</div>
-              <div className="mb-4" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "20px", md: { fontSize: "24px" }, fontWeight: 500 }}>The Glass Cathedral, Lake Como</div>
+              <div className="text-primary mb-2 uppercase tracking-wider text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>LATEST WORK</div>
+              <div className="mb-4 text-xl md:text-2xl font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>The Glass Cathedral, Lake Como</div>
               <p className="text-on-surface-variant text-xs md:text-sm" style={{ fontFamily: "Inter, sans-serif" }}>A 3-day immersive experience for 200 guests featuring a floating glass pavilion.</p>
             </div>
           </motion.div>
@@ -156,7 +156,7 @@ export default function EventsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-primary uppercase tracking-widest mb-4 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>
+            <span className="text-primary uppercase tracking-widest mb-4 block text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
               02 / Institutional Impact
             </span>
             <h2 style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
@@ -181,7 +181,7 @@ export default function EventsPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60" />
               <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 pr-4">
-                <h3 className="mb-2" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "20px", md: { fontSize: "28px" }, fontWeight: 500 }}>Global Leadership Summits</h3>
+                <h3 className="mb-2 text-xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>Global Leadership Summits</h3>
                 <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>Strategic environments for high-stakes decision making.</p>
               </div>
             </motion.div>
@@ -232,7 +232,7 @@ export default function EventsPage() {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <div className="flex-1">
-                <h3 className="mb-4" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "24px", md: { fontSize: "28px" }, fontWeight: 500 }}>Strategic Production</h3>
+                <h3 className="mb-4 text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>Strategic Production</h3>
                 <p className="text-on-surface-variant mb-6 text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>
                   Full-scale logistics and technical direction for multi-city international tours. We manage the complexity so you can lead the conversation.
                 </p>
@@ -273,7 +273,7 @@ export default function EventsPage() {
             transition={{ duration: 0.7 }}
           >
             <div className="max-w-xl text-center md:text-left">
-              <span className="text-primary uppercase tracking-widest mb-4 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>
+              <span className="text-primary uppercase tracking-widest mb-4 block text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
                 03 / Beyond Borders
               </span>
               <h2 className="mb-8" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
@@ -282,9 +282,9 @@ export default function EventsPage() {
               <div className="space-y-10 md:space-y-12 text-left">
                 {destSteps.map((step) => (
                   <div key={step.num} className="flex gap-6">
-                    <span className="text-primary opacity-30 shrink-0" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "24px", md: { fontSize: "28px" }, fontWeight: 500 }}>{step.num}</span>
+                    <span className="text-primary opacity-30 shrink-0 text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{step.num}</span>
                     <div>
-                      <h4 className="mb-2" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "20px", md: { fontSize: "24px" } }}>{step.title}</h4>
+                      <h4 className="mb-2 text-xl md:text-2xl" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{step.title}</h4>
                       <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{step.desc}</p>
                     </div>
                   </div>
@@ -298,7 +298,7 @@ export default function EventsPage() {
       {/* ─── PRODUCTION & STYLING ─── */}
       <section className="py-[60px] md:py-[120px] px-6 md:px-16 max-w-[1280px] mx-auto">
         <motion.div className="text-center mb-12 md:mb-20" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <span className="text-primary uppercase tracking-widest mb-4 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>
+          <span className="text-primary uppercase tracking-widest mb-4 block text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
             04 / Aesthetic Integrity
           </span>
           <h2 style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>

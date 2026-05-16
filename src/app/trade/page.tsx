@@ -106,7 +106,7 @@ export default function TradePage() {
           animate="visible"
         >
           <div className="max-w-3xl text-center md:text-left">
-            <motion.div variants={fadeInUp} className="inline-block bg-primary/10 border border-primary/20 text-primary px-4 py-1 mb-6 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>
+            <motion.div variants={fadeInUp} className="inline-block bg-primary/10 border border-primary/20 text-primary px-4 py-1 mb-6 uppercase tracking-widest text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
               Architectural Global Precision
             </motion.div>
             <motion.h1
@@ -116,7 +116,7 @@ export default function TradePage() {
             >
               GLOBAL TRADE <br /><span className="text-primary">INTELLIGENCE</span>
             </motion.h1>
-            <motion.p variants={fadeInUp} className="text-on-surface-variant mb-10 max-w-xl mx-auto md:mx-0" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", md: { fontSize: "18px" }, lineHeight: 1.6 }}>
+            <motion.p variants={fadeInUp} className="text-on-surface-variant mb-10 max-w-xl mx-auto md:mx-0 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
               Facilitating elite-scale import and export operations through a secure, premium ecosystem designed for the world's most sophisticated trading partners.
             </motion.p>
             <motion.div variants={fadeInUp} className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
@@ -170,8 +170,8 @@ export default function TradePage() {
                <div className="flex gap-6 md:gap-8">
                   {card.stats.map((s) => (
                     <div key={s.label}>
-                      <div className="text-primary font-bold" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "24px", md: { fontSize: "28px" } }}>{s.value}</div>
-                      <div className="text-on-surface-variant uppercase" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "11px" } }}>{s.label}</div>
+                      <div className="text-primary font-bold text-2xl md:text-[28px]" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{s.value}</div>
+                      <div className="text-on-surface-variant uppercase text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>{s.label}</div>
                     </div>
                   ))}
                 </div>
@@ -193,7 +193,7 @@ export default function TradePage() {
             <h2 className="text-white mb-6" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
               GLOBAL NODE REACH
             </h2>
-            <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-12 text-on-surface-variant uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-12 text-on-surface-variant uppercase tracking-[0.2em] text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
               <span>6 Continents</span>
               <span className="hidden md:block text-primary">•</span>
               <span>42 Nations</span>
@@ -245,8 +245,8 @@ export default function TradePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="text-white mb-1" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "20px", md: { fontSize: "24px" }, fontWeight: 500 }}>{r.label}</div>
-                <div className="text-on-surface-variant" style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", md: { fontSize: "16px" } }}>{r.sub}</div>
+                <div className="text-white mb-1 text-xl md:text-2xl font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{r.label}</div>
+                <div className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{r.sub}</div>
               </motion.div>
             ))}
           </div>
@@ -282,8 +282,8 @@ export default function TradePage() {
                 <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src={item.img} alt={item.title} />
               </div>
               <div className="p-6 md:p-8">
-                <div className="text-primary mb-2 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "11px" } }}>{item.category}</div>
-                <h3 className="text-white mb-4" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "24px", md: { fontSize: "28px" }, fontWeight: 500 }}>{item.title}</h3>
+                <div className="text-primary mb-2 uppercase tracking-widest text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>{item.category}</div>
+                <h3 className="text-white mb-4 text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{item.title}</h3>
                 <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{item.desc}</p>
               </div>
             </motion.div>
@@ -298,7 +298,7 @@ export default function TradePage() {
             <h2 className="text-white mb-6" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
               STRATEGIC PARTNERSHIP PROTOCOL
             </h2>
-            <p className="text-on-surface-variant mb-10" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", md: { fontSize: "18px" }, lineHeight: 1.6 }}>
+            <p className="text-on-surface-variant mb-10 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
               Join an elite network of global trade entities. We offer bespoke partnership frameworks designed for institutional investors, manufacturing giants, and sovereign logistics providers.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-6 text-left">
@@ -311,8 +311,8 @@ export default function TradePage() {
                 <div key={item.title} className="flex items-start gap-4 mx-auto md:mx-0 max-w-[280px] md:max-w-none">
                   <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1", fontSize: "20px" }}>check_circle</span>
                   <div>
-                    <div className="text-white uppercase mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px", md: { fontSize: "12px" } }}>{item.title}</div>
-                    <div className="text-on-surface-variant" style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", md: { fontSize: "16px" } }}>{item.desc}</div>
+                    <div className="text-white uppercase mb-1 text-[11px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>{item.title}</div>
+                    <div className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{item.desc}</div>
                   </div>
                 </div>
               ))}
@@ -327,21 +327,21 @@ export default function TradePage() {
             transition={{ duration: 0.6 }}
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl -mr-16 -mt-16" />
-            <h3 className="text-white mb-8" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "24px", md: { fontSize: "28px" }, fontWeight: 500 }}>INITIATE INQUIRY</h3>
+            <h3 className="text-white mb-8 text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>INITIATE INQUIRY</h3>
             <form className="space-y-6">
               {[
                 { label: "Organization Name", type: "text" },
                 { label: "Contact Email", type: "email" },
               ].map((field) => (
                 <div key={field.label}>
-                  <label className="text-on-surface-variant uppercase tracking-widest mb-2 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "11px" } }}>
+                  <label className="text-on-surface-variant uppercase tracking-widest mb-2 block text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>
                     {field.label}
                   </label>
                   <input className="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all text-white py-2 px-0 outline-none" type={field.type} />
                 </div>
               ))}
               <div>
-                <label className="text-on-surface-variant uppercase tracking-widest mb-2 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "11px" } }}>
+                <label className="text-on-surface-variant uppercase tracking-widest mb-2 block text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>
                   Strategic Interest
                 </label>
                 <select className="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all text-white py-2 px-0 outline-none appearance-none">

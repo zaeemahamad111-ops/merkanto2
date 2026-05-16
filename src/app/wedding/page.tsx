@@ -54,7 +54,7 @@ export default function WeddingPage() {
           >
             Archiving the <span className="text-primary italic">Eternal</span>
           </h1>
-          <p className="text-on-surface-variant max-w-2xl mx-auto mb-10 md:mb-12" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", md: { fontSize: "18px" }, lineHeight: 1.6 }}>
+          <p className="text-on-surface-variant max-w-2xl mx-auto mb-10 md:mb-12 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
             Elite wedding photography for those who view life through a cinematic lens. Precision-crafted imagery for the global aesthetic elite.
           </p>
           <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center">
@@ -92,8 +92,8 @@ export default function WeddingPage() {
             />
             <div className="absolute inset-0 bg-black/40 md:opacity-0 md:group-hover:opacity-100 transition-opacity flex items-end p-6 md:p-10">
               <div>
-                <span className="text-primary uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>Lake Como, Italy</span>
-                <h3 className="text-white mt-2" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "20px", md: { fontSize: "28px" }, fontWeight: 500 }}>The Villa Sola Cabiati Union</h3>
+                <span className="text-primary uppercase tracking-widest text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>Lake Como, Italy</span>
+                <h3 className="text-white mt-2 text-xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>The Villa Sola Cabiati Union</h3>
               </div>
             </div>
           </motion.div>
@@ -107,7 +107,7 @@ export default function WeddingPage() {
             transition={{ duration: 0.7 }}
           >
             <div className="flex-1 glass-card p-8 md:p-10 flex flex-col justify-center text-center md:text-left">
-              <span className="text-primary uppercase tracking-widest mb-4" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>Philosophy</span>
+              <span className="text-primary uppercase tracking-widest mb-4 text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>Philosophy</span>
               <h2 className="text-on-surface leading-tight mb-6" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(24px, 3vw, 40px)", fontWeight: 600 }}>
                 Precision in <br />Sentiment
               </h2>
@@ -149,7 +149,7 @@ export default function WeddingPage() {
               alt="Wedding reception dancing"
             />
             <div className="absolute inset-0 glass-card md:opacity-0 md:group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <button className="bg-primary text-on-primary px-8 py-3 font-bold uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>
+              <button className="bg-primary text-on-primary px-8 py-3 font-bold uppercase tracking-widest text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
                 View Wedding Film
               </button>
             </div>
@@ -179,18 +179,18 @@ export default function WeddingPage() {
           </motion.div>
  
           <motion.div className="text-center md:text-left" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <span className="text-primary uppercase tracking-[0.3em] mb-4 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>The Process</span>
+            <span className="text-primary uppercase tracking-[0.3em] mb-4 block text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>The Process</span>
             <h2 className="text-on-surface mb-8" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
               Architectural Storytelling
             </h2>
             <div className="space-y-10 md:space-y-12 text-left">
               {processSteps.map((step) => (
                 <div key={step.num} className="flex gap-6">
-                  <span className="text-on-surface/10 leading-none shrink-0" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "32px", md: { fontSize: "48px" }, fontWeight: 600 }}>
+                  <span className="text-on-surface/10 leading-none shrink-0 text-[32px] md:text-[48px] font-semibold" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
                     {step.num}
                   </span>
                   <div>
-                    <h4 className="text-on-surface mb-2" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "24px", md: { fontSize: "28px" }, fontWeight: 500 }}>{step.title}</h4>
+                    <h4 className="text-on-surface mb-2 text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{step.title}</h4>
                     <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{step.desc}</p>
                   </div>
                 </div>

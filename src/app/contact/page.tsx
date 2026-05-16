@@ -14,7 +14,7 @@ export default function ContactPage() {
           transition={{ duration: 0.7 }}
         >
           <div className="inline-block px-3 py-1 bg-surface-container-highest/30 border border-primary/30 mb-6" style={{ borderRadius: "9999px" }}>
-            <span className="text-primary uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>Contact Excellence</span>
+            <span className="text-primary uppercase tracking-[0.2em] text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>Contact Excellence</span>
           </div>
           <h1 className="mb-4" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(36px, 8vw, 72px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
             Establish Connection
@@ -42,7 +42,7 @@ export default function ContactPage() {
             <form className="space-y-10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-8">
                 <div className="flex flex-col gap-2">
-                  <label className="text-on-surface-variant uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "11px" } }}>Full Name</label>
+                  <label className="text-on-surface-variant uppercase tracking-widest text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>Full Name</label>
                   <input
                     className="bg-transparent border-b border-outline-variant/40 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface text-sm md:text-base"
                     placeholder="Alexander Sterling"
@@ -51,7 +51,7 @@ export default function ContactPage() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-on-surface-variant uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "11px" } }}>Corporate Email</label>
+                  <label className="text-on-surface-variant uppercase tracking-widest text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>Corporate Email</label>
                   <input
                     className="bg-transparent border-b border-outline-variant/40 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface text-sm md:text-base"
                     placeholder="as@merkanto.global"
@@ -109,8 +109,8 @@ export default function ContactPage() {
             <div className="bg-surface-container-low border border-outline-variant/20 p-8 flex flex-col justify-between min-h-[200px] md:min-h-[240px] text-center md:text-left">
               <div>
                 <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
-                  <span className="material-symbols-outlined text-primary" style={{ fontSize: "32px", md: { fontSize: "40px" } }}>chat_bubble</span>
-                  <h3 style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "24px", md: { fontSize: "28px" }, fontWeight: 500 }}>Instant Priority</h3>
+                  <span className="material-symbols-outlined text-primary text-[32px] md:text-[40px]">chat_bubble</span>
+                  <h3 className="text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>Instant Priority</h3>
                 </div>
                 <p className="text-on-surface-variant mb-8 text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>
                   Connect with our concierge desk via encrypted WhatsApp for immediate institutional support.
@@ -183,7 +183,7 @@ export default function ContactPage() {
             <div className="w-4 h-4 bg-primary rounded-full animate-ping absolute" />
             <div className="w-4 h-4 bg-primary rounded-full relative z-10 border-2 border-on-primary" />
             <div className="mt-4 glass-card px-4 md:px-6 py-2 md:py-3 border border-primary/40">
-              <span className="text-primary uppercase tracking-[0.2em] whitespace-nowrap" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>MERKANTO HQ</span>
+              <span className="text-primary uppercase tracking-[0.2em] whitespace-nowrap text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>MERKANTO HQ</span>
             </div>
           </div>
         </motion.div>

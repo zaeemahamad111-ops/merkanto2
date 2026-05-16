@@ -89,7 +89,7 @@ export default function AcademyPage() {
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={fadeInUp} className="inline-block bg-primary text-on-primary px-3 py-1 mb-6 md:mb-8 font-bold uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>
+          <motion.div variants={fadeInUp} className="inline-block bg-primary text-on-primary px-3 py-1 mb-6 md:mb-8 font-bold uppercase tracking-[0.2em] text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
             Intelligence at Scale
           </motion.div>
           <motion.h1
@@ -99,7 +99,7 @@ export default function AcademyPage() {
           >
             Learn International Trade From <span className="text-primary italic">Real</span> Business Operations
           </motion.h1>
-          <motion.p variants={fadeInUp} className="text-on-surface-variant max-w-2xl mx-auto mb-10 md:mb-12" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", md: { fontSize: "18px" }, lineHeight: 1.6 }}>
+          <motion.p variants={fadeInUp} className="text-on-surface-variant max-w-2xl mx-auto mb-10 md:mb-12 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
             Access the proprietary blueprints of global logistics. We don't just teach theory; we show you the live data streams of Merkanto's own international trade networks.
           </motion.p>
           <motion.div variants={fadeInUp} className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
@@ -122,8 +122,8 @@ export default function AcademyPage() {
           <div className="max-w-[1280px] mx-auto px-6 md:px-16 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
             {stats.map((s) => (
               <div key={s.label}>
-                <div className="text-primary font-bold mb-1" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "24px", md: { fontSize: "28px" } }}>{s.value}</div>
-                <div className="text-on-surface-variant uppercase tracking-widest mt-1" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "11px" } }}>{s.label}</div>
+                <div className="text-primary font-bold mb-1 text-2xl md:text-[28px]" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{s.value}</div>
+                <div className="text-on-surface-variant uppercase tracking-widest mt-1 text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -158,7 +158,7 @@ export default function AcademyPage() {
             >
               {mod.badge && (
                 <div className="absolute top-6 right-6 md:top-10 md:right-10">
-                  <span className="bg-primary/10 text-primary px-3 py-1 uppercase tracking-wider" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "11px" } }}>{mod.badge}</span>
+                  <span className="bg-primary/10 text-primary px-3 py-1 uppercase tracking-wider text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>{mod.badge}</span>
                 </div>
               )}
               <div className="relative z-10">
@@ -233,7 +233,7 @@ export default function AcademyPage() {
           <h2 className="mb-6 md:mb-8" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(24px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
             Apply for the 2024 Cohort
           </h2>
-          <p className="text-on-surface-variant mb-10 md:mb-12" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", md: { fontSize: "18px" }, lineHeight: 1.6 }}>
+          <p className="text-on-surface-variant mb-10 md:mb-12 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
             Limited to 500 executive candidates per quarter to ensure operational mentorship quality.
           </p>
           <form className="flex flex-col md:flex-row gap-6 md:gap-4 max-w-2xl mx-auto">

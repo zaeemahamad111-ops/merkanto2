@@ -159,7 +159,7 @@ export default function HomePage() {
             >
               A Synthesis of Intelligence <br className="hidden md:block" />& Structural Integrity.
             </motion.h2>
-            <motion.div variants={stagger} className="space-y-6 text-on-surface-variant max-w-lg mx-auto md:mx-0" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", md: { fontSize: "18px" }, lineHeight: 1.6 }}>
+            <motion.div variants={stagger} className="space-y-6 text-on-surface-variant max-w-lg mx-auto md:mx-0 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
               <motion.p variants={fadeInUp}>
                 Merkanto is more than a trade institution; it is a global ecosystem designed for high-stakes precision. Our philosophy merges the architectural discipline of logistics with the refined aesthetics of luxury operations.
               </motion.p>
@@ -169,12 +169,12 @@ export default function HomePage() {
             </motion.div>
             <motion.div variants={fadeInUp} className="flex justify-center md:justify-start gap-8 md:gap-12 pt-4">
               <div>
-                <div className="text-primary font-bold mb-1" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "28px", md: { fontSize: "32px" } }}>15+</div>
-                <div className="text-on-surface-variant uppercase tracking-wider" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>Global Hubs</div>
+                <div className="text-primary font-bold mb-1 text-[28px] md:text-[32px]" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>15+</div>
+                <div className="text-on-surface-variant uppercase tracking-wider text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>Global Hubs</div>
               </div>
               <div>
-                <div className="text-primary font-bold mb-1" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "28px", md: { fontSize: "32px" } }}>500+</div>
-                <div className="text-on-surface-variant uppercase tracking-wider" style={{ fontFamily: "Geist, monospace", fontSize: "10px", md: { fontSize: "12px" } }}>Strategic Partners</div>
+                <div className="text-primary font-bold mb-1 text-[28px] md:text-[32px]" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>500+</div>
+                <div className="text-on-surface-variant uppercase tracking-wider text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>Strategic Partners</div>
               </div>
             </motion.div>
           </motion.div>
@@ -247,7 +247,7 @@ export default function HomePage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 md:p-10">
-                  <h3 className="text-on-surface mb-2" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "28px", md: { fontSize: "32px" }, fontWeight: 500 }}>
+                  <h3 className="text-on-surface mb-2 text-[28px] md:text-[32px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
                     {div.title}
                   </h3>
                   <p className="text-on-surface-variant max-w-md" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px" }}>
