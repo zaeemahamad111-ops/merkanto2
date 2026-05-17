@@ -6,6 +6,7 @@ import DashboardSidebar from "@/components/layout/DashboardSidebar";
 import { useCourses, Course, Session } from "@/hooks/useCourses";
 import { useStudents } from "@/hooks/useStudents";
 import { useAssignments } from "@/hooks/useAssignments";
+import { useQA } from "@/hooks/useQA";
 
 const getEmbedUrl = (url: string) => {
   try {
@@ -37,25 +38,17 @@ export default function StudentDashboardPage() {
   const [activeSession, setActiveSession] = useState<Session | null>(null);
   const [notesText, setNotesText] = useState("");
   const [notebookTab, setNotebookTab] = useState<"notes" | "qa">("notes");
-  const [qaList, setQaList] = useState<{ id: string; studentName: string; text: string; upvotes: number; replies: string[] }[]>([]);
+  const { qaList: globalQaList, postQuestion, upvoteQuestion } = useQA();
   const [newQuestionText, setNewQuestionText] = useState("");
+
+  const activeSessionQa = activeSession 
+    ? globalQaList.filter(q => q.session_id === activeSession.id) 
+    : [];
 
   useEffect(() => {
     if (activeSession) {
       const savedNotes = localStorage.getItem(`merkanto_notes_${activeSession.id}`) || "";
       setNotesText(savedNotes);
-      
-      const savedQa = localStorage.getItem(`merkanto_qa_${activeSession.id}`);
-      if (savedQa) {
-        setQaList(JSON.parse(savedQa));
-      } else {
-        const dummyQa = [
-          { id: "q1", studentName: "Aisha Vance", text: "How long does customs clearance typically take for dry freight on this route?", upvotes: 4, replies: ["Usually 2-3 business days if all cargo manifests match perfectly."] },
-          { id: "q2", studentName: "James Sterling", text: "Are letters of credit absolutely required for first-time suppliers?", upvotes: 2, replies: [] }
-        ];
-        setQaList(dummyQa);
-        localStorage.setItem(`merkanto_qa_${activeSession.id}`, JSON.stringify(dummyQa));
-      }
     }
   }, [activeSession]);
 
@@ -66,28 +59,21 @@ export default function StudentDashboardPage() {
     }
   };
 
-  const handlePostQuestion = (e: React.FormEvent) => {
+  const handlePostQuestion = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newQuestionText.trim() || !activeSession) return;
-    const newQ = {
-      id: Math.random().toString(36).substring(2, 9),
-      studentName: currentStudent.name,
-      text: newQuestionText,
-      upvotes: 0,
-      replies: []
-    };
-    const updated = [newQ, ...qaList];
-    setQaList(updated);
-    localStorage.setItem(`merkanto_qa_${activeSession.id}`, JSON.stringify(updated));
-    setNewQuestionText("");
-    showToast("Question posted to classroom feed.");
+    if (!newQuestionText.trim() || !activeSession || !currentStudent.id) return;
+    
+    const success = await postQuestion(activeSession.id, currentStudent.id, currentStudent.name, newQuestionText);
+    if (success) {
+      setNewQuestionText("");
+      showToast("Question posted to classroom feed.");
+    } else {
+      showToast("Failed to post question. Please try again.");
+    }
   };
 
-  const handleUpvote = (qId: string) => {
-    if (!activeSession) return;
-    const updated = qaList.map(q => q.id === qId ? { ...q, upvotes: q.upvotes + 1 } : q);
-    setQaList(updated);
-    localStorage.setItem(`merkanto_qa_${activeSession.id}`, JSON.stringify(updated));
+  const handleUpvote = async (qId: string, currentUpvotes: number) => {
+    await upvoteQuestion(qId, currentUpvotes);
   };
 
   // Submit assignment modal state
@@ -719,27 +705,27 @@ export default function StudentDashboardPage() {
 
                       {/* Q&A Feed */}
                       <div className="space-y-3 flex-1 overflow-y-auto max-h-[350px] pr-1 custom-scrollbar">
-                        {qaList.map((q) => (
+                        {activeSessionQa.map((q) => (
                           <div key={q.id} className="p-3 bg-surface-container border border-outline-variant/10 rounded-md space-y-2">
                             <div className="flex items-center justify-between">
-                              <span className="text-[10px] text-primary font-bold" style={{ fontFamily: "Geist, monospace" }}>{q.studentName}</span>
+                              <span className="text-[10px] text-primary font-bold" style={{ fontFamily: "Geist, monospace" }}>{q.student_name}</span>
                               <button 
                                 type="button"
-                                onClick={() => handleUpvote(q.id)}
+                                onClick={() => handleUpvote(q.id, q.upvotes)}
                                 className="flex items-center gap-1 text-[10px] text-on-surface-variant hover:text-primary transition-colors"
                               >
                                 <span className="material-symbols-outlined text-[12px]">thumb_up</span>
                                 {q.upvotes}
                               </button>
                             </div>
-                            <p className="text-xs text-white leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{q.text}</p>
+                            <p className="text-xs text-white leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{q.question_text}</p>
                             
                             {/* Replies */}
                             {q.replies && q.replies.length > 0 && (
                               <div className="pl-3 border-l-2 border-primary/30 mt-2 space-y-1 bg-white/2">
                                 <div className="text-[9px] text-primary uppercase font-bold" style={{ fontFamily: "Geist, monospace" }}>Instructor Answer:</div>
-                                {q.replies.map((rep, idx) => (
-                                  <p key={idx} className="text-[11px] text-on-surface-variant italic" style={{ fontFamily: "Inter, sans-serif" }}>"{rep}"</p>
+                                {q.replies.map((r, i) => (
+                                  <p key={i} className="text-[11px] text-on-surface-variant leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{r}</p>
                                 ))}
                               </div>
                             )}

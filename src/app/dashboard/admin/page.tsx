@@ -8,6 +8,7 @@ import { useCourses } from "@/hooks/useCourses";
 import { useStudents } from "@/hooks/useStudents";
 import { useAssignments } from "@/hooks/useAssignments";
 import { useAdmins } from "@/hooks/useAdmins";
+import { supabase } from "@/utils/supabaseClient";
 
 interface SessionForm {
   id: string;
@@ -108,20 +109,29 @@ export default function AdminHubPage() {
               return;
             }
             try {
-              const uploadFormData = new FormData();
-              uploadFormData.append("file", blob, "image.webp");
-              
-              const res = await fetch("/api/upload", {
-                method: "POST",
-                body: uploadFormData
-              });
-              if (!res.ok) {
-                const errData = await res.json();
-                reject(new Error(errData.error || "Upload failed"));
+              const uniqueName = `upload_${Date.now()}_${Math.random().toString(36).substring(2, 9)}.webp`;
+              const { data, error } = await supabase
+                .storage
+                .from("resources")
+                .upload(uniqueName, blob, {
+                  contentType: "image/webp",
+                  cacheControl: "3600",
+                  upsert: false
+                });
+
+              if (error) {
+                console.error("Supabase storage upload error:", error);
+                reject(new Error(error.message || "Upload failed"));
                 return;
               }
-              const data = await res.json();
-              resolve(data.url);
+
+              // Get public URL
+              const { data: publicUrlData } = supabase
+                .storage
+                .from("resources")
+                .getPublicUrl(uniqueName);
+
+              resolve(publicUrlData.publicUrl);
             } catch (err) {
               reject(err);
             }
