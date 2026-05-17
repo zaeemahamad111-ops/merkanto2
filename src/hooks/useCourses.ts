@@ -32,7 +32,7 @@ export function useCourses() {
         .order("created_at", { ascending: true });
 
       if (error) {
-        console.error("Error loading courses:", error);
+        console.error("Error loading courses:", error.message || error);
       } else {
         setCourses(data || []);
       }

@@ -28,7 +28,7 @@ export function useStudents() {
         .eq("role", "student");
 
       if (error) {
-        console.error("Error loading students:", error);
+        console.error("Error loading students:", error.message || error);
       } else {
         const mapped = (data || []).map((p: any) => ({
           id: p.id,
