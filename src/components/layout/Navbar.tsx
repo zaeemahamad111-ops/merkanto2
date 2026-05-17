@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -17,6 +17,15 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Security: Auto-logout when user leaves the dashboard and returns to the public website
+  useEffect(() => {
+    if (typeof window !== "undefined" && pathname && !pathname.startsWith("/dashboard") && pathname !== "/login" && pathname !== "/reset-password") {
+      localStorage.removeItem("merkanto_role");
+      localStorage.removeItem("merkanto_user");
+      localStorage.removeItem("merkanto_student_id");
+    }
+  }, [pathname]);
 
   const isDashboard = pathname?.startsWith("/dashboard");
   if (isDashboard) return null;
@@ -70,7 +79,7 @@ export default function Navbar() {
             href="/login"
             className="bg-primary text-on-primary px-4 md:px-6 py-2 font-label-sm text-label-sm font-bold tracking-widest uppercase text-[10px] hover:brightness-110 active:scale-[0.99] transition-all"
           >
-            CLIENT PORTAL
+            LOGIN
           </Link>
           {/* Mobile hamburger */}
           <button
@@ -115,7 +124,7 @@ export default function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="block text-center bg-primary text-on-primary px-6 py-4 font-label-sm text-label-sm font-bold tracking-[0.3em] uppercase text-[10px]"
                 >
-                  CLIENT PORTAL
+                  LOGIN
                 </Link>
               </div>
             </div>

@@ -103,9 +103,13 @@ export default function AcademyPage() {
             Access the proprietary blueprints of global logistics. We don't just teach theory; we show you the live data streams of Merkanto's own international trade networks.
           </motion.p>
           <motion.div variants={fadeInUp} className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
-            <button className="w-full md:w-auto bg-primary text-on-primary px-10 py-4 md:py-5 font-black uppercase tracking-[0.1em] hover:opacity-90 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
-              Secure Admission
-            </button>
+            <Link
+              href="/login"
+              className="w-full md:w-auto bg-primary text-on-primary px-10 py-4 md:py-5 font-black uppercase tracking-[0.1em] hover:opacity-90 transition-all text-center flex items-center justify-center"
+              style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}
+            >
+              DIVE INTO IT
+            </Link>
             <button className="w-full md:w-auto border border-outline-variant text-on-surface px-10 py-4 md:py-5 font-medium uppercase tracking-[0.1em] hover:bg-white/5 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
               Explore Curriculum
             </button>
