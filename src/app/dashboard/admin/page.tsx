@@ -120,8 +120,12 @@ export default function AdminHubPage() {
                 });
 
               if (error) {
-                console.error("Supabase storage upload error:", error);
-                reject(new Error(error.message || "Upload failed"));
+                console.warn("Supabase storage bucket error, falling back to Base64 data URL:", error.message || error);
+                const base64Reader = new FileReader();
+                base64Reader.onloadend = () => {
+                  resolve(base64Reader.result as string);
+                };
+                base64Reader.readAsDataURL(blob);
                 return;
               }
 
@@ -133,7 +137,12 @@ export default function AdminHubPage() {
 
               resolve(publicUrlData.publicUrl);
             } catch (err) {
-              reject(err);
+              console.warn("Supabase storage exception, falling back to Base64 data URL:", err);
+              const base64Reader = new FileReader();
+              base64Reader.onloadend = () => {
+                resolve(base64Reader.result as string);
+              };
+              base64Reader.readAsDataURL(blob);
             }
           }, "image/webp", 0.85);
         };
