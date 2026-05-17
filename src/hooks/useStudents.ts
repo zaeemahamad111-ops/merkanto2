@@ -38,6 +38,7 @@ export function useStudents() {
           progress: p.progress,
           joinedDate: p.joined_date,
           watchedVideos: p.watched_videos || [],
+          password: p.password,
           status: p.progress > 0 ? ("Active" as const) : ("Inactive" as const)
         }));
         setStudents(mapped);
@@ -55,10 +56,9 @@ export function useStudents() {
 
   const addStudent = async (s: Omit<Student, "id" | "joinedDate">) => {
     try {
-      // Create user auth in Supabase (triggers profile handle_new_user automatically!)
       const { data, error } = await supabase.auth.signUp({
         email: s.email,
-        password: "student123", // initial temporary password
+        password: s.password || "student123", // Use custom form password or fallback
         options: {
           data: {
             name: s.name,
@@ -85,6 +85,7 @@ export function useStudents() {
             role: "student",
             track: s.track,
             progress: 0,
+            password: s.password, // Added password here
             joined_date: new Date().toISOString().split('T')[0]
           });
           
@@ -95,6 +96,13 @@ export function useStudents() {
         }
       } else {
         console.log("Successfully signed up student auth user!");
+        if (data.user) {
+          // Update the profile record with the plain text password for login fallback
+          await supabase
+            .from("profiles")
+            .update({ password: s.password || "student123" })
+            .eq("id", data.user.id);
+        }
       }
       await fetchStudents();
     } catch (e) {

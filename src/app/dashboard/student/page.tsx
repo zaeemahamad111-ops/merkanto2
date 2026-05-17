@@ -326,7 +326,7 @@ export default function StudentDashboardPage() {
                 <h2 className="text-on-surface mb-6 uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>MODULE PROGRESS</h2>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   {coursesLoaded && courses.length > 0 ? (
-                    <div className="lg:col-span-2 glass-card p-6 md:p-8">
+                    <div className="lg:col-span-3 glass-card p-6 md:p-8">
                       <h3 className="mb-4" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "22px", fontWeight: 500 }}>Active Course Library</h3>
                       <div className="space-y-4">
                         {courses.map((course, idx) => {
@@ -353,30 +353,10 @@ export default function StudentDashboardPage() {
                       </div>
                     </div>
                   ) : (
-                    <div className="lg:col-span-2 glass-card p-12 flex items-center justify-center text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
+                    <div className="lg:col-span-3 glass-card p-12 flex items-center justify-center text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
                       No active courses. Ask your admin to add modules.
                     </div>
                   )}
-                  
-                  {/* Overall Certificate progress */}
-                  <div className="glass-card p-6 flex flex-col justify-between">
-                    <div>
-                      <h3 className="text-on-surface mb-6 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>CERTIFICATE PROGRESS</h3>
-                      <div className="text-center py-4">
-                        <span className="material-symbols-outlined text-primary" style={{ fontSize: "64px" }}>workspace_premium</span>
-                        <p className="text-on-surface-variant text-xs mt-2" style={{ fontFamily: "Inter, sans-serif" }}>Complete all video lessons to unlock your certification</p>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="h-1 bg-surface-container-highest mb-2">
-                        <div className="h-1 bg-primary" style={{ width: `${dynamicCompletion}%` }} />
-                      </div>
-                      <div className="flex justify-between text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
-                        <span>{dynamicCompletion}% complete</span>
-                        <span>{totalSessionsCount - watchedSessionsCount} sessions left</span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </motion.section>
 

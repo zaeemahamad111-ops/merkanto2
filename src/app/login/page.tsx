@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useStudents } from "@/hooks/useStudents";
 import { useAdmins } from "@/hooks/useAdmins";
+import { supabase } from "@/utils/supabaseClient";
 
 export default function LoginPage() {
   const { students } = useStudents();
@@ -69,7 +70,7 @@ export default function LoginPage() {
     }
   };
 
-  const handleForgotPasswordSubmit = (e: React.FormEvent) => {
+  const handleForgotPasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setForgotMsg(null);
 
@@ -78,18 +79,32 @@ export default function LoginPage() {
       return;
     }
 
-    // Search both student & admin lists
+    // Search both student & admin lists to check if the user is registered in profiles
     const matchedStudent = students.find(s => s.email.toLowerCase() === forgotEmail.toLowerCase());
     const matchedAdmin = admins.find(a => a.email.toLowerCase() === forgotEmail.toLowerCase());
     const matchedUser = matchedStudent || matchedAdmin;
 
     if (matchedUser) {
-      const resetLink = `/reset-password?email=${encodeURIComponent(matchedUser.email)}`;
       setForgotMsg({
-        text: `Secure Password Reset Link generated successfully! Normally, this link is dispatched to ${matchedUser.email}. For testing instantly:`,
-        type: "success",
-        link: resetLink
+        text: "Sending reset instructions...",
+        type: "success"
       });
+
+      const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail.trim(), {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+
+      if (error) {
+        setForgotMsg({
+          text: `Supabase Auth Error: ${error.message}`,
+          type: "error"
+        });
+      } else {
+        setForgotMsg({
+          text: `A secure password reset link has been dispatched to ${forgotEmail}. Please check your inbox and follow the instructions.`,
+          type: "success"
+        });
+      }
     } else {
       setForgotMsg({
         text: "Account email not found in our registry database.",

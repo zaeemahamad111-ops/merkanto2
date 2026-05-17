@@ -31,7 +31,8 @@ export function useAdmins() {
           name: p.name,
           email: p.email,
           role: "admin" as const,
-          joinedDate: p.joined_date
+          joinedDate: p.joined_date,
+          password: p.password
         }));
         setAdmins(mapped);
       }
@@ -48,7 +49,7 @@ export function useAdmins() {
 
   const addAdmin = async (data: Omit<Admin, "id" | "joinedDate" | "role"> & { password?: string }) => {
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email: data.email,
         password: data.password || "admin123", // Default initial password
         options: {
@@ -62,6 +63,14 @@ export function useAdmins() {
 
       if (error) {
         console.error("Error creating admin auth:", error);
+      } else {
+        if (data?.user) {
+          // Update profile record with password fallback
+          await supabase
+            .from("profiles")
+            .update({ password: data.password || "admin123" })
+            .eq("id", data.user.id);
+        }
       }
       await fetchAdmins();
     } catch (e) {

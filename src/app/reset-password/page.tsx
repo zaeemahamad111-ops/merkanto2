@@ -5,75 +5,81 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { supabase } from "@/utils/supabaseClient";
 
 function ResetPasswordForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const email = searchParams.get("email");
+  const emailParam = searchParams.get("email");
 
+  const [email, setEmail] = useState(emailParam || "");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!email) {
-      setError("Invalid or expired password reset link.");
-    }
-  }, [email]);
+    const checkSession = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user && user.email) {
+          setEmail(user.email);
+        } else if (!emailParam) {
+          setError("Session not found. Please click the password reset link inside your email again.");
+        }
+      } catch (err) {
+        console.error("Error retrieving user session:", err);
+      }
+    };
+    checkSession();
+  }, [emailParam]);
 
-  const handleReset = (e: React.FormEvent) => {
+  const handleReset = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setLoading(true);
 
     if (password.length < 6) {
       setError("Password must be at least 6 characters long.");
+      setLoading(false);
       return;
     }
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
+      setLoading(false);
       return;
     }
 
-    // Try finding and updating in Students database
-    let updated = false;
-    const studentsSaved = localStorage.getItem("merkanto_students");
-    if (studentsSaved) {
-      try {
-        const students = JSON.parse(studentsSaved);
-        const match = students.find((s: any) => s.email.toLowerCase() === email?.toLowerCase());
-        if (match) {
-          match.password = password;
-          localStorage.setItem("merkanto_students", JSON.stringify(students));
-          updated = true;
-        }
-      } catch (err) {
-        console.error(err);
+    try {
+      // 1. Update password in Supabase Auth
+      const { error: authError } = await supabase.auth.updateUser({ password });
+      
+      if (authError) {
+        setError(`Auth Error: ${authError.message}`);
+        setLoading(false);
+        return;
       }
-    }
 
-    // Try finding and updating in Admins database if not updated
-    if (!updated) {
-      const adminsSaved = localStorage.getItem("merkanto_admins");
-      if (adminsSaved) {
-        try {
-          const admins = JSON.parse(adminsSaved);
-          const match = admins.find((a: any) => a.email.toLowerCase() === email?.toLowerCase());
-          if (match) {
-            match.password = password;
-            localStorage.setItem("merkanto_admins", JSON.stringify(admins));
-            updated = true;
-          }
-        } catch (err) {
-          console.error(err);
-        }
+      // 2. Synchronize plain text password into profiles table for standard login fallback
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        await supabase
+          .from("profiles")
+          .update({ password })
+          .eq("id", user.id);
+      } else if (email) {
+        await supabase
+          .from("profiles")
+          .update({ password })
+          .eq("email", email);
       }
-    }
 
-    if (updated) {
       setSuccess(true);
-    } else {
-      setError("Account email not found in our database.");
+    } catch (err: any) {
+      setError(`Reset Failed: ${err.message || err}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -116,7 +122,7 @@ function ResetPasswordForm() {
 
             <div className="bg-surface-container/30 p-3 border border-outline-variant/10 mb-2">
               <span className="text-on-surface-variant uppercase tracking-wider block text-[9px]" style={{ fontFamily: "Geist, monospace" }}>Account Email Target:</span>
-              <span className="text-white text-xs font-bold font-mono">{email || "Unknown"}</span>
+              <span className="text-white text-xs font-bold font-mono">{email || "Verifying reset token..."}</span>
             </div>
 
             <div>
@@ -124,7 +130,7 @@ function ResetPasswordForm() {
               <input
                 type="password"
                 required
-                disabled={!email}
+                disabled={loading}
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 className="w-full bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none transition-colors text-white py-1.5 px-0 text-sm"
@@ -137,7 +143,7 @@ function ResetPasswordForm() {
               <input
                 type="password"
                 required
-                disabled={!email}
+                disabled={loading}
                 value={confirmPassword}
                 onChange={e => setConfirmPassword(e.target.value)}
                 className="w-full bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none transition-colors text-white py-1.5 px-0 text-sm"
@@ -147,11 +153,11 @@ function ResetPasswordForm() {
 
             <button
               type="submit"
-              disabled={!email}
+              disabled={loading}
               className="w-full py-3 bg-primary text-background font-bold uppercase tracking-widest hover:brightness-110 transition-all text-xs disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ fontFamily: "Geist, monospace" }}
             >
-              Save Credentials
+              {loading ? "Saving Credentials..." : "Save Credentials"}
             </button>
 
             <div className="text-center pt-2">

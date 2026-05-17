@@ -8,7 +8,7 @@ import { useCourses } from "@/hooks/useCourses";
 
 const TRACKS = ["Executive Track", "Foundation Track", "Advanced Track"];
 
-const emptyForm = { name: "", email: "", password: "", track: "Executive Track", progress: 0, lastModule: "Module 01", status: "Active" as "Active" | "Inactive" };
+const emptyForm = { name: "", email: "", password: "", progress: 0, lastModule: "Module 01" };
 
 const getYouTubeEmbedUrl = (url: string) => {
   try {
@@ -29,14 +29,14 @@ export default function StudentManagementPage() {
   const [form, setForm] = useState({ ...emptyForm });
   const [search, setSearch] = useState("");
   const [toast, setToast] = useState<string | null>(null);
-  const [filterStatus, setFilterStatus] = useState<"All" | "Active" | "Inactive">("All");
+
 
   const showToast = (msg: string) => { setToast(msg); setTimeout(() => setToast(null), 3000); };
 
   const openAdd = () => { setEditingId(null); setForm({ ...emptyForm }); setModalOpen(true); };
   const openEdit = (s: Student) => {
     setEditingId(s.id);
-    setForm({ name: s.name, email: s.email, password: s.password || "", track: s.track, progress: s.progress, lastModule: s.lastModule || "", status: s.status });
+    setForm({ name: s.name, email: s.email, password: s.password || "", progress: s.progress, lastModule: s.lastModule || "" });
     setModalOpen(true);
   };
 
@@ -53,11 +53,9 @@ export default function StudentManagementPage() {
 
   const filtered = students.filter(s => {
     const matchSearch = s.name.toLowerCase().includes(search.toLowerCase()) || s.email.toLowerCase().includes(search.toLowerCase());
-    const matchStatus = filterStatus === "All" || s.status === filterStatus;
-    return matchSearch && matchStatus;
+    return matchSearch;
   });
 
-  const activeCount = students.filter(s => s.status === "Active").length;
   const avgProgress = students.length ? Math.round(students.reduce((a, s) => a + s.progress, 0) / students.length) : 0;
 
   return (
@@ -83,7 +81,6 @@ export default function StudentManagementPage() {
           <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
             {[
               { label: "Total Enrolled", value: students.length, icon: "group", delta: "+5 this month" },
-              { label: "Active Scholars", value: activeCount, icon: "school", delta: `${students.length - activeCount} inactive` },
               { label: "Avg. Progress", value: `${avgProgress}%`, icon: "query_stats", delta: "Across all modules" },
             ].map((stat) => (
               <div key={stat.label} className="glass-card p-6">
@@ -107,13 +104,7 @@ export default function StudentManagementPage() {
                 style={{ fontFamily: "Inter, sans-serif", fontSize: "14px" }}
               />
             </div>
-            <div className="flex gap-2">
-              {(["All", "Active", "Inactive"] as const).map(f => (
-                <button key={f} onClick={() => setFilterStatus(f)} className={`px-4 py-3 border uppercase tracking-widest transition-all ${filterStatus === f ? "bg-primary text-background border-primary" : "border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary"}`} style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
-                  {f}
-                </button>
-              ))}
-            </div>
+
           </motion.div>
 
           {/* Table */}
@@ -122,7 +113,7 @@ export default function StudentManagementPage() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-outline-variant/20">
-                    {["Scholar", "Email", "Track", "Progress", "Last Module", "Status", "Actions"].map(h => (
+                    {["Scholar", "Email", "Progress", "Last Module", "Status", "Actions"].map(h => (
                       <th key={h} className="text-left px-6 py-4 text-on-surface-variant uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>{h}</th>
                     ))}
                   </tr>
@@ -139,9 +130,7 @@ export default function StudentManagementPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4 text-on-surface-variant" style={{ fontFamily: "Inter, sans-serif", fontSize: "13px" }}>{s.email}</td>
-                      <td className="px-6 py-4">
-                        <span className="text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>{s.track}</span>
-                      </td>
+
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3 min-w-[120px]">
                           <div className="flex-1 h-1 bg-surface-container-highest rounded-full">
@@ -151,15 +140,7 @@ export default function StudentManagementPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4 text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>{s.lastModule}</td>
-                      <td className="px-6 py-4">
-                        <button
-                          onClick={() => updateStudent(s.id, { status: s.status === "Active" ? "Inactive" : "Active" })}
-                          className={`px-3 py-1 border text-xs uppercase tracking-widest transition-all ${s.status === "Active" ? "border-primary/40 text-primary bg-primary/10 hover:bg-primary/20" : "border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary"}`}
-                          style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}
-                        >
-                          {s.status}
-                        </button>
-                      </td>
+
                       <td className="px-6 py-4">
                         <div className="flex gap-2">
                           <button onClick={() => { setSelectedStudent(s); setProgressModalOpen(true); }} className="w-8 h-8 border border-outline-variant flex items-center justify-center hover:border-primary hover:text-primary transition-all text-on-surface-variant" title="View Progress">
@@ -215,32 +196,9 @@ export default function StudentManagementPage() {
                   <label className="text-on-surface-variant uppercase tracking-widest mb-2 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>Initial Password</label>
                   <input type="text" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} className="w-full bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none text-white py-2 px-0" placeholder="Set a temporary password" />
                 </div>
-                <div>
-                  <label className="text-on-surface-variant uppercase tracking-widest mb-2 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>Track</label>
-                  <select value={form.track} onChange={e => setForm({ ...form, track: e.target.value })} className="w-full bg-surface-container border-b border-outline-variant/40 focus:border-primary focus:outline-none text-white py-2 px-0 appearance-none">
-                    {TRACKS.map(t => <option key={t} className="bg-surface" value={t}>{t}</option>)}
-                  </select>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-on-surface-variant uppercase tracking-widest mb-2 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>Progress ({form.progress}%)</label>
-                    <input type="range" min={0} max={100} value={form.progress} onChange={e => setForm({ ...form, progress: Number(e.target.value) })} className="w-full accent-primary" />
-                  </div>
-                  <div>
-                    <label className="text-on-surface-variant uppercase tracking-widest mb-2 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>Last Module</label>
-                    <input type="text" value={form.lastModule} onChange={e => setForm({ ...form, lastModule: e.target.value })} className="w-full bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none text-white py-2 px-0" placeholder="Module 01" />
-                  </div>
-                </div>
-                <div>
-                  <label className="text-on-surface-variant uppercase tracking-widest mb-2 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>Status</label>
-                  <div className="flex gap-3">
-                    {(["Active", "Inactive"] as const).map(s => (
-                      <button key={s} type="button" onClick={() => setForm({ ...form, status: s })} className={`flex-1 py-2 border uppercase tracking-widest transition-all ${form.status === s ? "bg-primary text-background border-primary" : "border-outline-variant text-on-surface-variant"}`} style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
-                        {s}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+
+
+
                 <div className="pt-4 flex gap-4">
                   <button type="button" onClick={() => setModalOpen(false)} className="flex-1 py-3 border border-outline-variant uppercase tracking-widest hover:bg-white/5 transition-colors" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Cancel</button>
                   <button type="submit" className="flex-1 py-3 bg-primary text-background font-bold uppercase tracking-widest hover:brightness-110 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
