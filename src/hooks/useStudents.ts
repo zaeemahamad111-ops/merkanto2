@@ -7,11 +7,11 @@ export interface Student {
   id: string;
   name: string;
   email: string;
-  track: string;
+  track?: string;
   progress: number;
   joinedDate: string;
   watchedVideos?: string[];
-  status: "Active" | "Inactive";
+  status?: "Active" | "Inactive";
   password?: string;
   lastModule?: string;
 }
