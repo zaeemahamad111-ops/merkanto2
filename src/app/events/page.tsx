@@ -50,8 +50,6 @@ const destSteps = [
 export default function EventsPage() {
   return (
     <div className="bg-background min-h-screen">
-      <div className="fixed inset-0 grain-overlay z-50 pointer-events-none" />
-
       {/* ─── HERO ─── */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">

@@ -28,6 +28,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background text-on-surface antialiased">
+        <div className="fixed inset-0 grain-overlay z-50 pointer-events-none" />
         <Navbar />
         {children}
         <FooterWrapper />
