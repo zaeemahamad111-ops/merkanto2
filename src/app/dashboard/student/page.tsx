@@ -551,7 +551,7 @@ export default function StudentDashboardPage() {
       <AnimatePresence>
         {submittingAssignmentId && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-background/90 backdrop-blur-sm overflow-y-auto">
-            <motion.div initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }} className="glass-card w-full max-w-lg p-8 border border-primary/20 relative my-8">
+            <motion.div initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }} className="glass-card w-full max-w-lg p-6 md:p-8 border border-primary/20 relative max-h-[90vh] overflow-y-auto my-auto">
               <button onClick={() => setSubmittingAssignmentId(null)} className="absolute top-4 right-4 text-on-surface-variant hover:text-white transition-colors">
                 <span className="material-symbols-outlined">close</span>
               </button>
@@ -593,7 +593,7 @@ export default function StudentDashboardPage() {
             <div className="relative w-full max-w-6xl h-[85vh] bg-surface-container border border-primary/20 flex flex-col md:flex-row overflow-hidden shadow-2xl">
               
               {/* Left Side: Video Player */}
-              <div className="flex-1 bg-black relative flex flex-col">
+              <div className="h-[40vh] md:h-auto md:flex-1 bg-black relative flex flex-col">
                 <div className="flex items-center justify-between px-6 py-3 border-b border-outline-variant/10 bg-surface-container-lowest">
                   <div>
                     <span className="text-[10px] text-primary uppercase font-bold tracking-widest" style={{ fontFamily: "Geist, monospace" }}>Active Session</span>
@@ -612,7 +612,7 @@ export default function StudentDashboardPage() {
               </div>
 
               {/* Right Side: Tabbed Workspace (Notebook / QA Forum) */}
-              <div className="w-full md:w-96 border-t md:border-t-0 md:border-l border-outline-variant/10 flex flex-col h-full bg-surface-container-low">
+              <div className="w-full md:w-96 border-t md:border-t-0 md:border-l border-outline-variant/10 flex flex-col h-[45vh] md:h-full bg-surface-container-low">
                 {/* Tab Switcher */}
                 <div className="flex border-b border-outline-variant/10 bg-surface-container-lowest">
                   <button 
