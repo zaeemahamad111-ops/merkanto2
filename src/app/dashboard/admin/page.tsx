@@ -1,73 +1,146 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import DashboardSidebar from "@/components/layout/DashboardSidebar";
+import { useCourses, Session } from "@/hooks/useCourses";
+import { useStudents } from "@/hooks/useStudents";
 
-const analyticsCards = [
-  {
-    title: "REVENUE OVERVIEW",
-    value: "$2.48M",
-    delta: "+12.4% YTD",
-    icon: "payments",
-    chart: [40, 60, 50, 70, 55, 80, 75, 90, 85, 95, 88, 100],
-    large: true,
-  },
-  {
-    title: "ACTIVE SCHOLARS",
-    value: "14,209",
-    delta: "+823 this month",
-    icon: "school",
-    large: false,
-  },
-  {
-    title: "TOTAL WATCH TIME",
-    value: "84.2k",
-    sub: "hours",
-    delta: "+6.2% MTD",
-    icon: "query_stats",
-    large: false,
-  },
-];
+interface SessionForm {
+  id: string;
+  title: string;
+  youtubeUrl: string;
+  description?: string;
+  img?: string;
+}
 
-const modules = [
-  {
-    title: "Import-Export Fundamentals",
-    students: "4,280",
-    status: "Live",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCIS_XXZEdyc4X_TjQ0j2jFwwhbN2IBRWXTed_znHlmdrsvzjIiyretvhJ1qlntdwbjH_fAsMW-Kex6I3_wXNqxLetnBrptc7iyo5xHN10JGNpZ1PqS_M0LOHlUD4ov2ny-u_h8B8cz1Cg1ozlHBJ3l8k7TSKDzKt7aJS3milJqhUDgHrQ9R0pGQqfOTSZABWDOXdEeufsC1plzMGddT1BLrJPND-T1jIV05TKegE2yM6rrbb0lhPmk8AbxOCkUgpYJ01abfCOO-mk",
-  },
-  {
-    title: "Supplier Negotiation",
-    students: "3,120",
-    status: "Live",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuALhGG74MWePnvYdyu0liEwb--Nshc3-n4G7Y59HAnK6j2lfE96nVJsx86Rgq1F8isl0ziNNIBka_Q4s2I85wkLAX_-Nizex7m9pcPWtrlIG-TgPfC6qNF8Dv4b_Xjh5y_psiEtF9A40v5y-PlhfrrxKuzO8rtY-AGDjzs3ZO28pYzdbAFRJYmQfO95fMOfMB264uRcLXXnpx8glMSHmh8JE9pqUGKa_jdf25oBzR0XmDx7r4ILk5heQd0Z3lYfV-nfM2c9-wmMits",
-  },
-  {
-    title: "Product Branding for Global Markets",
-    students: "2,881",
-    status: "Draft",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCklkeF4ZuMkBb75fsxKi5nNkwJbIhrHIfNrxc6miByGr7FpA4eCJjXy8z_KyvgKdU9Vgsg0I_REtweRpXHgVzsxFBhAluhenfRbhDS8tYaTVc4Mfx9PLYrGgntSE0cWyF2fbIryXFXGkShzU8jQptEPPYrx35C-BpX1nM2yFBdqXP1yHMZ2Bibq3eTXcynJBrjvUcLi7qFDaOX0BEa-EaMaR9vDB1idAOkW_dvivnre8ApnLwmHG4xZrWHFH9JZ2Vsbe7p-KHwJw",
-  },
-];
-
-const studentActivity = [
-  { name: "Aisha Nair", prog: 88, last: "Module 07" },
-  { name: "Carlos Medina", prog: 72, last: "Module 05" },
-  { name: "Priya Sharma", prog: 95, last: "Module 09" },
-  { name: "Oliver Hughes", prog: 41, last: "Module 03" },
-];
+const emptySessionForm = (): SessionForm => ({
+  id: Math.random().toString(36).substring(2, 9),
+  title: "",
+  youtubeUrl: "",
+  description: "",
+  img: ""
+});
 
 export default function AdminHubPage() {
+  const router = useRouter();
+  const { courses, addCourse, updateCourse, deleteCourse, isLoaded } = useCourses();
+  const { students } = useStudents();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  
+  const [formData, setFormData] = useState<{
+    title: string;
+    description: string;
+    sessions: SessionForm[];
+  }>({
+    title: "",
+    description: "",
+    sessions: [emptySessionForm()]
+  });
+
+  const [notifOpen, setNotifOpen] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+  const [viewAll, setViewAll] = useState(false);
+
+  const showToast = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  const openAddModal = () => {
+    setEditingId(null);
+    setFormData({
+      title: "",
+      description: "",
+      sessions: [emptySessionForm()]
+    });
+    setIsModalOpen(true);
+  };
+
+  const openEditModal = (course: any) => {
+    setEditingId(course.id);
+    setFormData({
+      title: course.title,
+      description: course.description || "",
+      sessions: course.sessions && course.sessions.length > 0 
+        ? course.sessions.map((s: any) => ({ ...s })) 
+        : [emptySessionForm()]
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleAddSessionField = () => {
+    setFormData(prev => ({
+      ...prev,
+      sessions: [...prev.sessions, emptySessionForm()]
+    }));
+  };
+
+  const handleRemoveSessionField = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      sessions: prev.sessions.filter((_, i) => i !== index)
+    }));
+  };
+
+  const handleSessionChange = (index: number, field: keyof SessionForm, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      sessions: prev.sessions.map((session, i) => 
+        i === index ? { ...session, [field]: value } : session
+      )
+    }));
+  };
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Filter out sessions that don't have titles and URLs
+    const cleanedSessions = formData.sessions.filter(s => s.title.trim() !== "" && s.youtubeUrl.trim() !== "");
+    
+    const coursePayload = {
+      title: formData.title,
+      description: formData.description,
+      sessions: cleanedSessions
+    };
+
+    if (editingId) {
+      updateCourse(editingId, coursePayload);
+      showToast("Course module updated successfully.");
+    } else {
+      addCourse(coursePayload);
+      showToast("New course module created successfully.");
+    }
+    setIsModalOpen(false);
+  };
+
+  const handleDelete = (id: string, title: string) => {
+    if (window.confirm(`Delete "${title}"? This cannot be undone.`)) {
+      deleteCourse(id);
+      showToast("Module deleted.");
+    }
+  };
+
+  const displayedCourses = viewAll ? courses : courses.slice(0, 3);
+  
+  // Calculate true, actual stats
+  const totalCourses = courses.length;
+  const enrolledStudents = students.length;
+  
+  // Count how many videos actually watched across all students
+  const totalWatchedVideos = students.reduce((acc, s) => acc + (s.watchedVideos ? s.watchedVideos.length : 0), 0);
+
   return (
     <div className="flex h-screen bg-background overflow-hidden">
-      <DashboardSidebar activeIndex={0} brandLabel="Global Operations" />
+      <DashboardSidebar activeIndex={0} brandLabel="Global Operations" role="admin" onNewVenture={openAddModal} />
 
-      {/* Main */}
       <div className="flex-1 overflow-y-auto custom-scrollbar">
         {/* Header */}
-        <header className="sticky top-0 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-outline-variant/10 z-40 px-8 py-5">
+        <header className="sticky top-0 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-outline-variant/10 z-40 px-6 md:px-8 py-5">
           <div className="flex items-center justify-between">
-            <div>
+            <div className="ml-12 md:ml-0">
               <div className="uppercase tracking-[0.2em]" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "18px", fontWeight: 700 }}>
                 ADMINISTRATION PORTAL
               </div>
@@ -76,14 +149,42 @@ export default function AdminHubPage() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <button className="hover:text-primary transition-colors text-on-surface-variant">
-                <span className="material-symbols-outlined">notifications</span>
-              </button>
+              {/* Notifications */}
+              <div className="relative">
+                <button
+                  onClick={() => setNotifOpen(!notifOpen)}
+                  className="hover:text-primary transition-colors text-on-surface-variant relative"
+                >
+                  <span className="material-symbols-outlined">notifications</span>
+                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />
+                </button>
+                <AnimatePresence>
+                  {notifOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                      className="absolute right-0 top-10 w-80 glass-card border border-outline-variant/20 p-4 shadow-2xl z-50"
+                    >
+                      <div className="text-on-surface uppercase tracking-widest mb-3" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>NOTIFICATIONS</div>
+                      {[
+                        { text: "James Sterling started Lesson 1", time: "Dynamic Log" },
+                        { text: "Aisha Nair watched Global Trade Basics", time: "Dynamic Log" },
+                      ].map((n, i) => (
+                        <div key={i} className="py-3 border-b border-outline-variant/10 last:border-0">
+                          <div className="text-on-surface text-sm">{n.text}</div>
+                          <div className="text-on-surface-variant mt-1" style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>{n.time}</div>
+                        </div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full border border-primary flex items-center justify-center">
                   <span className="material-symbols-outlined text-primary" style={{ fontSize: "20px" }}>person</span>
                 </div>
-                <div>
+                <div className="hidden md:block">
                   <div className="text-on-surface" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>Admin — Merkanto</div>
                   <div className="text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Executive Director</div>
                 </div>
@@ -92,54 +193,36 @@ export default function AdminHubPage() {
           </div>
         </header>
 
-        <div className="p-8 space-y-8">
-          {/* Analytics Bento */}
+        <div className="p-6 md:p-8 space-y-8">
+          {/* Real Metrics Bento */}
           <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <h2 className="mb-6 uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>PERFORMANCE OVERVIEW</h2>
+            <h2 className="mb-6 uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>PORTAL OVERVIEW</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Revenue — large with chart */}
-              <div className="md:col-span-2 glass-card p-8 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 blur-3xl rounded-full -mr-24 -mt-24" />
-                <div className="flex justify-between items-start mb-8">
-                  <div>
-                    <div className="text-on-surface-variant uppercase tracking-widest mb-2" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>REVENUE OVERVIEW</div>
-                    <div className="text-on-surface font-black" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "48px", fontWeight: 700 }}>$2.48M</div>
-                    <div className="text-primary flex items-center gap-1 mt-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>trending_up</span> +12.4% YTD
-                    </div>
-                  </div>
-                  <span className="material-symbols-outlined text-primary" style={{ fontSize: "32px" }}>payments</span>
+              <div className="glass-card p-6 flex flex-col justify-between">
+                <div>
+                  <span className="material-symbols-outlined text-primary mb-4 block" style={{ fontSize: "32px" }}>library_books</span>
+                  <div className="text-on-surface-variant uppercase tracking-widest mb-2" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>ACTIVE COURSE MODULES</div>
+                  <div className="font-black text-white" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "40px" }}>{totalCourses}</div>
                 </div>
-                {/* Bar chart */}
-                <div className="flex items-end gap-2 h-24">
-                  {[40, 60, 50, 70, 55, 80, 75, 90, 85, 95, 88, 100].map((h, i) => (
-                    <div key={i} className="flex-1 bg-primary/20 rounded-sm transition-all hover:bg-primary/40" style={{ height: `${h}%` }} />
-                  ))}
-                </div>
-                <div className="flex justify-between mt-2 text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
-                  <span>JAN</span><span>FEB</span><span>MAR</span><span>APR</span><span>MAY</span><span>JUN</span>
-                  <span>JUL</span><span>AUG</span><span>SEP</span><span>OCT</span><span>NOV</span><span>DEC</span>
-                </div>
+                <div className="text-primary mt-4" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Total modules available inside academy</div>
               </div>
 
-              {/* Right column */}
-              <div className="space-y-6">
-                <div className="glass-card p-6">
-                  <span className="material-symbols-outlined text-primary mb-4 block" style={{ fontSize: "32px" }}>school</span>
-                  <div className="text-on-surface-variant uppercase tracking-widest mb-2" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>ACTIVE SCHOLARS</div>
-                  <div className="font-black" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "36px" }}>14,209</div>
-                  <div className="text-primary mt-1 flex items-center gap-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
-                    <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>add</span> +823 this month
-                  </div>
+              <div className="glass-card p-6 flex flex-col justify-between">
+                <div>
+                  <span className="material-symbols-outlined text-primary mb-4 block" style={{ fontSize: "32px" }}>group</span>
+                  <div className="text-on-surface-variant uppercase tracking-widest mb-2" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>ENROLLED SCHOLARS</div>
+                  <div className="font-black text-white" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "40px" }}>{enrolledStudents}</div>
                 </div>
-                <div className="glass-card p-6">
-                  <span className="material-symbols-outlined text-primary mb-4 block" style={{ fontSize: "32px" }}>query_stats</span>
-                  <div className="text-on-surface-variant uppercase tracking-widest mb-2" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>TOTAL WATCH TIME</div>
-                  <div className="font-black" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "36px" }}>84.2k <span className="text-on-surface-variant font-normal" style={{ fontSize: "18px" }}>hrs</span></div>
-                  <div className="text-primary mt-1 flex items-center gap-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
-                    <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>trending_up</span> +6.2% MTD
-                  </div>
+                <div className="text-primary mt-4" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Actual registered students list</div>
+              </div>
+
+              <div className="glass-card p-6 flex flex-col justify-between">
+                <div>
+                  <span className="material-symbols-outlined text-primary mb-4 block" style={{ fontSize: "32px" }}>play_circle</span>
+                  <div className="text-on-surface-variant uppercase tracking-widest mb-2" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>COMPLETED LESSONS</div>
+                  <div className="font-black text-white" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "40px" }}>{totalWatchedVideos}</div>
                 </div>
+                <div className="text-primary mt-4" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Total distinct lessons watched by all students</div>
               </div>
             </div>
           </motion.section>
@@ -148,106 +231,183 @@ export default function AdminHubPage() {
           <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
             <div className="flex items-center justify-between mb-6">
               <h2 className="uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>ACADEMY MODULES</h2>
-              <button className="text-primary flex items-center gap-2 hover:gap-4 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
-                View All <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>arrow_forward</span>
+              <button
+                onClick={() => setViewAll(!viewAll)}
+                className="text-primary flex items-center gap-2 hover:gap-4 transition-all"
+                style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}
+              >
+                {viewAll ? "Show Less" : "View All"} <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>{viewAll ? "expand_less" : "arrow_forward"}</span>
               </button>
             </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {modules.map((mod) => (
-                <div key={mod.title} className="glass-card group overflow-hidden">
-                  <div className="h-40 overflow-hidden">
-                    <img className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src={mod.img} alt={mod.title} />
+              {isLoaded && displayedCourses.map((mod) => (
+                <div key={mod.id} className="glass-card group overflow-hidden flex flex-col">
+                  <div className="h-40 overflow-hidden shrink-0">
+                    <img className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src={mod.img || "https://lh3.googleusercontent.com/aida-public/AB6AXuCklkeF4ZuMkBb75fsxKi5nNkwJbIhrHIfNrxc6miByGr7FpA4eCJjXy8z_KyvgKdU9Vgsg0I_REtweRpXHgVzsxFBhAluhenfRbhDS8tYaTVc4Mfx9PLYrGgntSE0cWyF2fbIryXFXGkShzU8jQptEPPYrx35C-BpX1nM2yFBdqXP1yHMZ2Bibq3eTXcynJBrjvUcLi7qFDaOX0BEa-EaMaR9vDB1idAOkW_dvivnre8ApnLwmHG4xZrWHFH9JZ2Vsbe7p-KHwJw"} alt={mod.title} />
                   </div>
-                  <div className="p-5">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "16px" }}>{mod.title}</h4>
-                      <span className={`px-2 py-1 ${mod.status === "Live" ? "bg-primary/20 text-primary" : "bg-surface-container-highest text-on-surface-variant"}`} style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>
-                        {mod.status}
-                      </span>
+                  <div className="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-start mb-2">
+                        <h4 style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "16px" }}>{mod.title}</h4>
+                        <button
+                          onClick={() => updateCourse(mod.id, { status: mod.status === "Live" ? "Draft" : "Live" })}
+                          className={`px-2 py-1 shrink-0 cursor-pointer transition-all ${mod.status === "Live" ? "bg-primary/20 text-primary hover:bg-primary/30" : "bg-surface-container-highest text-on-surface-variant hover:bg-primary/10 hover:text-primary"}`}
+                          style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}
+                          title="Toggle Live/Draft"
+                        >
+                          {mod.status}
+                        </button>
+                      </div>
+                      <div className="flex items-center gap-2 text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>video_library</span>
+                        {mod.sessions ? mod.sessions.length : 0} Video Lessons
+                      </div>
+                      {mod.description && (
+                        <p className="text-on-surface-variant mt-2 line-clamp-2" style={{ fontFamily: "Inter, sans-serif", fontSize: "13px" }}>{mod.description}</p>
+                      )}
                     </div>
-                    <div className="flex items-center gap-2 text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>group</span>
-                      {mod.students} students enrolled
-                    </div>
-                    <div className="flex gap-2 mt-4">
-                      <button className="flex-1 border border-outline-variant py-2 hover:border-primary hover:text-primary transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
+                    <div className="flex gap-2 mt-4 pt-4 border-t border-outline-variant/20">
+                      <button onClick={() => openEditModal(mod)} className="flex-1 border border-outline-variant py-2 hover:border-primary hover:text-primary transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
                         Edit
                       </button>
-                      <button className="flex-1 border border-outline-variant py-2 hover:border-primary hover:text-primary transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
-                        Analytics
+                      <button onClick={() => handleDelete(mod.id, mod.title)} className="flex-1 border border-outline-variant py-2 text-red-400 hover:border-red-400 hover:bg-red-400/10 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
+                        Delete
                       </button>
                     </div>
                   </div>
                 </div>
               ))}
-              {/* Upload Module Card */}
-              <div className="border-2 border-dashed border-outline-variant/30 hover:border-primary/30 transition-colors flex flex-col items-center justify-center p-12 cursor-pointer group min-h-[280px]">
+              
+              <div onClick={openAddModal} className="border-2 border-dashed border-outline-variant/30 hover:border-primary/30 transition-colors flex flex-col items-center justify-center p-12 cursor-pointer group min-h-[280px]">
                 <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors mb-4" style={{ fontSize: "48px" }}>add_circle</span>
-                <div className="text-on-surface-variant group-hover:text-on-surface transition-colors uppercase tracking-widest text-center" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
-                  Upload New Module
-                </div>
+                <div className="text-on-surface-variant group-hover:text-on-surface transition-colors uppercase tracking-widest text-center" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>Upload New Module</div>
               </div>
             </div>
           </motion.section>
 
-          {/* Student Activity + Digital Assets */}
-          <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
-            {/* Student Activity */}
+          {/* Student Activity Log */}
+          <motion.div className="grid grid-cols-1 gap-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
             <div className="glass-card p-6">
-              <h2 className="mb-6 uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>STUDENT ACTIVITY</h2>
+              <h2 className="mb-6 uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>STUDENT REGISTRY & STATUS</h2>
               <div className="space-y-5">
-                {studentActivity.map((student) => (
-                  <div key={student.name}>
+                {students.slice(0, 4).map((student) => (
+                  <div key={student.id}>
                     <div className="flex justify-between mb-1">
-                      <div className="text-on-surface" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>{student.name}</div>
-                      <div className="text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>{student.last} · {student.prog}%</div>
+                      <div className="text-on-surface" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>{student.name} ({student.email})</div>
+                      <div className="text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
+                        {student.watchedVideos ? student.watchedVideos.length : 0} Lessons Watched · {student.progress}%
+                      </div>
                     </div>
                     <div className="h-1 bg-surface-container-highest rounded-full">
-                      <div
-                        className="h-1 rounded-full transition-all"
-                        style={{ width: `${student.prog}%`, background: student.prog > 80 ? "#46e176" : student.prog > 50 ? "#46e176aa" : "#46e17660" }}
-                      />
+                      <div className="h-1 rounded-full transition-all" style={{ width: `${student.progress}%`, background: student.progress > 80 ? "#46e176" : student.progress > 50 ? "#46e176aa" : "#46e17660" }} />
                     </div>
                   </div>
                 ))}
               </div>
-              <button className="mt-8 w-full border border-outline-variant py-3 uppercase tracking-widest hover:border-primary hover:text-primary transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
-                View All Students
+              <button
+                onClick={() => router.push("/dashboard/admin/students")}
+                className="mt-8 w-full border border-outline-variant py-3 uppercase tracking-widest hover:border-primary hover:text-primary transition-all flex items-center justify-center gap-2"
+                style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}
+              >
+                Go to Student Registry <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>arrow_forward</span>
               </button>
-            </div>
-
-            {/* Digital Assets */}
-            <div className="space-y-4">
-              {[
-                { title: "Landing Page Assets", desc: "Main website visuals and branding kit", size: "2.4 GB", icon: "web" },
-                { title: "Trade Insights Pack", desc: "Market reports and infographics library", size: "890 MB", icon: "analytics" },
-              ].map((asset) => (
-                <div key={asset.title} className="glass-card p-6 flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary/10 flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined text-primary" style={{ fontSize: "24px" }}>{asset.icon}</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-on-surface mb-1" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "18px" }}>{asset.title}</div>
-                    <div className="text-on-surface-variant" style={{ fontFamily: "Inter, sans-serif", fontSize: "14px" }}>{asset.desc}</div>
-                  </div>
-                  <div className="text-primary shrink-0" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>{asset.size}</div>
-                </div>
-              ))}
-              {/* Storage bar */}
-              <div className="glass-card p-6">
-                <div className="flex justify-between mb-3">
-                  <div className="text-on-surface" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>ASSET VAULT</div>
-                  <div className="text-primary" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>1.2 TB / 2 TB</div>
-                </div>
-                <div className="h-2 bg-surface-container-highest rounded-full">
-                  <div className="h-2 rounded-full" style={{ width: "60%", background: "linear-gradient(90deg, #46e176, #13c35c)" }} />
-                </div>
-                <div className="text-on-surface-variant mt-2" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>800 GB remaining</div>
-              </div>
             </div>
           </motion.div>
         </div>
       </div>
+
+      {/* Course Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm overflow-y-auto">
+            <motion.div initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }} className="glass-card w-full max-w-2xl p-8 border border-primary/20 relative my-8">
+              <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface transition-colors">
+                <span className="material-symbols-outlined">close</span>
+              </button>
+              <h2 className="text-white mb-6 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "14px" }}>
+                {editingId ? "Edit Course Module" : "Upload New Course Module"}
+              </h2>
+              
+              <form onSubmit={handleSave} className="space-y-6">
+                <div>
+                  <label className="text-on-surface-variant uppercase tracking-widest mb-2 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>Course Title *</label>
+                  <input type="text" required value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} className="w-full bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none transition-colors text-white py-2 px-0" placeholder="e.g. Advanced Logistics" />
+                </div>
+                
+                <div>
+                  <label className="text-on-surface-variant uppercase tracking-widest mb-2 block" style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>Description (Optional)</label>
+                  <textarea rows={2} value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} className="w-full bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none transition-colors text-white py-2 px-0 resize-none" placeholder="A brief overview of the module..." />
+                </div>
+
+                {/* Video Sessions list */}
+                <div className="border-t border-outline-variant/20 pt-4 space-y-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="uppercase tracking-widest text-white" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>LESSON SESSIONS / VIDEOS</span>
+                    <button type="button" onClick={handleAddSessionField} className="text-primary hover:underline flex items-center gap-1 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>add</span> Add Lesson
+                    </button>
+                  </div>
+
+                  <div className="space-y-4 max-h-72 overflow-y-auto custom-scrollbar pr-2">
+                    {formData.sessions.map((session, index) => (
+                      <div key={session.id} className="p-4 bg-surface-container border border-outline-variant/10 space-y-3 relative">
+                        <button 
+                          type="button" 
+                          onClick={() => handleRemoveSessionField(index)} 
+                          className="absolute top-2 right-2 text-on-surface-variant hover:text-red-400 transition-colors"
+                          title="Remove Lesson"
+                        >
+                          <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>delete</span>
+                        </button>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                          <div>
+                            <label className="text-on-surface-variant uppercase tracking-widest mb-1 block" style={{ fontFamily: "Geist, monospace", fontSize: "9px" }}>Lesson Title *</label>
+                            <input type="text" required value={session.title} onChange={e => handleSessionChange(index, "title", e.target.value)} className="w-full bg-transparent border-b border-outline-variant/30 focus:border-primary focus:outline-none text-white text-xs py-1" placeholder="e.g. Session 1: Basics" />
+                          </div>
+                          <div>
+                            <label className="text-on-surface-variant uppercase tracking-widest mb-1 block" style={{ fontFamily: "Geist, monospace", fontSize: "9px" }}>YouTube Link *</label>
+                            <input type="url" required value={session.youtubeUrl} onChange={e => handleSessionChange(index, "youtubeUrl", e.target.value)} className="w-full bg-transparent border-b border-outline-variant/30 focus:border-primary focus:outline-none text-white text-xs py-1" placeholder="https://youtube.com/watch?v=..." />
+                          </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-on-surface-variant uppercase tracking-widest mb-1 block" style={{ fontFamily: "Geist, monospace", fontSize: "9px" }}>Lesson Cover Image (Optional)</label>
+                            <input type="url" value={session.img} onChange={e => handleSessionChange(index, "img", e.target.value)} className="w-full bg-transparent border-b border-outline-variant/30 focus:border-primary focus:outline-none text-white text-xs py-1" placeholder="https://example.com/cover.jpg" />
+                          </div>
+                          <div>
+                            <label className="text-on-surface-variant uppercase tracking-widest mb-1 block" style={{ fontFamily: "Geist, monospace", fontSize: "9px" }}>Lesson Description</label>
+                            <input type="text" value={session.description} onChange={e => handleSessionChange(index, "description", e.target.value)} className="w-full bg-transparent border-b border-outline-variant/30 focus:border-primary focus:outline-none text-white text-xs py-1" placeholder="What will they learn?" />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4 flex gap-4 border-t border-outline-variant/20">
+                  <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 py-3 border border-outline-variant uppercase tracking-widest hover:bg-white/5 transition-colors" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Cancel</button>
+                  <button type="submit" className="flex-1 py-3 bg-primary text-background font-bold uppercase tracking-widest hover:brightness-110 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Save Course</button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Toast */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-surface-container border border-primary/30 px-6 py-3 z-[200] shadow-xl">
+            <span className="text-on-surface" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>{toast}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Close notifications on outside click */}
+      {notifOpen && <div className="fixed inset-0 z-30" onClick={() => setNotifOpen(false)} />}
     </div>
   );
 }

@@ -67,7 +67,7 @@ export default function Navbar() {
             </button>
           </div>
           <Link
-            href="/contact"
+            href="/login"
             className="bg-primary text-on-primary px-4 md:px-6 py-2 font-label-sm text-label-sm font-bold tracking-widest uppercase text-[10px] hover:brightness-110 active:scale-[0.99] transition-all"
           >
             CLIENT PORTAL
@@ -111,7 +111,7 @@ export default function Navbar() {
               })}
               <div className="px-6 py-6 border-t border-white/5 mt-2">
                 <Link
-                  href="/contact"
+                  href="/login"
                   onClick={() => setMobileOpen(false)}
                   className="block text-center bg-primary text-on-primary px-6 py-4 font-label-sm text-label-sm font-bold tracking-[0.3em] uppercase text-[10px]"
                 >
