@@ -236,7 +236,7 @@ export default function StudentDashboardPage() {
                 </button>
                 <AnimatePresence>
                   {notifOpen && (
-                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="absolute right-0 top-10 w-72 glass-card border border-outline-variant/20 p-4 z-50">
+                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="absolute right-0 top-10 w-72 bg-[#121414] border border-outline-variant/20 p-4 z-[100] shadow-2xl">
                       <div className="text-on-surface uppercase tracking-widest mb-3" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>NOTIFICATIONS</div>
                       {["New lesson available in your course", "Live session starts in 2h 34m"].map((n, i) => (
                         <div key={i} className="py-2 border-b border-outline-variant/10 last:border-0 text-sm text-on-surface-variant">{n}</div>

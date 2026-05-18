@@ -377,7 +377,7 @@ export default function AdminHubPage() {
                       initial={{ opacity: 0, y: 8, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                      className="absolute right-0 top-10 w-80 glass-card border border-outline-variant/20 p-4 shadow-2xl z-50"
+                      className="absolute right-0 top-10 w-80 bg-[#121414] border border-outline-variant/20 p-4 shadow-2xl z-[100]"
                     >
                       <div className="text-on-surface uppercase tracking-widest mb-3" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>NOTIFICATIONS</div>
                       {[
