@@ -28,9 +28,11 @@ const emptySessionForm = (): SessionForm => ({
 
 export default function AdminHubPage() {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     if (typeof window !== "undefined") {
       const role = localStorage.getItem("merkanto_role");
       const user = localStorage.getItem("merkanto_user");
@@ -335,7 +337,7 @@ export default function AdminHubPage() {
   const enrolledStudents = students.length;
   const totalWatchedVideos = students.reduce((acc, s) => acc + (s.watchedVideos ? s.watchedVideos.length : 0), 0);
 
-  if (!authChecked) {
+  if (!mounted || !authChecked) {
     return (
       <div className="flex h-screen bg-background items-center justify-center">
         <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>

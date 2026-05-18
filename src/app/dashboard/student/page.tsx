@@ -23,9 +23,11 @@ const TABS = ["My Learning", "Course Library", "Resources"];
 
 export default function StudentDashboardPage() {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     if (typeof window !== "undefined") {
       const role = localStorage.getItem("merkanto_role");
       const user = localStorage.getItem("merkanto_user");
@@ -185,7 +187,7 @@ export default function StudentDashboardPage() {
     }
   };
 
-  if (!authChecked) {
+  if (!mounted || !authChecked) {
     return (
       <div className="flex h-screen bg-background items-center justify-center">
         <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>

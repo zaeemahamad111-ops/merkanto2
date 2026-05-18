@@ -22,9 +22,11 @@ const getYouTubeEmbedUrl = (url: string) => {
 
 export default function StudentManagementPage() {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     if (typeof window !== "undefined") {
       const role = localStorage.getItem("merkanto_role");
       const user = localStorage.getItem("merkanto_user");
@@ -74,7 +76,7 @@ export default function StudentManagementPage() {
 
   const avgProgress = students.length ? Math.round(students.reduce((a, s) => a + s.progress, 0) / students.length) : 0;
 
-  if (!authChecked) {
+  if (!mounted || !authChecked) {
     return (
       <div className="flex h-screen bg-background items-center justify-center">
         <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>
