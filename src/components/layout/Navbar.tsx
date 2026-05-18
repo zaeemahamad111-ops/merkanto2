@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/trade", label: "Trade" },
   { href: "/academy", label: "Academy" },
   { href: "/automotive", label: "Automotive" },

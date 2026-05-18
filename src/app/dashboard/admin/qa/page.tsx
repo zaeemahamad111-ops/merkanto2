@@ -1,12 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import DashboardSidebar from "@/components/layout/DashboardSidebar";
 import { useQA, QA } from "@/hooks/useQA";
 import { useCourses } from "@/hooks/useCourses";
 
 export default function AdminQAPage() {
+  const router = useRouter();
+  const [authChecked, setAuthChecked] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const role = localStorage.getItem("merkanto_role");
+      const user = localStorage.getItem("merkanto_user");
+      if (!role || !user || role !== "admin") {
+        router.push("/login");
+      } else {
+        setAuthChecked(true);
+      }
+    }
+  }, [router]);
+
   const { qaList, isLoaded: qaLoaded, addReply } = useQA();
   const { courses, isLoaded: coursesLoaded } = useCourses();
   
@@ -57,6 +73,16 @@ export default function AdminQAPage() {
   });
 
   const uniqueCourses = Array.from(new Set(enhancedQA.map(q => q.courseName)));
+
+  if (!authChecked) {
+    return (
+      <div className="flex h-screen bg-background items-center justify-center">
+        <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>
+          Authenticating Session...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import DashboardSidebar from "@/components/layout/DashboardSidebar";
 import { useCourses, Course, Session } from "@/hooks/useCourses";
@@ -21,6 +22,21 @@ const files = ["Trade Finance Guide.pdf", "Global Operations customs_template.xl
 const TABS = ["My Learning", "Course Library", "Resources"];
 
 export default function StudentDashboardPage() {
+  const router = useRouter();
+  const [authChecked, setAuthChecked] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const role = localStorage.getItem("merkanto_role");
+      const user = localStorage.getItem("merkanto_user");
+      if (!role || !user || role !== "student") {
+        router.push("/login");
+      } else {
+        setAuthChecked(true);
+      }
+    }
+  }, [router]);
+
   const { courses, isLoaded: coursesLoaded } = useCourses();
   const { students, markVideoWatched } = useStudents();
   const { assignments, submitAssignment, isLoaded: assignmentsLoaded } = useAssignments();
@@ -168,6 +184,16 @@ export default function StudentDashboardPage() {
       setSubmittingAssignmentId(null);
     }
   };
+
+  if (!authChecked) {
+    return (
+      <div className="flex h-screen bg-background items-center justify-center">
+        <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>
+          Authenticating Session...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">

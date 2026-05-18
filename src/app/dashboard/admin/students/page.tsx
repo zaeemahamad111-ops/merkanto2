@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import DashboardSidebar from "@/components/layout/DashboardSidebar";
 import { useStudents, Student } from "@/hooks/useStudents";
@@ -20,6 +21,21 @@ const getYouTubeEmbedUrl = (url: string) => {
 };
 
 export default function StudentManagementPage() {
+  const router = useRouter();
+  const [authChecked, setAuthChecked] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const role = localStorage.getItem("merkanto_role");
+      const user = localStorage.getItem("merkanto_user");
+      if (!role || !user || role !== "admin") {
+        router.push("/login");
+      } else {
+        setAuthChecked(true);
+      }
+    }
+  }, [router]);
+
   const { students, isLoaded, addStudent, updateStudent, deleteStudent } = useStudents();
   const { courses } = useCourses();
   const [modalOpen, setModalOpen] = useState(false);
@@ -57,6 +73,16 @@ export default function StudentManagementPage() {
   });
 
   const avgProgress = students.length ? Math.round(students.reduce((a, s) => a + s.progress, 0) / students.length) : 0;
+
+  if (!authChecked) {
+    return (
+      <div className="flex h-screen bg-background items-center justify-center">
+        <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>
+          Authenticating Session...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">

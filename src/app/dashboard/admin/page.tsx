@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import DashboardSidebar from "@/components/layout/DashboardSidebar";
@@ -28,10 +28,35 @@ const emptySessionForm = (): SessionForm => ({
 
 export default function AdminHubPage() {
   const router = useRouter();
+  const [authChecked, setAuthChecked] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const role = localStorage.getItem("merkanto_role");
+      const user = localStorage.getItem("merkanto_user");
+      if (!role || !user || role !== "admin") {
+        router.push("/login");
+      } else {
+        setAuthChecked(true);
+      }
+    }
+  }, [router]);
+
   const { courses, addCourse, updateCourse, deleteCourse, isLoaded: coursesLoaded } = useCourses();
   const { students } = useStudents();
   const { assignments, addAssignment, gradeAssignment, deleteAssignment, isLoaded: assignmentsLoaded } = useAssignments();
   const { admins, addAdmin, deleteAdmin, isLoaded: adminsLoaded } = useAdmins();
+
+  // Guard render
+  if (!authChecked) {
+    return (
+      <div className="flex h-screen bg-background items-center justify-center">
+        <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>
+          Authenticating Session...
+        </div>
+      </div>
+    );
+  }
 
   // Course management states
   const [isModalOpen, setIsModalOpen] = useState(false);

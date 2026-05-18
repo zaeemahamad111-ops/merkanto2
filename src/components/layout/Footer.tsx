@@ -24,6 +24,8 @@ export default function Footer() {
               Ventures
             </span>
             {[
+              { href: "/", label: "Home" },
+              { href: "/about", label: "About" },
               { href: "/trade", label: "Trade" },
               { href: "/academy", label: "Academy" },
               { href: "/automotive", label: "Automotive" },
