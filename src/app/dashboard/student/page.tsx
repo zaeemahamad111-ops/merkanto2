@@ -187,6 +187,27 @@ export default function StudentDashboardPage() {
     }
   };
 
+  // Build dynamic student notifications for new courses and assignments
+  const studentNotifications: { text: string; time: string }[] = [];
+  if (courses && courses.length > 0) {
+    const sortedCourses = [...courses].reverse().slice(0, 3);
+    sortedCourses.forEach(c => {
+      studentNotifications.push({
+        text: `New Module available: "${c.title}"`,
+        time: "Course Release"
+      });
+    });
+  }
+  if (studentAssignments && studentAssignments.length > 0) {
+    const sortedAssignments = [...studentAssignments].reverse().slice(0, 3);
+    sortedAssignments.forEach(a => {
+      studentNotifications.push({
+        text: `New Assignment published: "${a.title}"`,
+        time: `Due: ${a.dueDate}`
+      });
+    });
+  }
+
   if (!mounted || !authChecked) {
     return (
       <div className="flex h-screen bg-background items-center justify-center">
@@ -234,15 +255,24 @@ export default function StudentDashboardPage() {
               <div className="relative">
                 <button onClick={() => setNotifOpen(!notifOpen)} className="hover:text-primary transition-colors text-on-surface-variant relative">
                   <span className="material-symbols-outlined">notifications</span>
-                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />
+                  {studentNotifications.length > 0 && (
+                    <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />
+                  )}
                 </button>
                 <AnimatePresence>
                   {notifOpen && (
                     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="absolute right-0 top-10 w-72 bg-[#121414] border border-outline-variant/20 p-4 z-[100] shadow-2xl">
                       <div className="text-on-surface uppercase tracking-widest mb-3" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>NOTIFICATIONS</div>
-                      {["New lesson available in your course", "Live session starts in 2h 34m"].map((n, i) => (
-                        <div key={i} className="py-2 border-b border-outline-variant/10 last:border-0 text-sm text-on-surface-variant">{n}</div>
-                      ))}
+                      {studentNotifications.length === 0 ? (
+                        <div className="text-on-surface-variant text-xs py-2">No new scholastic notifications.</div>
+                      ) : (
+                        studentNotifications.map((n, i) => (
+                          <div key={i} className="py-2 border-b border-outline-variant/10 last:border-0">
+                            <div className="text-sm text-on-surface">{n.text}</div>
+                            <div className="text-[10px] text-on-surface-variant mt-1" style={{ fontFamily: "Geist, monospace" }}>{n.time}</div>
+                          </div>
+                        ))
+                      )}
                     </motion.div>
                   )}
                 </AnimatePresence>

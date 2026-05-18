@@ -364,36 +364,6 @@ export default function AdminHubPage() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <div className="relative">
-                <button
-                  onClick={() => setNotifOpen(!notifOpen)}
-                  className="hover:text-primary transition-colors text-on-surface-variant relative"
-                >
-                  <span className="material-symbols-outlined">notifications</span>
-                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />
-                </button>
-                <AnimatePresence>
-                  {notifOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                      className="absolute right-0 top-10 w-80 bg-[#121414] border border-outline-variant/20 p-4 shadow-2xl z-[100]"
-                    >
-                      <div className="text-on-surface uppercase tracking-widest mb-3" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>NOTIFICATIONS</div>
-                      {[
-                        { text: "James Sterling started Lesson 1", time: "Dynamic Log" },
-                        { text: "Aisha Nair watched Global Trade Basics", time: "Dynamic Log" },
-                      ].map((n, i) => (
-                        <div key={i} className="py-3 border-b border-outline-variant/10 last:border-0">
-                          <div className="text-on-surface text-sm">{n.text}</div>
-                          <div className="text-on-surface-variant mt-1" style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>{n.time}</div>
-                        </div>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full border border-primary flex items-center justify-center">
                   <span className="material-symbols-outlined text-primary" style={{ fontSize: "20px" }}>person</span>

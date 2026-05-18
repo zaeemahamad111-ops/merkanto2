@@ -53,7 +53,20 @@ export function useCourses() {
         .from("courses")
         .insert([courseData]);
 
-      if (error) console.error("Error adding course:", error);
+      if (error) {
+        console.error("Error adding course:", error);
+      } else {
+        // Trigger student email notification dispatch
+        await fetch("/api/notify-students", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "course",
+            title: courseData.title,
+            details: courseData.description
+          })
+        }).catch(err => console.error("Notification API failed:", err));
+      }
       await fetchCourses();
     } catch (e) {
       console.error(e);

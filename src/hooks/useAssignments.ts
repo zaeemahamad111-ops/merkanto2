@@ -85,7 +85,20 @@ export function useAssignments() {
           assigned_student_ids: data.assignedStudentIds
         }]);
 
-      if (error) console.error("Error adding assignment:", error);
+      if (error) {
+        console.error("Error adding assignment:", error);
+      } else {
+        // Trigger student email notification dispatch
+        await fetch("/api/notify-students", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "assignment",
+            title: data.title,
+            details: data.description
+          })
+        }).catch(err => console.error("Notification API failed:", err));
+      }
       await fetchAssignments();
     } catch (e) {
       console.error(e);

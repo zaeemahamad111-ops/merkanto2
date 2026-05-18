@@ -69,14 +69,6 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center gap-4 md:gap-6">
-          <div className="hidden sm:flex items-center gap-4 text-on-surface-variant">
-            <button className="hover:text-primary transition-colors" aria-label="Search">
-              <span className="material-symbols-outlined">search</span>
-            </button>
-            <button className="hover:text-primary transition-colors" aria-label="Notifications">
-              <span className="material-symbols-outlined">notifications</span>
-            </button>
-          </div>
           <Link
             href="/login"
             className="bg-primary text-on-primary px-4 md:px-6 py-2 font-label-sm text-label-sm font-bold tracking-widest uppercase text-[10px] hover:brightness-110 active:scale-[0.99] transition-all"
