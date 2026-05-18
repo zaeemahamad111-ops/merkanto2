@@ -32,7 +32,12 @@ export default function LoginPage() {
     
     setTimeout(() => {
       if (role === "admin") {
-        const foundAdmin = admins.find(a => a.email.toLowerCase() === email.toLowerCase() && a.password === password);
+        const localAdmins = [
+          { email: "admin@merkanto.com", password: "admin123" },
+          { email: "merkantopvtltd@gmail.com", password: "Merkanto@123" }
+        ];
+        const foundAdmin = admins.find(a => a.email.toLowerCase() === email.toLowerCase() && a.password === password) ||
+                           localAdmins.find(la => la.email === email.toLowerCase() && la.password === password);
         if (foundAdmin) {
           localStorage.setItem("merkanto_role", "admin");
           localStorage.setItem("merkanto_user", foundAdmin.email);
@@ -42,7 +47,11 @@ export default function LoginPage() {
           setLoading(false);
         }
       } else {
-        const foundStudent = students.find(s => s.email.toLowerCase() === email.toLowerCase() && s.password === password);
+        const localStudents = [
+          { email: "student@merkanto.com", password: "student123", id: "s1" }
+        ];
+        const foundStudent = students.find(s => s.email.toLowerCase() === email.toLowerCase() && s.password === password) ||
+                             localStudents.find(ls => ls.email === email.toLowerCase() && ls.password === password);
         if (foundStudent) {
           localStorage.setItem("merkanto_role", "student");
           localStorage.setItem("merkanto_user", foundStudent.email);
