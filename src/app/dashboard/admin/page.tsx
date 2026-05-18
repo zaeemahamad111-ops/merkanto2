@@ -47,17 +47,6 @@ export default function AdminHubPage() {
   const { assignments, addAssignment, gradeAssignment, deleteAssignment, isLoaded: assignmentsLoaded } = useAssignments();
   const { admins, addAdmin, deleteAdmin, isLoaded: adminsLoaded } = useAdmins();
 
-  // Guard render
-  if (!authChecked) {
-    return (
-      <div className="flex h-screen bg-background items-center justify-center">
-        <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>
-          Authenticating Session...
-        </div>
-      </div>
-    );
-  }
-
   // Course management states
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -345,6 +334,16 @@ export default function AdminHubPage() {
   const totalCourses = courses.length;
   const enrolledStudents = students.length;
   const totalWatchedVideos = students.reduce((acc, s) => acc + (s.watchedVideos ? s.watchedVideos.length : 0), 0);
+
+  if (!authChecked) {
+    return (
+      <div className="flex h-screen bg-background items-center justify-center">
+        <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>
+          Authenticating Session...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">
