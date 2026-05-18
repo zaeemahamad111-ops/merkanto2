@@ -27,10 +27,12 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap"
         />
       </head>
-      <body className="bg-background text-on-surface antialiased">
+      <body className="bg-background text-on-surface antialiased min-h-screen flex flex-col">
         <div className="fixed inset-0 grain-overlay z-50 pointer-events-none" />
         <Navbar />
-        {children}
+        <main className="flex-1 flex flex-col relative w-full">
+          {children}
+        </main>
         <FooterWrapper />
       </body>
     </html>

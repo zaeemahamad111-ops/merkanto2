@@ -1,7 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isDashboard = pathname?.startsWith("/dashboard");
+  if (isDashboard) return null;
+
   return (
     <footer className="bg-surface border-t border-outline-variant/10">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center px-6 md:px-16 py-12 max-w-[1280px] mx-auto gap-12 md:gap-8">
