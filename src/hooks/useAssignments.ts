@@ -110,14 +110,14 @@ export function useAssignments() {
       // Upsert student answer in the submissions table
       const { error } = await supabase
         .from("submissions")
-        .insert([{
+        .upsert([{
           assignment_id: assignmentId,
           student_id: studentId,
           answer: answer,
           status: "Submitted"
-        }]);
+        }], { onConflict: 'assignment_id, student_id' });
 
-      if (error) console.error("Error submitting answer:", error);
+      if (error) throw error;
       await fetchAssignments();
     } catch (e) {
       console.error(e);

@@ -88,7 +88,7 @@ export default function StudentManagementPage() {
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">
-      <DashboardSidebar activeIndex={2} brandLabel="Global Operations" role="admin" onNewVenture={openAdd} />
+      <DashboardSidebar activeIndex={1} brandLabel="Global Operations" role="admin" onNewVenture={openAdd} />
 
       <div className="flex-1 overflow-y-auto custom-scrollbar">
         <header className="sticky top-0 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-outline-variant/10 z-40 px-6 md:px-8 py-5">
