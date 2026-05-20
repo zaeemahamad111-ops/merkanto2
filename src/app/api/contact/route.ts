@@ -9,13 +9,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Read the Web3Forms access key from environment variables
-    const accessKey = process.env.WEB3FORMS_ACCESS_KEY || "";
-
-    if (!accessKey) {
-      return NextResponse.json({ 
-        error: "Web3Forms Access Key is missing. Please add WEB3FORMS_ACCESS_KEY=your_key to your environment variables. You can get a free key instantly by entering your email at web3forms.com." 
-      }, { status: 500 });
-    }
+    const accessKey = process.env.WEB3FORMS_ACCESS_KEY || "deaac10c-d556-4907-9fa2-b1a157306ab2";
 
     // Forward the request to Web3Forms API
     const response = await fetch("https://api.web3forms.com/submit", {
