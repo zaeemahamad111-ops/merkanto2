@@ -15,6 +15,8 @@ export default function Footer() {
   const facebookUrl = getContent("social.facebook", "https://facebook.com/merkanto");
   const whatsappNumber = getContent("social.whatsapp", "919746957077");
   const emailAddress = getContent("social.email", "merkantopvtltd@gmail.com");
+  const officeAddress = getContent("contact.address", "1003, T1, Business Park\nHiLITE City, Kozhikode, Kerala 673014");
+  const workingHours = getContent("contact.hours", "Mon — Sat: 10:00 AM - 06:00 PM (Sun Off)");
 
   return (
     <footer className="relative bg-surface border-t border-outline-variant/10 overflow-hidden">
@@ -39,7 +41,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 md:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 w-full md:w-auto">
           <div className="flex flex-col gap-3">
             <span className="text-on-surface font-bold mb-2 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
               Ventures
@@ -63,7 +65,24 @@ export default function Footer() {
               </Link>
             ))}
           </div>
+
           <div className="flex flex-col gap-3">
+            <span className="text-on-surface font-bold mb-2 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
+              Contact
+            </span>
+            <div className="text-on-surface-variant space-y-3" style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", lineHeight: "1.6" }}>
+              <div>
+                <span className="block font-semibold text-[9px] uppercase tracking-wider text-on-surface/60 font-mono mb-0.5">Location</span>
+                <span className="text-on-surface-variant block whitespace-pre-line leading-relaxed">{officeAddress}</span>
+              </div>
+              <div>
+                <span className="block font-semibold text-[9px] uppercase tracking-wider text-on-surface/60 font-mono mb-0.5">Hours</span>
+                <span className="text-on-surface-variant block leading-relaxed">{workingHours}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3 col-span-2 md:col-span-1">
             <span className="text-on-surface font-bold mb-2 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
               Legal
             </span>
@@ -83,7 +102,7 @@ export default function Footer() {
 
       <div className="px-6 md:px-16 py-8 border-t border-white/5 max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="text-on-surface-variant uppercase tracking-widest opacity-70" style={{ fontFamily: "Geist, monospace", fontSize: "10px" }}>
-          © 2024 MERKANTO GLOBAL TRADE ACADEMY & MERKANTO PRIVATE LIMITED. ALL RIGHTS RESERVED.
+          © {new Date().getFullYear()} MERKANTO GLOBAL TRADE ACADEMY & MERKANTO PRIVATE LIMITED. ALL RIGHTS RESERVED.
         </div>
         <div className="flex gap-6 text-on-surface-variant items-center">
           <a 

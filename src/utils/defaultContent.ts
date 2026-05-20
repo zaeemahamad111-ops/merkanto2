@@ -657,5 +657,19 @@ export const defaultContent: ContentItem[] = [
     category: "Socials",
     label: "Contact Email Address",
     type: "text"
+  },
+  {
+    key: "contact.address",
+    value: "1003, T1, Business Park\nHiLITE City, Kozhikode, Kerala 673014",
+    category: "Socials",
+    label: "Corporate Office Address",
+    type: "textarea"
+  },
+  {
+    key: "contact.hours",
+    value: "Mon — Sat: 10:00 AM - 06:00 PM (Sun Off)",
+    category: "Socials",
+    label: "Working Hours & Days",
+    type: "text"
   }
 ];
