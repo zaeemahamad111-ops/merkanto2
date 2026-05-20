@@ -36,7 +36,7 @@ export default function EventsPage() {
   const { getContent } = useContent();
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="min-h-screen">
       {/* ─── HERO ─── */}
       <section className="relative min-h-[500px] md:h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">

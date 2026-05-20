@@ -75,7 +75,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="min-h-screen">
       {/* ─── HERO ─── */}
       <section className="relative min-h-[600px] md:h-screen md:min-h-[700px] flex items-center overflow-hidden py-20 md:py-0">
         <div className="absolute inset-0 z-0">

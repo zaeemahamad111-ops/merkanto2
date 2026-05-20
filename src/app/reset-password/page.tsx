@@ -174,7 +174,7 @@ function ResetPasswordForm() {
 
 export default function ResetPasswordPage() {
   return (
-    <div className="min-h-screen bg-background flex flex-col justify-center items-center p-4">
+    <div className="min-h-screen flex flex-col justify-center items-center p-4">
       <Suspense fallback={
         <div className="text-on-surface-variant uppercase tracking-widest font-mono text-xs">
           Loading Reset Shell...

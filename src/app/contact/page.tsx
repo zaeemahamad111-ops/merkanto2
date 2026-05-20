@@ -63,7 +63,7 @@ export default function ContactPage() {
   const whatsappUrl = "https://wa.me/919746957077?text=Hello%2C%20I'm%20interested%20in%20arranging%20a%20priority%20consultation%20with%20Merkanto.";
 
   return (
-    <div className="bg-background min-h-screen line-pattern">
+    <div className="min-h-screen">
       {/* ─── HERO HEADER ─── */}
       <section className="relative pt-32 md:pt-24 pb-12 md:pb-16 hero-gradient">
         <motion.div

@@ -210,7 +210,7 @@ export default function StudentDashboardPage() {
 
   if (!mounted || !authChecked) {
     return (
-      <div className="flex min-h-screen md:h-screen bg-background items-center justify-center">
+      <div className="flex min-h-screen md:h-screen items-center justify-center">
         <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>
           Authenticating Session...
         </div>
@@ -219,7 +219,7 @@ export default function StudentDashboardPage() {
   }
 
   return (
-    <div className="flex min-h-screen md:h-screen bg-background overflow-hidden">
+    <div className="flex min-h-screen md:h-screen overflow-hidden">
       <DashboardSidebar activeIndex={0} brandLabel="Academy Portal" role="student" />
 
       <div className="flex-1 overflow-y-auto custom-scrollbar">

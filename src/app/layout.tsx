@@ -29,7 +29,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=Manrope:wght@300;400;500;600;700;800&family=Geist:wght@400;500;600&display=swap"
         />
       </head>
-      <body className="bg-background text-on-surface antialiased min-h-screen flex flex-col overflow-x-hidden w-full">
+      <body className="bg-background line-pattern text-on-surface antialiased min-h-screen flex flex-col overflow-x-hidden w-full">
         <StartupLoader />
         <div className="fixed inset-0 grain-overlay z-50 pointer-events-none" />
         <Navbar />

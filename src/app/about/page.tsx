@@ -19,10 +19,10 @@ export default function AboutPage() {
   const { getContent } = useContent();
 
   return (
-    <div className="bg-background min-h-screen text-white relative overflow-hidden">
+    <div className="min-h-screen text-white relative overflow-hidden">
       {/* Background spotlights & SVGs */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-primary/5 blur-[150px] rounded-full pointer-events-none z-0" />
-      <div className="absolute inset-0 line-pattern pointer-events-none opacity-40 z-0" />
+      <div className="absolute inset-0 pointer-events-none opacity-40 z-0" />
 
       {/* ─── HERO SECTION ─── */}
       <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 px-6 md:px-16 max-w-[1280px] mx-auto z-10">

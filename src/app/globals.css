@@ -173,7 +173,7 @@ button.bg-primary:active, a.bg-primary:active {
 }
 
 .line-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='100' x2='100' y2='0' stroke='rgba(255,255,255,0.015)' stroke-width='1'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='32' x2='32' y2='0' stroke='rgba(255,255,255,0.025)' stroke-width='1'/%3E%3C/svg%3E");
 }
 
 .grain-overlay {

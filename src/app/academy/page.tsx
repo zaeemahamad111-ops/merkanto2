@@ -25,7 +25,7 @@ export default function AcademyPage() {
   const { getContent } = useContent();
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="min-h-screen">
       {/* ─── HERO ─── */}
       <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden border-b border-outline-variant/10">
         <div className="absolute inset-0 z-0">

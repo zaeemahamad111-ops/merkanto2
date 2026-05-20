@@ -78,7 +78,7 @@ export default function AdminQAPage() {
 
   if (!mounted || !authChecked) {
     return (
-      <div className="flex h-screen bg-background items-center justify-center">
+      <div className="flex h-screen items-center justify-center">
         <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>
           Authenticating Session...
         </div>
@@ -87,7 +87,7 @@ export default function AdminQAPage() {
   }
 
   return (
-    <div className="flex h-screen bg-background overflow-hidden">
+    <div className="flex h-screen overflow-hidden">
       <DashboardSidebar activeIndex={2} brandLabel="Global Operations" role="admin" />
 
       <div className="flex-1 overflow-y-auto custom-scrollbar relative">

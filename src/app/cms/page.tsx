@@ -234,7 +234,7 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
   // ─── LOGIN SCREEN ───
   if (!isAuthorized) {
     return (
-      <div className="bg-background min-h-screen flex items-center justify-center px-4 relative overflow-hidden line-pattern">
+      <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-primary/10 blur-[100px] rounded-full pointer-events-none" />
         <motion.div 
           className="glass-card w-full max-w-[420px] p-8 relative z-10 border border-outline-variant/10 text-center"
@@ -297,7 +297,7 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
 
   // ─── DASHBOARD SCREEN ───
   return (
-    <div className="bg-background min-h-screen text-on-surface relative line-pattern pb-20">
+    <div className="min-h-screen text-on-surface relative pb-20">
       {/* Spotlight */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 

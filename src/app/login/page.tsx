@@ -123,7 +123,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center relative overflow-hidden line-pattern">
+    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-primary/10 blur-[120px] rounded-full z-0" />
 
       <div className="w-full max-w-md px-6 relative z-10">
