@@ -266,37 +266,24 @@ export default function ContactPage() {
 
       {/* ─── MAP SECTION ─── */}
       <section className="max-w-[1280px] mx-auto px-6 md:px-16 pb-[60px] md:pb-[120px]">
-        <a 
-          href="https://www.google.com/maps/place/HiLITE+Business+Park+,/data=!4m2!3m1!1s0x0:0xbb7abc23c1ea8a?sa=X&ved=1t:2428&ictx=111"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block"
+        <motion.div
+          className="relative h-[350px] md:h-[500px] w-full overflow-hidden border border-white/10 rounded-lg transition-all duration-500 hover:border-primary/40"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <motion.div
-            className="relative h-[300px] md:h-[480px] w-full overflow-hidden border border-white/10 group grayscale contrast-125 brightness-50 hover:brightness-75 hover:border-primary/40 cursor-pointer transition-all duration-1000"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <img
-              className="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-1000 opacity-60"
-              src="/images/world_map_vector.png"
-              alt="Merkanto Office Location Map"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-  
-            {/* Floating Map Tag */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-              <div className="w-4 h-4 bg-primary rounded-full animate-ping absolute" />
-              <div className="w-4 h-4 bg-primary rounded-full relative z-10 border-2 border-on-primary" />
-              <div className="mt-4 glass-card px-4 md:px-6 py-2 md:py-3 border border-primary/40 flex flex-col items-center gap-1 group-hover:border-primary transition-all">
-                <span className="text-primary uppercase tracking-[0.2em] whitespace-nowrap text-[10px] md:text-[12px] font-bold" style={{ fontFamily: "Geist, monospace" }}>MERKANTO HQ</span>
-                <span className="text-white/40 uppercase tracking-widest text-[7px] md:text-[8px] font-bold" style={{ fontFamily: "Geist, monospace" }}>Open Google Maps</span>
-              </div>
-            </div>
-          </motion.div>
-        </a>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.875647573177!2d75.81525997486164!3d11.267798950005705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba65922338276f5%3A0x62955f284e36630f!2sHiLITE%20Business%20Park!5e0!3m2!1sen!2sin!4v1716216000000!5m2!1sen!2sin"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen={true}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full h-full grayscale opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+          />
+        </motion.div>
       </section>
     </div>
   );
