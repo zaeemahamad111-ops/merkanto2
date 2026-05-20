@@ -268,19 +268,24 @@ export default function AdminHubPage() {
   };
 
   // Admin Account creation handlers
-  const handleCreateAdmin = (e: React.FormEvent) => {
+  const handleCreateAdmin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!adminForm.name || !adminForm.email || !adminForm.password) {
       showToast("Please fill in all details.");
       return;
     }
-    addAdmin({
+    const success = await addAdmin({
       name: adminForm.name,
       email: adminForm.email,
       password: adminForm.password
     });
-    setIsAdminModalOpen(false);
-    showToast(`Administrator account for ${adminForm.name} created successfully.`);
+    if (success) {
+      setIsAdminModalOpen(false);
+      setAdminForm({ name: "", email: "", password: "" });
+      showToast(`Administrator account for ${adminForm.name} created successfully.`);
+    } else {
+      showToast("Failed to create administrator. Please try again.");
+    }
   };
 
   // Assignment Handlers

@@ -49,32 +49,30 @@ export function useAdmins() {
 
   const addAdmin = async (data: Omit<Admin, "id" | "joinedDate" | "role"> & { password?: string }) => {
     try {
-      const { data: authData, error } = await supabase.auth.signUp({
-        email: data.email,
-        password: data.password || "admin123", // Default initial password
-        options: {
-          data: {
-            name: data.name,
-            role: "admin",
-            track: "Global Command"
-          }
-        }
-      });
+      const newId = crypto.randomUUID();
+      const today = new Date().toISOString().split("T")[0];
+
+      const { error } = await supabase
+        .from("profiles")
+        .insert({
+          id: newId,
+          name: data.name,
+          email: data.email,
+          password: data.password || "admin123",
+          role: "admin",
+          track: "Global Command",
+          joined_date: today
+        });
 
       if (error) {
-        console.error("Error creating admin auth:", error);
-      } else {
-        if (authData?.user) {
-          // Update profile record with password fallback
-          await supabase
-            .from("profiles")
-            .update({ password: data.password || "admin123" })
-            .eq("id", authData.user.id);
-        }
+        console.error("Error creating admin profile:", error);
+        return false;
       }
       await fetchAdmins();
+      return true;
     } catch (e) {
-      console.error(e);
+      console.error("Failed to create admin:", e);
+      return false;
     }
   };
 
