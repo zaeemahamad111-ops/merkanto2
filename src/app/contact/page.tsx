@@ -22,13 +22,23 @@ export default function ContactPage() {
     }
     setStatus("submitting");
     try {
-      const response = await fetch("/api/contact", {
+      const formFields = new FormData();
+      // Using public access key directly on the client side as designed by Web3Forms
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "deaac10c-d556-4907-9fa2-b1a157306ab2";
+      
+      formFields.append("access_key", accessKey);
+      formFields.append("name", formData.name);
+      formFields.append("email", formData.email);
+      formFields.append("subject", `[MERKANTO INQUIRY] ${formData.type} - ${formData.name}`);
+      formFields.append("message", `Inquiry Type: ${formData.type}\n\nMessage: ${formData.message}`);
+      formFields.append("from_name", "Merkanto Website Contact Desk");
+      formFields.append("replyto", formData.email);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { 
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
+        body: formFields
       });
+
       let data: any = {};
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
@@ -41,7 +51,7 @@ export default function ContactPage() {
         setFormData({ name: "", email: "", type: "Strategic Trade Partnership", message: "" });
       } else {
         setStatus("error");
-        setStatusMessage(data.error || "The email service is temporarily unavailable. Please retry shortly.");
+        setStatusMessage(data.message || "Failed to dispatch message. Please retry.");
       }
     } catch (err) {
       setStatus("error");
