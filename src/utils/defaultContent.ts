@@ -628,5 +628,34 @@ export const defaultContent: ContentItem[] = [
     category: "Events",
     label: "Galas Section Image URL",
     type: "image"
+  },
+  // ─── SOCIAL LINKS ───
+  {
+    key: "social.whatsapp",
+    value: "919746957077",
+    category: "Socials",
+    label: "WhatsApp Phone Number (e.g. 919746957077)",
+    type: "text"
+  },
+  {
+    key: "social.instagram",
+    value: "https://instagram.com/merkantopvtltd",
+    category: "Socials",
+    label: "Instagram URL",
+    type: "text"
+  },
+  {
+    key: "social.facebook",
+    value: "https://facebook.com/merkanto",
+    category: "Socials",
+    label: "Facebook URL",
+    type: "text"
+  },
+  {
+    key: "social.email",
+    value: "merkantopvtltd@gmail.com",
+    category: "Socials",
+    label: "Contact Email Address",
+    type: "text"
   }
 ];

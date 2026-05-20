@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
+import StartupLoader from "@/components/layout/StartupLoader";
 
 export const metadata: Metadata = {
   title: "MERKANTO | Global Trade Leaders",
@@ -29,6 +30,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background text-on-surface antialiased min-h-screen flex flex-col overflow-x-hidden w-full">
+        <StartupLoader />
         <div className="fixed inset-0 grain-overlay z-50 pointer-events-none" />
         <Navbar />
         <main className="flex-1 flex flex-col relative w-full">

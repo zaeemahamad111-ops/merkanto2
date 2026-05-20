@@ -6,7 +6,7 @@ import { defaultContent, ContentItem } from "@/utils/defaultContent";
 import { motion, AnimatePresence } from "framer-motion";
 import { clearContentCache } from "@/hooks/useContent";
 
-const categories = ["Home", "About", "Trade", "Academy", "Automotive", "Weddings", "Events"];
+const categories = ["Home", "About", "Trade", "Academy", "Automotive", "Weddings", "Events", "Socials"];
 
 export default function CMSPage() {
   // Authentication states
@@ -24,6 +24,10 @@ export default function CMSPage() {
   const [savingStatus, setSavingStatus] = useState<Record<string, "idle" | "saving" | "success" | "error">>({});
   const [uploadingKey, setUploadingKey] = useState<string | null>(null);
   const [generalError, setGeneralError] = useState("");
+
+  const missingKeysCount = dbItems.length > 0 
+    ? defaultContent.filter((defaultItem) => !dbItems.some((dbItem) => dbItem.key === defaultItem.key)).length
+    : 0;
 
   // 1. Session authorization check
   useEffect(() => {
@@ -441,6 +445,56 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
                   {dbItems.filter((i) => i.category === activeTab).length} fields editable
                 </span>
               </div>
+
+              {missingKeysCount > 0 && (
+                <div className="bg-primary/5 border border-primary/20 p-6 rounded-lg mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-primary flex items-center gap-2" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+                      <span className="material-symbols-outlined text-[18px]">info</span>
+                      New CMS Fields Available ({missingKeysCount})
+                    </h4>
+                    <p className="text-xs text-on-surface-variant max-w-xl" style={{ fontFamily: "Inter, sans-serif" }}>
+                      New editable components (like social media links) have been added to the application. Click to sync your database without resetting any of your existing text or images.
+                    </p>
+                  </div>
+                  <button
+                    onClick={async () => {
+                      const missingItems = defaultContent.filter(
+                        (defaultItem) => !dbItems.some((dbItem) => dbItem.key === defaultItem.key)
+                      );
+                      if (missingItems.length === 0) return;
+                      setDbState("checking");
+                      try {
+                        const { error } = await supabase
+                          .from("merkanto_content")
+                          .insert(
+                            missingItems.map((item) => ({
+                              key: item.key,
+                              value: item.value,
+                              category: item.category,
+                              label: item.label,
+                              type: item.type
+                            }))
+                          );
+
+                        if (error) {
+                          alert(`Sync failed: ${error.message}`);
+                        } else {
+                          alert("Database synced successfully! Added " + missingItems.length + " new fields.");
+                        }
+                      } catch (err: any) {
+                        alert(`Sync failed: ${err.message || err}`);
+                      } finally {
+                        checkDatabaseStatus();
+                      }
+                    }}
+                    className="bg-primary text-on-primary px-5 py-2.5 text-[11px] font-bold uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all whitespace-nowrap"
+                    style={{ fontFamily: "Geist, monospace" }}
+                  >
+                    Sync New Fields
+                  </button>
+                </div>
+              )}
 
               {generalError && (
                 <div className="p-4 bg-error/10 border border-error text-error text-xs uppercase tracking-wider mb-6" style={{ fontFamily: "Geist, monospace" }}>

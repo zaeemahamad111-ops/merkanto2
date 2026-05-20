@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useContent } from "@/hooks/useContent";
 
 export default function WhatsAppButton() {
   const pathname = usePathname();
@@ -33,8 +34,10 @@ export default function WhatsAppButton() {
     message = "Hello, I'm interested in your event production services.";
   }
 
+  const { getContent } = useContent();
+
   // Corporate WhatsApp number
-  const phoneNumber = "919746957077";
+  const phoneNumber = getContent("social.whatsapp", "919746957077");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
