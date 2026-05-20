@@ -60,17 +60,20 @@ export default function CMSPage() {
   // 4. Diagnose Supabase Table presence and seeding state
   const checkDatabaseStatus = async () => {
     setDbState("checking");
+    setGeneralError("");
     try {
       const { data, error } = await supabase
         .from("merkanto_content")
         .select("*");
 
       if (error) {
+        console.error("Supabase query error:", error);
         // PostgREST code for relation/table missing is 42P01
         if (error.code === "42P01") {
           setDbState("table_missing");
         } else {
-          setGeneralError(`Database Connection Error: ${error.message}`);
+          setDbState("table_missing"); // Fallback to setup screen so user can run SQL or check keys
+          setGeneralError(`Database Connection Error: ${error.message} (Code: ${error.code})`);
         }
       } else if (!data || data.length === 0) {
         setDbState("empty");
@@ -78,8 +81,10 @@ export default function CMSPage() {
         setDbItems(data as ContentItem[]);
         setDbState("ready");
       }
-    } catch (err) {
-      setGeneralError("An unexpected error occurred connecting to Supabase.");
+    } catch (err: any) {
+      console.error("Unexpected connection error:", err);
+      setDbState("table_missing");
+      setGeneralError(`An unexpected error occurred connecting to Supabase: ${err?.message || err}`);
     }
   };
 
