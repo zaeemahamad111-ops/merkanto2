@@ -356,7 +356,7 @@ export default function AdminHubPage() {
         <header className="sticky top-0 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-outline-variant/10 z-40 px-6 md:px-8 py-5">
           <div className="flex items-center justify-between">
             <div className="ml-12 md:ml-0">
-              <div className="uppercase tracking-[0.2em]" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "18px", fontWeight: 700 }}>
+              <div className="uppercase tracking-[0.2em]" style={{ fontFamily: "Outfit, sans-serif", fontSize: "18px", fontWeight: 700 }}>
                 ADMINISTRATION PORTAL
               </div>
               <div className="text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
@@ -386,7 +386,7 @@ export default function AdminHubPage() {
                 <div>
                   <span className="material-symbols-outlined text-primary mb-4 block" style={{ fontSize: "32px" }}>library_books</span>
                   <div className="text-on-surface-variant uppercase tracking-widest mb-2" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>ACTIVE COURSE MODULES</div>
-                  <div className="font-black text-white" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "40px" }}>{totalCourses}</div>
+                  <div className="font-black text-white" style={{ fontFamily: "Outfit, sans-serif", fontSize: "40px" }}>{totalCourses}</div>
                 </div>
                 <div className="text-primary mt-4" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Total modules available inside academy</div>
               </div>
@@ -395,7 +395,7 @@ export default function AdminHubPage() {
                 <div>
                   <span className="material-symbols-outlined text-primary mb-4 block" style={{ fontSize: "32px" }}>group</span>
                   <div className="text-on-surface-variant uppercase tracking-widest mb-2" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>ENROLLED SCHOLARS</div>
-                  <div className="font-black text-white" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "40px" }}>{enrolledStudents}</div>
+                  <div className="font-black text-white" style={{ fontFamily: "Outfit, sans-serif", fontSize: "40px" }}>{enrolledStudents}</div>
                 </div>
                 <div className="text-primary mt-4" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Actual registered students list</div>
               </div>
@@ -404,7 +404,7 @@ export default function AdminHubPage() {
                 <div>
                   <span className="material-symbols-outlined text-primary mb-4 block" style={{ fontSize: "32px" }}>play_circle</span>
                   <div className="text-on-surface-variant uppercase tracking-widest mb-2" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>COMPLETED LESSONS</div>
-                  <div className="font-black text-white" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "40px" }}>{totalWatchedVideos}</div>
+                  <div className="font-black text-white" style={{ fontFamily: "Outfit, sans-serif", fontSize: "40px" }}>{totalWatchedVideos}</div>
                 </div>
                 <div className="text-primary mt-4" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Total distinct lessons watched by all students</div>
               </div>
@@ -433,7 +433,7 @@ export default function AdminHubPage() {
                   <div className="p-5 flex-1 flex flex-col justify-between">
                     <div>
                       <div className="flex justify-between items-start mb-2">
-                        <h4 style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "16px" }}>{mod.title}</h4>
+                        <h4 style={{ fontFamily: "Outfit, sans-serif", fontSize: "16px" }}>{mod.title}</h4>
                         <button
                           onClick={() => updateCourse(mod.id, { status: mod.status === "Live" ? "Draft" : "Live" })}
                           className={`px-2 py-1 shrink-0 cursor-pointer transition-all ${mod.status === "Live" ? "bg-primary/20 text-primary hover:bg-primary/30" : "bg-surface-container-highest text-on-surface-variant hover:bg-primary/10 hover:text-primary"}`}
@@ -448,7 +448,7 @@ export default function AdminHubPage() {
                         {mod.sessions ? mod.sessions.length : 0} Video Lessons
                       </div>
                       {mod.description && (
-                        <p className="text-on-surface-variant mt-2 line-clamp-2" style={{ fontFamily: "Inter, sans-serif", fontSize: "13px" }}>{mod.description}</p>
+                        <p className="text-on-surface-variant mt-2 line-clamp-2" style={{ fontFamily: "Manrope, sans-serif", fontSize: "13px" }}>{mod.description}</p>
                       )}
                     </div>
                     <div className="flex gap-2 mt-4 pt-4 border-t border-outline-variant/20">
@@ -505,7 +505,7 @@ export default function AdminHubPage() {
                           Assigned to: {assign.assignedStudentIds.includes("all") ? "All Scholars" : `${assign.assignedStudentIds.length} Student(s)`}
                         </span>
                       </div>
-                      <h3 className="text-white font-bold" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "18px" }}>{assign.title}</h3>
+                      <h3 className="text-white font-bold" style={{ fontFamily: "Outfit, sans-serif", fontSize: "18px" }}>{assign.title}</h3>
                       <p className="text-on-surface-variant text-sm mt-1 mb-6">{assign.description}</p>
                     </div>
 
@@ -579,7 +579,7 @@ export default function AdminHubPage() {
                       </div>
                     </div>
                     <div className="h-1 bg-surface-container-highest rounded-full">
-                      <div className="h-1 rounded-full transition-all" style={{ width: `${student.progress}%`, background: student.progress > 80 ? "#46e176" : student.progress > 50 ? "#46e176aa" : "#46e17660" }} />
+                      <div className="h-1 bg-primary rounded-full transition-all" style={{ width: `${student.progress}%` }} />
                     </div>
                   </div>
                 ))}

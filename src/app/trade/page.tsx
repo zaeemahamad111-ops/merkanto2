@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useContent } from "@/hooks/useContent";
+import AlternatingText from "@/components/AlternatingText";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -115,12 +116,14 @@ export default function TradePage() {
             <motion.h1
               variants={fadeInUp}
               className="text-white mb-6 md:mb-8 uppercase"
-              style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(40px, 8vw, 72px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.0 }}
-              dangerouslySetInnerHTML={{
-                __html: getContent("trade.hero.title", "GLOBAL TRADE <br /><span class=\"text-primary\">INTELLIGENCE</span>")
-              }}
-            />
-            <motion.p variants={fadeInUp} className="text-on-surface-variant mb-10 max-w-xl mx-auto md:mx-0 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
+              style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(40px, 8vw, 72px)", letterSpacing: "-0.03em", lineHeight: 1.0 }}
+            >
+              <AlternatingText
+                text={getContent("trade.hero.title", "GLOBAL TRADE INTELLIGENCE")}
+                highlightIndices={[2]}
+              />
+            </motion.h1>
+            <motion.p variants={fadeInUp} className="text-on-surface-variant mb-10 max-w-xl mx-auto md:mx-0 text-base md:text-[18px]" style={{ fontFamily: "Manrope, sans-serif", lineHeight: 1.6 }}>
               {getContent("trade.hero.description", "We govern primary networks and trade lines across global markets. From origin validation to secure custom routing, Merkanto guarantees absolute execution reliability.")}
             </motion.p>
             <motion.div variants={fadeInUp} className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
@@ -139,10 +142,10 @@ export default function TradePage() {
       <section className="py-[60px] md:py-[120px] px-6 md:px-16 max-w-[1280px] mx-auto">
         <motion.div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
           <motion.div variants={fadeInUp} className="text-center md:text-left">
-            <h2 className="text-white mb-4" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
-              Operations & Compliance
+            <h2 className="text-white mb-4 animate-pulse-subtle" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", letterSpacing: "-0.02em" }}>
+              <AlternatingText text="Operations & Compliance" />
             </h2>
-            <p className="text-on-surface-variant max-w-md mx-auto md:mx-0" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px" }}>
+            <p className="text-on-surface-variant max-w-md mx-auto md:mx-0" style={{ fontFamily: "Manrope, sans-serif", fontSize: "16px" }}>
               Our operational framework ensures seamless cross-border movement with absolute regulatory integrity.
             </p>
           </motion.div>
@@ -164,17 +167,17 @@ export default function TradePage() {
               <span className="material-symbols-outlined text-primary mb-8 block group-hover:scale-110 transition-transform" style={{ fontSize: "40px" }}>
                 {card.icon}
               </span>
-              <h3 className="text-white mb-4" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "28px", fontWeight: 500 }}>
+              <h3 className="text-white mb-4" style={{ fontFamily: "Outfit, sans-serif", fontSize: "28px" }}>
                 {card.title}
               </h3>
-              <p className="text-on-surface-variant mb-6" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px" }}>
+              <p className="text-on-surface-variant mb-6" style={{ fontFamily: "Manrope, sans-serif", fontSize: "16px" }}>
                 {card.desc}
               </p>
               {card.stats && (
                 <div className="flex gap-6 md:gap-8">
                   {card.stats.map((s) => (
                     <div key={s.label}>
-                      <div className="text-primary font-bold text-2xl md:text-[28px]" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{s.value}</div>
+                      <div className="text-primary font-bold text-2xl md:text-[28px]" style={{ fontFamily: "Outfit, sans-serif" }}>{s.value}</div>
                       <div className="text-on-surface-variant uppercase text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>{s.label}</div>
                     </div>
                   ))}
@@ -194,8 +197,8 @@ export default function TradePage() {
       <section className="bg-surface-container-low py-[60px] md:py-[120px] relative overflow-hidden">
         <div className="px-6 md:px-16 max-w-[1280px] mx-auto relative z-10">
           <motion.div className="text-center mb-12 md:mb-20" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <h2 className="text-white mb-6" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
-              GLOBAL NODE REACH
+            <h2 className="text-white mb-6 animate-pulse-subtle" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", letterSpacing: "-0.02em" }}>
+              <AlternatingText text="GLOBAL NODE REACH" />
             </h2>
             <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-12 text-on-surface-variant uppercase tracking-[0.2em] text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
               <span>6 Continents</span>
@@ -232,45 +235,45 @@ export default function TradePage() {
             <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
               <motion.line 
                 x1="45%" y1="30%" x2="65%" y2="25%" 
-                stroke="#46e176" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
+                stroke="#c8a55a" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut" }}
               />
               <motion.line 
                 x1="45%" y1="30%" x2="20%" y2="40%" 
-                stroke="#46e176" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
+                stroke="#c8a55a" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
               />
               <motion.line 
                 x1="45%" y1="30%" x2="52%" y2="60%" 
-                stroke="#46e176" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
+                stroke="#c8a55a" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut", delay: 1 }}
               />
             </svg>
 
             {/* Hub Pins */}
             <div className="absolute top-[30%] left-[45%] group cursor-pointer z-20">
-              <div className="w-4 h-4 bg-primary rounded-full animate-pulse shadow-[0_0_20px_#46e176]" />
+              <div className="w-4 h-4 bg-primary rounded-full animate-pulse shadow-[0_0_20px_#c8a55a]" />
               <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                 <span className="text-white font-bold tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>EMEA CENTRAL</span>
               </div>
             </div>
             
             <div className="absolute top-[25%] left-[65%] group cursor-pointer z-20">
-              <div className="w-3 h-3 bg-primary/80 rounded-full shadow-[0_0_15px_#46e176]" />
+              <div className="w-3 h-3 bg-primary/80 rounded-full shadow-[0_0_15px_#c8a55a]" />
               <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                 <span className="text-white font-bold tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>APAC HUB</span>
               </div>
             </div>
 
             <div className="absolute top-[40%] left-[20%] group cursor-pointer z-20">
-              <div className="w-3 h-3 bg-primary/80 rounded-full shadow-[0_0_15px_#46e176]" />
+              <div className="w-3 h-3 bg-primary/80 rounded-full shadow-[0_0_15px_#c8a55a]" />
               <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                 <span className="text-white font-bold tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>AMERICAS NODE</span>
               </div>
             </div>
 
             <div className="absolute top-[60%] left-[52%] group cursor-pointer z-20">
-              <div className="w-2 h-2 bg-primary/60 rounded-full shadow-[0_0_10px_#46e176]" />
+              <div className="w-2 h-2 bg-primary/60 rounded-full shadow-[0_0_10px_#c8a55a]" />
               <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                 <span className="text-white font-bold tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>AFRICA TRANSIT</span>
               </div>
@@ -287,8 +290,8 @@ export default function TradePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="text-white mb-1 text-xl md:text-2xl font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{r.label}</div>
-                <div className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{r.sub}</div>
+                <div className="text-white mb-1 text-xl md:text-2xl font-medium" style={{ fontFamily: "Outfit, sans-serif" }}>{r.label}</div>
+                <div className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Manrope, sans-serif" }}>{r.sub}</div>
               </motion.div>
             ))}
           </div>
@@ -298,8 +301,8 @@ export default function TradePage() {
       {/* ─── CORE PORTFOLIO ─── */}
       <section className="py-[60px] md:py-[120px]">
         <div className="px-6 md:px-16 max-w-[1280px] mx-auto mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <h2 className="text-white" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
-            CORE PORTFOLIO
+          <h2 className="text-white animate-pulse-subtle" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", letterSpacing: "-0.02em" }}>
+            <AlternatingText text="CORE PORTFOLIO" />
           </h2>
           <div className="hidden md:flex gap-4">
             {["chevron_left", "chevron_right"].map((icon) => (
@@ -325,8 +328,8 @@ export default function TradePage() {
               </div>
               <div className="p-6 md:p-8">
                 <div className="text-primary mb-2 uppercase tracking-widest text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>{item.category}</div>
-                <h3 className="text-white mb-4 text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{item.title}</h3>
-                <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{item.desc}</p>
+                <h3 className="text-white mb-4 text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Outfit, sans-serif" }}>{item.title}</h3>
+                <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Manrope, sans-serif" }}>{item.desc}</p>
               </div>
             </motion.div>
           ))}

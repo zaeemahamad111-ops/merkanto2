@@ -138,7 +138,7 @@ export default function LoginPage() {
             {!forgotOpen ? (
               <motion.div key="login" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                 <div className="text-center mb-8">
-                  <h1 className="text-white mb-2" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "28px", fontWeight: 600 }}>PORTAL ACCESS</h1>
+                  <h1 className="text-white mb-2" style={{ fontFamily: "Outfit, sans-serif", fontSize: "28px", fontWeight: 600 }}>PORTAL ACCESS</h1>
                   <p className="text-on-surface-variant uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Secure Authentication</p>
                 </div>
 
@@ -155,7 +155,7 @@ export default function LoginPage() {
                 <div className="bg-primary/10 border border-primary/20 px-4 py-3 mb-6 flex items-center justify-between">
                   <div className="flex-1 min-w-0 pr-2">
                     <div className="text-primary" style={{ fontFamily: "Geist, monospace", fontSize: "10px", letterSpacing: "0.1em" }}>DEMO CREDENTIALS</div>
-                    <div className="text-on-surface-variant mt-1 truncate" style={{ fontFamily: "Inter, sans-serif", fontSize: "12px" }}>
+                    <div className="text-on-surface-variant mt-1 truncate" style={{ fontFamily: "Manrope, sans-serif", fontSize: "12px" }}>
                       {role === "admin" 
                         ? (() => {
                             const demoA = admins[0] || { email: "admin@merkanto.com", password: "admin123" };
@@ -176,11 +176,11 @@ export default function LoginPage() {
                 <form onSubmit={handleLogin} className="space-y-6">
                   <div>
                     <label className="text-on-surface-variant uppercase tracking-widest mb-2 block" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Email</label>
-                    <input type="email" required value={email} onChange={(e) => { setEmail(e.target.value); setError(""); }} placeholder={role === "admin" ? "admin@merkanto.com" : "student@university.edu"} className="w-full bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none transition-colors text-white py-2 px-0" style={{ fontFamily: "Inter, sans-serif" }} />
+                    <input type="email" required value={email} onChange={(e) => { setEmail(e.target.value); setError(""); }} placeholder={role === "admin" ? "admin@merkanto.com" : "student@university.edu"} className="w-full bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none transition-colors text-white py-2 px-0" style={{ fontFamily: "Manrope, sans-serif" }} />
                   </div>
                   <div>
                     <label className="text-on-surface-variant uppercase tracking-widest mb-2 block" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Password</label>
-                    <input type="password" required value={password} onChange={(e) => { setPassword(e.target.value); setError(""); }} placeholder="••••••••" className="w-full bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none transition-colors text-white py-2 px-0" style={{ fontFamily: "Inter, sans-serif" }} />
+                    <input type="password" required value={password} onChange={(e) => { setPassword(e.target.value); setError(""); }} placeholder="••••••••" className="w-full bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none transition-colors text-white py-2 px-0" style={{ fontFamily: "Manrope, sans-serif" }} />
                   </div>
 
                   <AnimatePresence>
@@ -191,12 +191,12 @@ export default function LoginPage() {
                     )}
                   </AnimatePresence>
 
-                  <button type="submit" disabled={loading} className="w-full bg-primary text-background py-4 font-bold uppercase tracking-[0.2em] hover:brightness-110 active:scale-[0.99] transition-all shadow-[0_0_20px_rgba(70,225,118,0.2)] mt-4 disabled:opacity-70 text-xs" style={{ fontFamily: "Geist, monospace" }}>
+                  <button type="submit" disabled={loading} className="w-full bg-primary text-background py-4 font-bold uppercase tracking-[0.2em] hover:brightness-110 active:scale-[0.99] transition-all shadow-[0_0_20px_rgba(200,165,90,0.2)] mt-4 disabled:opacity-70 text-xs" style={{ fontFamily: "Geist, monospace" }}>
                     {loading ? "Authenticating..." : "Authenticate"}
                   </button>
                 </form>
 
-                <div className="mt-8 flex justify-between items-center text-xs" style={{ fontFamily: "Inter, sans-serif" }}>
+                <div className="mt-8 flex justify-between items-center text-xs" style={{ fontFamily: "Manrope, sans-serif" }}>
                   <button onClick={() => { setForgotOpen(true); setForgotMsg(null); setForgotEmail(""); }} className="text-primary hover:underline bg-transparent border-0 cursor-pointer uppercase tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>
                     Forgot Password?
                   </button>
@@ -208,14 +208,14 @@ export default function LoginPage() {
             ) : (
               <motion.div key="forgot" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                 <div className="text-center mb-8">
-                  <h1 className="text-white mb-2" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "24px", fontWeight: 600 }}>PASSWORD RESET</h1>
+                  <h1 className="text-white mb-2" style={{ fontFamily: "Outfit, sans-serif", fontSize: "24px", fontWeight: 600 }}>PASSWORD RESET</h1>
                   <p className="text-on-surface-variant uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Generate Secure Reset Link</p>
                 </div>
 
                 <form onSubmit={handleForgotPasswordSubmit} className="space-y-6">
                   <div>
                     <label className="text-on-surface-variant uppercase tracking-widest mb-2 block" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Account Email Address</label>
-                    <input type="email" required value={forgotEmail} onChange={(e) => { setForgotEmail(e.target.value); setForgotMsg(null); }} placeholder="e.g. student@merkanto.com" className="w-full bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none transition-colors text-white py-2 px-0" style={{ fontFamily: "Inter, sans-serif" }} />
+                    <input type="email" required value={forgotEmail} onChange={(e) => { setForgotEmail(e.target.value); setForgotMsg(null); }} placeholder="e.g. student@merkanto.com" className="w-full bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none transition-colors text-white py-2 px-0" style={{ fontFamily: "Manrope, sans-serif" }} />
                   </div>
 
                   <AnimatePresence>

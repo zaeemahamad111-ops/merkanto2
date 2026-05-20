@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useContent } from "@/hooks/useContent";
+import AlternatingText from "@/components/AlternatingText";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -106,16 +107,18 @@ export default function HomePage() {
           <motion.h1
             variants={fadeInUp}
             className="text-on-surface mb-6 max-w-4xl mx-auto leading-tight"
-            style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(48px, 8vw, 72px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1 }}
-            dangerouslySetInnerHTML={{
-              __html: getContent("home.hero.title", "Building Global <span class=\"text-primary\">Trade Leaders</span>")
-            }}
-          />
+            style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(48px, 8vw, 72px)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
+          >
+            <AlternatingText 
+              text={getContent("home.hero.title", "Building Global Trade Leaders")}
+              highlightIndices={[2, 3]}
+            />
+          </motion.h1>
 
           <motion.p
             variants={fadeInUp}
             className="text-on-surface-variant max-w-2xl mx-auto mb-10 leading-relaxed opacity-90 text-base md:text-[18px]"
-            style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}
+            style={{ fontFamily: "Manrope, sans-serif", lineHeight: 1.6 }}
           >
             {getContent("home.hero.description", "Merkanto Global Trade Academy equips entrepreneurs and future exporters with practical international trade systems, supplier networks, branding strategies, and real-world import-export operations.")}
           </motion.p>
@@ -157,23 +160,25 @@ export default function HomePage() {
             <motion.div variants={fadeInUp} className="inline-block h-[1px] w-12 bg-primary mx-auto md:mx-0" />
             <motion.h2
               variants={fadeInUp}
-              style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1.2 }}
+              style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", letterSpacing: "-0.02em", lineHeight: 1.2 }}
               className="text-on-surface animate-pulse-subtle"
             >
-              {getContent("home.about.title", "Architecting Global Trade Integration")}
+              <AlternatingText 
+                text={getContent("home.about.title", "Architecting Global Trade Integration")}
+              />
             </motion.h2>
-            <motion.div variants={stagger} className="space-y-6 text-on-surface-variant max-w-lg mx-auto md:mx-0 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
+            <motion.div variants={stagger} className="space-y-6 text-on-surface-variant max-w-lg mx-auto md:mx-0 text-base md:text-[18px]" style={{ fontFamily: "Manrope, sans-serif", lineHeight: 1.6 }}>
               <motion.p variants={fadeInUp} className="leading-relaxed whitespace-pre-line">
                 {getContent("home.about.description", "Merkanto Global is a multi-sector enterprise integrating premium commodity trading, structured academy training, luxury automotive acquisitions, and elite creative production.")}
               </motion.p>
             </motion.div>
             <motion.div variants={fadeInUp} className="flex justify-center md:justify-start gap-8 md:gap-12 pt-4">
               <div>
-                <div className="text-primary font-bold mb-1 text-[28px] md:text-[32px]" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>15+</div>
+                <div className="text-primary font-bold mb-1 text-[28px] md:text-[32px]" style={{ fontFamily: "Outfit, sans-serif" }}>15+</div>
                 <div className="text-on-surface-variant uppercase tracking-wider text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>Global Hubs</div>
               </div>
               <div>
-                <div className="text-primary font-bold mb-1 text-[28px] md:text-[32px]" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>500+</div>
+                <div className="text-primary font-bold mb-1 text-[28px] md:text-[32px]" style={{ fontFamily: "Outfit, sans-serif" }}>500+</div>
                 <div className="text-on-surface-variant uppercase tracking-wider text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>Strategic Partners</div>
               </div>
             </motion.div>
@@ -223,8 +228,8 @@ export default function HomePage() {
           <span className="text-primary mb-4 block uppercase tracking-[0.3em]" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
             The Ecosystem
           </span>
-          <h2 className="text-on-surface" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
-            Operational Excellence Across Divisions
+          <h2 className="text-on-surface animate-pulse-subtle" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(32px, 4vw, 48px)", letterSpacing: "-0.02em" }}>
+            <AlternatingText text="Operational Excellence Across Divisions" />
           </h2>
         </motion.div>
 
@@ -247,10 +252,10 @@ export default function HomePage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 md:p-10">
-                  <h3 className="text-on-surface mb-2 text-[28px] md:text-[32px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+                  <h3 className="text-on-surface mb-2 text-[28px] md:text-[32px] font-medium" style={{ fontFamily: "Outfit, sans-serif" }}>
                     {div.title}
                   </h3>
-                  <p className="text-on-surface-variant max-w-md" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px" }}>
+                  <p className="text-on-surface-variant max-w-md" style={{ fontFamily: "Manrope, sans-serif", fontSize: "16px" }}>
                     {div.description}
                   </p>
                   <Link

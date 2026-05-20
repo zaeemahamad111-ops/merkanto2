@@ -93,10 +93,10 @@ export default function StudentManagementPage() {
       <div className="flex-1 overflow-y-auto custom-scrollbar">
         <header className="sticky top-0 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-outline-variant/10 z-40 px-6 md:px-8 py-5">
           <div className="flex items-center justify-between">
-            <div className="ml-12 md:ml-0">
-              <div className="uppercase tracking-[0.2em]" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "18px", fontWeight: 700 }}>STUDENT MANAGEMENT</div>
-              <div className="text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Scholar Registry / Enrollment Control</div>
-            </div>
+             <div className="ml-12 md:ml-0">
+               <div className="uppercase tracking-[0.2em]" style={{ fontFamily: "Outfit, sans-serif", fontSize: "18px", fontWeight: 700 }}>STUDENT MANAGEMENT</div>
+               <div className="text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Scholar Registry / Enrollment Control</div>
+             </div>
             <button onClick={openAdd} className="bg-primary text-background px-6 py-3 font-bold uppercase tracking-widest hover:brightness-110 transition-all flex items-center gap-2" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
               <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>person_add</span>
               Enroll Student
@@ -114,7 +114,7 @@ export default function StudentManagementPage() {
               <div key={stat.label} className="glass-card p-6">
                 <span className="material-symbols-outlined text-primary mb-3 block" style={{ fontSize: "28px" }}>{stat.icon}</span>
                 <div className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>{stat.label}</div>
-                <div className="font-black" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "36px" }}>{stat.value}</div>
+                <div className="font-black" style={{ fontFamily: "Outfit, sans-serif", fontSize: "36px" }}>{stat.value}</div>
                 <div className="text-primary mt-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>{stat.delta}</div>
               </div>
             ))}
@@ -129,7 +129,7 @@ export default function StudentManagementPage() {
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Search by name or email..."
                 className="w-full bg-surface-container border border-outline-variant/20 focus:border-primary focus:outline-none text-white pl-10 pr-4 py-3"
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "14px" }}
+                style={{ fontFamily: "Manrope, sans-serif", fontSize: "14px" }}
               />
             </div>
 
@@ -151,13 +151,13 @@ export default function StudentManagementPage() {
                     <tr key={s.id} className="border-b border-outline-variant/10 hover:bg-white/5 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold shrink-0" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "13px" }}>
+                          <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold shrink-0" style={{ fontFamily: "Outfit, sans-serif", fontSize: "13px" }}>
                             {s.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
                           </div>
                           <div className="text-on-surface" style={{ fontFamily: "Geist, monospace", fontSize: "13px" }}>{s.name}</div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-on-surface-variant" style={{ fontFamily: "Inter, sans-serif", fontSize: "13px" }}>{s.email}</td>
+                      <td className="px-6 py-4 text-on-surface-variant" style={{ fontFamily: "Manrope, sans-serif", fontSize: "13px" }}>{s.email}</td>
 
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3 min-w-[120px]">
@@ -250,7 +250,7 @@ export default function StudentManagementPage() {
               <h2 className="text-white mb-2 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "14px" }}>
                 {selectedStudent.name}'s Progress
               </h2>
-              <div className="text-on-surface-variant mb-6" style={{ fontFamily: "Inter, sans-serif", fontSize: "13px" }}>
+              <div className="text-on-surface-variant mb-6" style={{ fontFamily: "Manrope, sans-serif", fontSize: "13px" }}>
                 Watched Videos Log
               </div>
               
@@ -275,7 +275,7 @@ export default function StudentManagementPage() {
                       <div key={i} className="bg-surface-container-low border border-outline-variant/10 p-4 flex items-center gap-4">
                         <span className="material-symbols-outlined text-primary">play_circle</span>
                         <div>
-                          <div className="text-on-surface" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "15px" }}>
+                          <div className="text-on-surface" style={{ fontFamily: "Outfit, sans-serif", fontSize: "15px" }}>
                             {matchedCourseTitle} — {matchedSessionTitle}
                           </div>
                           <div className="text-on-surface-variant truncate w-64 md:w-96" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>

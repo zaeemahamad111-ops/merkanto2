@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useContent } from "@/hooks/useContent";
+import AlternatingText from "@/components/AlternatingText";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -35,12 +36,14 @@ export default function WeddingPage() {
           </div>
           <h1 
             className="mb-6 max-w-4xl mx-auto uppercase tracking-tighter" 
-            style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(32px, 8vw, 72px)", fontWeight: 600, lineHeight: 1.0 }}
-            dangerouslySetInnerHTML={{
-              __html: getContent("wedding.hero.title", "ARCHITECTING <br /><span class=\"text-primary italic\">TIMELESS CELEBRATIONS</span>")
-            }}
-          />
-          <p className="text-on-surface-variant max-w-2xl mx-auto mb-10 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
+            style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(32px, 8vw, 72px)", letterSpacing: "-0.03em", lineHeight: 1.0 }}
+          >
+            <AlternatingText
+              text={getContent("wedding.hero.title", "ARCHITECTING TIMELESS CELEBRATIONS")}
+              highlightIndices={[1, 2]}
+            />
+          </h1>
+          <p className="text-on-surface-variant max-w-2xl mx-auto mb-10 text-base md:text-[18px]" style={{ fontFamily: "Manrope, sans-serif", lineHeight: 1.6 }}>
             {getContent("wedding.hero.description", "From high-production design systems to premier film creation, Merkanto Weddings is the luxury destination for elite unions.")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -72,7 +75,7 @@ export default function WeddingPage() {
                 <span className="text-primary uppercase tracking-widest text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
                   {getContent("wedding.ceremony.subtitle", "Lake Como, Italy")}
                 </span>
-                <h3 className="text-white mt-2 text-xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+                <h3 className="text-white mt-2 text-xl md:text-[28px] font-medium" style={{ fontFamily: "Outfit, sans-serif" }}>
                   {getContent("wedding.ceremony.title", "The Villa Sola Cabiati Union")}
                 </h3>
               </div>
@@ -89,10 +92,10 @@ export default function WeddingPage() {
           >
             <div className="flex-1 glass-card p-8 md:p-10 flex flex-col justify-center text-center md:text-left">
               <span className="text-primary uppercase tracking-widest mb-4 text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>Philosophy</span>
-              <h2 className="text-on-surface leading-tight mb-6" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(24px, 3vw, 40px)", fontWeight: 600 }}>
-                Precision in <br />Sentiment
+              <h2 className="text-on-surface leading-tight mb-6 animate-pulse-subtle" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(24px, 3vw, 40px)" }}>
+                <AlternatingText text="Precision in Sentiment" />
               </h2>
-              <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>
+              <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Manrope, sans-serif" }}>
                 We don't capture events; we curate legacies. Every frame is a deliberate composition of light, shadow, and unscripted emotion.
               </p>
             </div>
@@ -144,8 +147,8 @@ export default function WeddingPage() {
           transition={{ duration: 0.8 }}
         >
           <span className="material-symbols-outlined text-primary mb-8 block" style={{ fontSize: "56px" }}>auto_awesome</span>
-          <blockquote className="text-on-surface mb-6" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(24px, 3vw, 40px)", fontWeight: 600, lineHeight: 1.3 }}>
-            "Merkanto transformed our wedding into a work of high art. It wasn't just photography; it was a cinematic experience."
+          <blockquote className="text-on-surface mb-6 animate-pulse-subtle" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(24px, 3vw, 40px)", lineHeight: 1.3 }}>
+            <AlternatingText text="Merkanto transformed our wedding into a work of high art. It wasn't just photography; it was a cinematic experience." />
           </blockquote>
           <cite className="text-primary uppercase tracking-widest not-italic" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
             — The Windsor-Hayes Union, 2023

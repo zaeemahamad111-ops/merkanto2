@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useContent } from "@/hooks/useContent";
+import AlternatingText from "@/components/AlternatingText";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -43,20 +44,22 @@ export default function AboutPage() {
             variants={fadeInUp}
             className="mb-8 font-black uppercase tracking-tight"
             style={{
-              fontFamily: "Hanken Grotesk, sans-serif",
+              fontFamily: "Outfit, sans-serif",
               fontSize: "clamp(36px, 7vw, 68px)",
               lineHeight: 1.05,
               letterSpacing: "-0.03em",
             }}
-            dangerouslySetInnerHTML={{
-              __html: getContent("about.hero.title", "Structural Intelligence <br /> <span class=\"text-primary\">For Global Commerce</span>")
-            }}
-          />
+          >
+            <AlternatingText
+              text={getContent("about.hero.title", "Structural Intelligence For Global Commerce")}
+              highlightIndices={[2, 3, 4]}
+            />
+          </motion.h1>
 
           <motion.p
             variants={fadeInUp}
             className="text-on-surface-variant text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light"
-            style={{ fontFamily: "Inter, sans-serif" }}
+            style={{ fontFamily: "Manrope, sans-serif" }}
           >
             {getContent("about.hero.description", "Merkanto is a multi-dimensional global enterprise operating at the intersection of international trade, private capital execution, strategic compliance advisory, and elite academic accreditation. We engineer and govern private supply chains with absolute precision.")}
           </motion.p>
@@ -78,10 +81,10 @@ export default function AboutPage() {
               <span className="material-symbols-outlined text-primary mb-6 block" style={{ fontSize: "36px" }}>
                 hub
               </span>
-              <h3 className="text-white mb-3 text-xl md:text-2xl font-bold uppercase tracking-wide" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+              <h3 className="text-white mb-3 text-xl md:text-2xl font-bold uppercase tracking-wide" style={{ fontFamily: "Outfit, sans-serif" }}>
                 {getContent("about.pillar.1.title", "Supply Chain Orchestration")}
               </h3>
-              <p className="text-on-surface-variant text-sm md:text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+              <p className="text-on-surface-variant text-sm md:text-base leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>
                 {getContent("about.pillar.1.description", "We direct primary networks and logistics channels across six continents, implementing real-time verification and rigorous quality control for raw asset and high-value technical shipments.")}
               </p>
             </div>
@@ -102,10 +105,10 @@ export default function AboutPage() {
               <span className="material-symbols-outlined text-primary mb-6 block" style={{ fontSize: "36px" }}>
                 verified_user
               </span>
-              <h3 className="text-white mb-3 text-xl md:text-2xl font-bold uppercase tracking-wide" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+              <h3 className="text-white mb-3 text-xl md:text-2xl font-bold uppercase tracking-wide" style={{ fontFamily: "Outfit, sans-serif" }}>
                 {getContent("about.pillar.2.title", "Compliance & Security")}
               </h3>
-              <p className="text-on-surface-variant text-sm md:text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+              <p className="text-on-surface-variant text-sm md:text-base leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>
                 {getContent("about.pillar.2.description", "Governance is our foundation. We operate structured compliance layers and automated customs documentation routing to guarantee secure, high-stakes regulatory clearance in complex jurisdictions.")}
               </p>
             </div>
@@ -126,10 +129,10 @@ export default function AboutPage() {
               <span className="material-symbols-outlined text-primary mb-6 block" style={{ fontSize: "36px" }}>
                 school
               </span>
-              <h3 className="text-white mb-3 text-xl md:text-2xl font-bold uppercase tracking-wide" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+              <h3 className="text-white mb-3 text-xl md:text-2xl font-bold uppercase tracking-wide" style={{ fontFamily: "Outfit, sans-serif" }}>
                 {getContent("about.pillar.3.title", "Scholastic Excellence")}
               </h3>
-              <p className="text-on-surface-variant text-sm md:text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+              <p className="text-on-surface-variant text-sm md:text-base leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>
                 {getContent("about.pillar.3.description", "Our Academy exists to cultivate the next cohort of global trade executives. We provide elite-track accreditation, dynamic video classrooms, and structured case review work.")
               }</p>
             </div>
@@ -152,12 +155,13 @@ export default function AboutPage() {
           >
             <h2 
               className="text-white mb-6 uppercase tracking-tight font-black" 
-              style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 42px)", lineHeight: 1.1 }}
-              dangerouslySetInnerHTML={{
-                __html: getContent("about.governance.title", "Governance <br />& Global Standards")
-              }}
-            />
-            <p className="text-on-surface-variant text-base leading-relaxed mb-6 font-light" style={{ fontFamily: "Inter, sans-serif" }}>
+              style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 4vw, 42px)", lineHeight: 1.1 }}
+            >
+              <AlternatingText
+                text={getContent("about.governance.title", "Governance & Global Standards")}
+              />
+            </h2>
+            <p className="text-on-surface-variant text-base leading-relaxed mb-6 font-light" style={{ fontFamily: "Manrope, sans-serif" }}>
               {getContent("about.governance.description", "Merkanto operates in compliance with strict international trade acts and custom protocols. Our corporate structures protect private client interest and maintain maximum execution efficiency across trade nodes.")}
             </p>
             <Link
@@ -181,7 +185,7 @@ export default function AboutPage() {
               <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-3" style={{ fontFamily: "Geist, monospace" }}>
                 Operational Integrity
               </h4>
-              <p className="text-on-surface-variant text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+              <p className="text-on-surface-variant text-sm leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>
                 Every transaction undergoes secure AML validation and multi-layer structural check to protect private investment portfolios.
               </p>
             </div>
@@ -190,7 +194,7 @@ export default function AboutPage() {
               <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-3" style={{ fontFamily: "Geist, monospace" }}>
                 Accredited Syllabus
               </h4>
-              <p className="text-on-surface-variant text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+              <p className="text-on-surface-variant text-sm leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>
                 The Academy curriculum is verified by institutional advisors to match primary industry standards for global logistics training.
               </p>
             </div>
@@ -199,7 +203,7 @@ export default function AboutPage() {
               <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-3" style={{ fontFamily: "Geist, monospace" }}>
                 Private Node Security
               </h4>
-              <p className="text-on-surface-variant text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+              <p className="text-on-surface-variant text-sm leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>
                 Student workspaces and private trade communication channels utilize advanced endpoint authentication to prevent database leaks.
               </p>
             </div>
@@ -208,7 +212,7 @@ export default function AboutPage() {
               <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-3" style={{ fontFamily: "Geist, monospace" }}>
                 Sovereign Compliance
               </h4>
-              <p className="text-on-surface-variant text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+              <p className="text-on-surface-variant text-sm leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>
                 Full cross-border synchronization with custom agencies in 42 partner nations to enable priority green lane clearances.
               </p>
             </div>

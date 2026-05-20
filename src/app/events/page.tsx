@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useContent } from "@/hooks/useContent";
+import AlternatingText from "@/components/AlternatingText";
 
 const styleItems = [
   {
@@ -59,12 +60,14 @@ export default function EventsPage() {
           </span>
           <h1 
             className="text-on-surface mb-8" 
-            style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(36px, 8vw, 72px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1 }}
-            dangerouslySetInnerHTML={{
-              __html: getContent("events.hero.title", "Couture Celebrations. <br />Global Precision.")
-            }}
-          />
-          <p className="text-on-surface-variant max-w-2xl mx-auto mb-10 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
+            style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(36px, 8vw, 72px)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
+          >
+            <AlternatingText
+              text={getContent("events.hero.title", "Couture Celebrations. Global Precision.")}
+              highlightIndices={[0, 1]}
+            />
+          </h1>
+          <p className="text-on-surface-variant max-w-2xl mx-auto mb-10 text-base md:text-[18px]" style={{ fontFamily: "Manrope, sans-serif", lineHeight: 1.6 }}>
             {getContent("events.hero.description", "Architectural event design for the world's most discerning visionaries. From high-stakes institutional galas to intimate destination unions.")}
           </p>
           <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-6">
@@ -88,17 +91,17 @@ export default function EventsPage() {
             <span className="text-primary uppercase tracking-widest mb-4 block text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
               01 / Curated Unions
             </span>
-            <h2 className="mb-6" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
-              Luxury Weddings
+            <h2 className="mb-6 animate-pulse-subtle" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", letterSpacing: "-0.02em" }}>
+              <AlternatingText text="Luxury Weddings" />
             </h2>
-            <p className="text-on-surface-variant mb-8 leading-relaxed text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>
+            <p className="text-on-surface-variant mb-8 leading-relaxed text-sm md:text-base" style={{ fontFamily: "Manrope, sans-serif" }}>
               We transform matrimonial ceremonies into immersive cinematic experiences. Every detail is meticulously engineered to reflect the unique legacy of the union, blending heritage aesthetics with avant-garde structural design.
             </p>
             <ul className="space-y-4 mb-10 text-left">
               {["Bespoke Architectural Altars", "Global Concierge for High-Net-Worth Guests", "Michelin-Level Culinary Choreography"].map((item) => (
                 <li key={item} className="flex items-center gap-4 text-on-surface">
                   <span className="material-symbols-outlined text-primary" style={{ fontSize: "20px", fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                  <span className="text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{item}</span>
+                  <span className="text-sm md:text-base" style={{ fontFamily: "Manrope, sans-serif" }}>{item}</span>
                 </li>
               ))}
             </ul>
@@ -123,8 +126,8 @@ export default function EventsPage() {
             </div>
             <div className="absolute -bottom-10 -left-6 md:-left-10 glass-card p-6 md:p-8 max-w-[280px] md:max-w-xs border border-primary/10">
               <div className="text-primary mb-2 uppercase tracking-wider text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>LATEST WORK</div>
-              <div className="mb-4 text-xl md:text-2xl font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>The Glass Cathedral, Lake Como</div>
-              <p className="text-on-surface-variant text-xs md:text-sm" style={{ fontFamily: "Inter, sans-serif" }}>A 3-day immersive experience for 200 guests featuring a floating glass pavilion.</p>
+              <div className="mb-4 text-xl md:text-2xl font-medium" style={{ fontFamily: "Outfit, sans-serif" }}>The Glass Cathedral, Lake Como</div>
+              <p className="text-on-surface-variant text-xs md:text-sm" style={{ fontFamily: "Manrope, sans-serif" }}>A 3-day immersive experience for 200 guests featuring a floating glass pavilion.</p>
             </div>
           </motion.div>
         </div>
@@ -144,8 +147,8 @@ export default function EventsPage() {
             <span className="text-primary uppercase tracking-widest mb-4 block text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
               02 / Institutional Impact
             </span>
-            <h2 style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
-              Corporate Events
+            <h2 className="animate-pulse-subtle" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", letterSpacing: "-0.02em" }}>
+              <AlternatingText text="Corporate Events" />
             </h2>
           </motion.div>
 
@@ -166,8 +169,8 @@ export default function EventsPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60" />
               <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 pr-4">
-                <h3 className="mb-2 text-xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>Global Leadership Summits</h3>
-                <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>Strategic environments for high-stakes decision making.</p>
+                <h3 className="mb-2 text-xl md:text-[28px] font-medium" style={{ fontFamily: "Outfit, sans-serif" }}>Global Leadership Summits</h3>
+                <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Manrope, sans-serif" }}>Strategic environments for high-stakes decision making.</p>
               </div>
             </motion.div>
 
@@ -183,8 +186,8 @@ export default function EventsPage() {
             >
               <span className="material-symbols-outlined text-primary" style={{ fontSize: "48px", fontVariationSettings: "'FILL' 1" }}>rocket_launch</span>
               <div>
-                <h3 className="mb-2" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "24px" }}>Product Launches</h3>
-                <p className="text-on-surface-variant" style={{ fontFamily: "Inter, sans-serif", fontSize: "14px" }}>Theatrical debuts for revolutionary technology and luxury goods.</p>
+                <h3 className="mb-2" style={{ fontFamily: "Outfit, sans-serif", fontSize: "24px" }}>Product Launches</h3>
+                <p className="text-on-surface-variant" style={{ fontFamily: "Manrope, sans-serif", fontSize: "14px" }}>Theatrical debuts for revolutionary technology and luxury goods.</p>
               </div>
             </motion.div>
 
@@ -217,8 +220,10 @@ export default function EventsPage() {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <div className="flex-1">
-                <h3 className="mb-4 text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>Strategic Production</h3>
-                <p className="text-on-surface-variant mb-6 text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>
+                <h3 className="mb-4 text-2xl md:text-[28px] font-medium animate-pulse-subtle" style={{ fontFamily: "Outfit, sans-serif" }}>
+                  <AlternatingText text="Strategic Production" />
+                </h3>
+                <p className="text-on-surface-variant mb-6 text-sm md:text-base" style={{ fontFamily: "Manrope, sans-serif" }}>
                   Full-scale logistics and technical direction for multi-city international tours. We manage the complexity so you can lead the conversation.
                 </p>
                 <button className="bg-primary text-on-primary px-6 py-2 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
@@ -239,8 +244,8 @@ export default function EventsPage() {
           <span className="text-primary uppercase tracking-widest mb-4 block text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
             03 / Aesthetic Integrity
           </span>
-          <h2 style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
-            Production & Styling
+          <h2 className="animate-pulse-subtle" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", letterSpacing: "-0.02em" }}>
+            <AlternatingText text="Production & Styling" />
           </h2>
         </motion.div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -256,8 +261,8 @@ export default function EventsPage() {
               <div className="overflow-hidden transition-all duration-500 group cursor-pointer" style={{ aspectRatio: "3/4" }}>
                 <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={item.img} alt={item.title} />
               </div>
-              <h4 style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "20px" }}>{item.title}</h4>
-              <p className="text-on-surface-variant" style={{ fontFamily: "Inter, sans-serif", fontSize: "14px" }}>{item.desc}</p>
+              <h4 style={{ fontFamily: "Outfit, sans-serif", fontSize: "20px" }}>{item.title}</h4>
+              <p className="text-on-surface-variant" style={{ fontFamily: "Manrope, sans-serif", fontSize: "14px" }}>{item.desc}</p>
             </motion.div>
           ))}
         </div>

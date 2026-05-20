@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useContent } from "@/hooks/useContent";
+import AlternatingText from "@/components/AlternatingText";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -49,12 +50,14 @@ export default function AcademyPage() {
           <motion.h1
             variants={fadeInUp}
             className="max-w-5xl mx-auto mb-6 md:mb-8"
-            style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(32px, 8vw, 72px)", fontWeight: 600, lineHeight: 1.1, letterSpacing: "-0.03em" }}
-            dangerouslySetInnerHTML={{
-              __html: getContent("academy.hero.title", "Learn International Trade From <span class=\"text-primary italic\">Real</span> Business Operations")
-            }}
-          />
-          <motion.p variants={fadeInUp} className="text-on-surface-variant max-w-2xl mx-auto mb-10 md:mb-12 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
+            style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(32px, 8vw, 72px)", lineHeight: 1.1, letterSpacing: "-0.03em" }}
+          >
+            <AlternatingText
+              text={getContent("academy.hero.title", "Learn International Trade From Real Business Operations")}
+              highlightIndices={[4, 5]}
+            />
+          </motion.h1>
+          <motion.p variants={fadeInUp} className="text-on-surface-variant max-w-2xl mx-auto mb-10 md:mb-12 text-base md:text-[18px]" style={{ fontFamily: "Manrope, sans-serif", lineHeight: 1.6 }}>
             {getContent("academy.hero.description", "Access the proprietary blueprints of global logistics. We don't just teach theory; we show you the live data streams of Merkanto's own international trade networks.")}
           </motion.p>
           <motion.div variants={fadeInUp} className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
@@ -78,7 +81,7 @@ export default function AcademyPage() {
           <div className="max-w-[1280px] mx-auto px-6 md:px-16 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
             {stats.map((s) => (
               <div key={s.label}>
-                <div className="text-primary font-bold mb-1 text-2xl md:text-[28px]" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{s.value}</div>
+                <div className="text-primary font-bold mb-1 text-2xl md:text-[28px]" style={{ fontFamily: "Outfit, sans-serif" }}>{s.value}</div>
                 <div className="text-on-surface-variant uppercase tracking-widest mt-1 text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>{s.label}</div>
               </div>
             ))}

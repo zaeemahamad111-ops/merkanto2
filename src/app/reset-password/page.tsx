@@ -101,7 +101,7 @@ function ResetPasswordForm() {
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="text-center space-y-6 py-4">
             <span className="material-symbols-outlined text-green-400" style={{ fontSize: "48px" }}>check_circle</span>
             <div className="space-y-2">
-              <h3 className="text-white font-bold" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>Password Updated</h3>
+              <h3 className="text-white font-bold" style={{ fontFamily: "Outfit, sans-serif" }}>Password Updated</h3>
               <p className="text-on-surface-variant text-xs">Your new credentials have been safely encrypted and saved. You can now log into your learning console.</p>
             </div>
             <Link

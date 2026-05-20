@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import AlternatingText from "@/components/AlternatingText";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -74,10 +75,10 @@ export default function ContactPage() {
           <div className="inline-block px-3 py-1 bg-surface-container-highest/30 border border-primary/30 mb-6" style={{ borderRadius: "9999px" }}>
             <span className="text-primary uppercase tracking-[0.2em] text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>Contact Excellence</span>
           </div>
-          <h1 className="mb-4" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(36px, 8vw, 72px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
-            Establish Connection
+          <h1 className="mb-4" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(36px, 8vw, 72px)", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+            <AlternatingText text="Establish Connection" />
           </h1>
-          <p className="text-on-surface-variant max-w-2xl mx-auto text-sm md:text-lg" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
+          <p className="text-on-surface-variant max-w-2xl mx-auto text-sm md:text-lg" style={{ fontFamily: "Manrope, sans-serif", lineHeight: 1.6 }}>
             Engage with our global trade advisory. Whether you are scaling operations or entering new markets, your journey begins here.
           </p>
         </motion.div>
@@ -94,8 +95,8 @@ export default function ContactPage() {
             transition={{ duration: 0.7 }}
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl -mr-16 -mt-16" />
-            <h2 className="mb-10 text-center md:text-left" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(24px, 3vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
-              Direct Inquiry
+            <h2 className="mb-10 text-center md:text-left" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(24px, 3vw, 48px)", letterSpacing: "-0.02em" }}>
+              <AlternatingText text="Direct Inquiry" />
             </h2>
 
             {status !== "idle" && (
@@ -118,7 +119,7 @@ export default function ContactPage() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    style={{ fontFamily: "Inter, sans-serif" }}
+                    style={{ fontFamily: "Manrope, sans-serif" }}
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -130,7 +131,7 @@ export default function ContactPage() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    style={{ fontFamily: "Inter, sans-serif" }}
+                    style={{ fontFamily: "Manrope, sans-serif" }}
                   />
                 </div>
               </div>
@@ -141,7 +142,7 @@ export default function ContactPage() {
                   className="bg-transparent border-b border-outline-variant/40 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface appearance-none"
                   value={formData.type}
                   onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                  style={{ fontFamily: "Inter, sans-serif" }}
+                  style={{ fontFamily: "Manrope, sans-serif" }}
                 >
                   <option className="bg-surface">Strategic Trade Partnership</option>
                   <option className="bg-surface">Institutional Academy Enrollment</option>
@@ -161,7 +162,7 @@ export default function ContactPage() {
                   required
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  style={{ fontFamily: "Inter, sans-serif" }}
+                  style={{ fontFamily: "Manrope, sans-serif" }}
                 />
               </div>
 
@@ -186,78 +187,80 @@ export default function ContactPage() {
             transition={{ duration: 0.7, delay: 0.15 }}
           >
             {/* WhatsApp */}
-            <div className="bg-surface-container-low border border-outline-variant/20 p-8 flex flex-col justify-between min-h-[200px] md:min-h-[240px] text-center md:text-left">
-              <div>
-                <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
-                  <span className="material-symbols-outlined text-primary text-[32px] md:text-[40px]">chat_bubble</span>
-                  <h3 className="text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>Instant Priority</h3>
-                </div>
-                <p className="text-on-surface-variant mb-8 text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>
-                  Connect with our concierge desk via encrypted WhatsApp for immediate institutional support.
-                </p>
-              </div>
-              <a
-                className="inline-flex items-center justify-center md:justify-start gap-4 text-primary uppercase tracking-widest border border-primary px-8 py-4 hover:bg-primary hover:text-on-primary transition-all self-center md:self-start w-full md:w-auto"
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}
-              >
-                Connect on WhatsApp
-                <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>arrow_outward</span>
-              </a>
-            </div>
+             <div className="bg-surface-container-low border border-outline-variant/20 p-8 flex flex-col justify-between min-h-[200px] md:min-h-[240px] text-center md:text-left">
+               <div>
+                 <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
+                   <span className="material-symbols-outlined text-primary text-[32px] md:text-[40px]">chat_bubble</span>
+                   <h3 className="text-2xl md:text-[28px] font-medium animate-pulse-subtle" style={{ fontFamily: "Outfit, sans-serif" }}>
+                     <AlternatingText text="Instant Priority" />
+                   </h3>
+                 </div>
+                 <p className="text-on-surface-variant mb-8 text-sm md:text-base" style={{ fontFamily: "Manrope, sans-serif" }}>
+                   Connect with our concierge desk via encrypted WhatsApp for immediate institutional support.
+                 </p>
+               </div>
+               <a
+                 className="inline-flex items-center justify-center md:justify-start gap-4 text-primary uppercase tracking-widest border border-primary px-8 py-4 hover:bg-primary hover:text-on-primary transition-all self-center md:self-start w-full md:w-auto"
+                 href={whatsappUrl}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}
+               >
+                 Connect on WhatsApp
+                 <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>arrow_outward</span>
+               </a>
+             </div>
 
             {/* Office Info */}
             <div className="glass-card p-8">
               <div className="space-y-8">
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 shrink-0 bg-primary-container/20 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-primary">location_on</span>
-                  </div>
-                  <div>
-                    <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Corporate Headquarters</h4>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", lineHeight: "1.6" }}>
-                      1003, T1, Business Park<br />
-                      HiLITE City, National Highway 66,<br />
-                      Bypass, Thondayad,<br />
-                      Kozhikode, Kerala 673014
-                    </p>
-                    <a 
-                      href="https://www.google.com/maps/place/HiLITE+Business+Park+,/data=!4m2!3m1!1s0x0:0xbb7abc23c1ea8a?sa=X&ved=1t:2428&ictx=111"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline text-xs uppercase tracking-widest font-mono mt-2 inline-flex items-center gap-1.5 font-bold"
-                    >
-                      View on Google Maps
-                      <span className="material-symbols-outlined text-[12px]">arrow_outward</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 shrink-0 bg-primary-container/20 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-primary">schedule</span>
-                  </div>
-                  <div>
-                    <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Operations Hours</h4>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", lineHeight: "1.6" }}>
-                      Monday — Saturday: 10:00 AM - 06:00 PM<br />
-                      Sunday: Off
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 shrink-0 bg-primary-container/20 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-primary">mail</span>
-                  </div>
-                  <div>
-                    <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Support Desk</h4>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", lineHeight: "1.6" }}>
-                      merkantopvtltd@gmail.com<br />
-                      +91 9746957077
-                    </p>
-                  </div>
-                </div>
+                 <div className="flex gap-6">
+                   <div className="w-12 h-12 shrink-0 bg-primary-container/20 flex items-center justify-center">
+                     <span className="material-symbols-outlined text-primary">location_on</span>
+                   </div>
+                   <div>
+                     <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Corporate Headquarters</h4>
+                     <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "15px", lineHeight: "1.6" }}>
+                       1003, T1, Business Park<br />
+                       HiLITE City, National Highway 66,<br />
+                       Bypass, Thondayad,<br />
+                       Kozhikode, Kerala 673014
+                     </p>
+                     <a 
+                       href="https://www.google.com/maps/place/HiLITE+Business+Park+,/data=!4m2!3m1!1s0x0:0xbb7abc23c1ea8a?sa=X&ved=1t:2428&ictx=111"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       className="text-primary hover:underline text-xs uppercase tracking-widest font-mono mt-2 inline-flex items-center gap-1.5 font-bold"
+                     >
+                       View on Google Maps
+                       <span className="material-symbols-outlined text-[12px]">arrow_outward</span>
+                     </a>
+                   </div>
+                 </div>
+                 <div className="flex gap-6">
+                   <div className="w-12 h-12 shrink-0 bg-primary-container/20 flex items-center justify-center">
+                     <span className="material-symbols-outlined text-primary">schedule</span>
+                   </div>
+                   <div>
+                     <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Operations Hours</h4>
+                     <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "15px", lineHeight: "1.6" }}>
+                       Monday — Saturday: 10:00 AM - 06:00 PM<br />
+                       Sunday: Off
+                     </p>
+                   </div>
+                 </div>
+                 <div className="flex gap-6">
+                   <div className="w-12 h-12 shrink-0 bg-primary-container/20 flex items-center justify-center">
+                     <span className="material-symbols-outlined text-primary">mail</span>
+                   </div>
+                   <div>
+                     <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Support Desk</h4>
+                     <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "15px", lineHeight: "1.6" }}>
+                       merkantopvtltd@gmail.com<br />
+                       +91 9746957077
+                     </p>
+                   </div>
+                 </div>
               </div>
             </div>
           </motion.div>

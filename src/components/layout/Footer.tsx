@@ -22,7 +22,7 @@ export default function Footer() {
     <footer className="relative bg-surface border-t border-outline-variant/10 overflow-hidden">
       {/* Oversized Background Watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.02] select-none overflow-hidden">
-        <span className="text-[20vw] font-black uppercase text-white whitespace-nowrap" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+        <span className="text-[20vw] font-black uppercase text-white whitespace-nowrap" style={{ fontFamily: "Outfit, sans-serif" }}>
           MERKANTO
         </span>
       </div>
@@ -36,7 +36,7 @@ export default function Footer() {
             height={120} 
             className="h-16 md:h-32 w-auto object-contain"
           />
-          <p className="text-on-surface-variant text-body-md max-w-xs leading-relaxed" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px" }}>
+          <p className="text-on-surface-variant text-body-md max-w-xs leading-relaxed" style={{ fontFamily: "Manrope, sans-serif", fontSize: "16px" }}>
             Global Trade Academy & Private Limited. Structural intelligence for the global market.
           </p>
         </div>
@@ -70,7 +70,7 @@ export default function Footer() {
             <span className="text-on-surface font-bold mb-2 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
               Contact
             </span>
-            <div className="text-on-surface-variant space-y-3" style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", lineHeight: "1.6" }}>
+            <div className="text-on-surface-variant space-y-3" style={{ fontFamily: "Manrope, sans-serif", fontSize: "12px", lineHeight: "1.6" }}>
               <div>
                 <span className="block font-semibold text-[9px] uppercase tracking-wider text-on-surface/60 font-mono mb-0.5">Location</span>
                 <span className="text-on-surface-variant block whitespace-pre-line leading-relaxed">{officeAddress}</span>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useContent } from "@/hooks/useContent";
+import AlternatingText from "@/components/AlternatingText";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -33,10 +34,13 @@ export default function AutomotivePage() {
           <div className="inline-block px-3 py-1 mb-6 bg-primary/10 border border-primary/20 text-primary uppercase tracking-widest text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
             {getContent("automotive.hero.badge", "Precision Craftsmanship")}
           </div>
-          <h1 className="mb-6 max-w-4xl mx-auto uppercase tracking-tighter" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(32px, 8vw, 72px)", fontWeight: 600, lineHeight: 1.0 }}>
-            {getContent("automotive.hero.title", "The Art of Automotive Excellence")}
+          <h1 className="mb-6 max-w-4xl mx-auto uppercase tracking-tighter" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(32px, 8vw, 72px)", letterSpacing: "-0.03em", lineHeight: 1.0 }}>
+            <AlternatingText
+              text={getContent("automotive.hero.title", "The Art of Automotive Excellence")}
+              highlightIndices={[3, 4]}
+            />
           </h1>
-          <p className="text-on-surface-variant max-w-2xl mx-auto mb-10 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
+          <p className="text-on-surface-variant max-w-2xl mx-auto mb-10 text-base md:text-[18px]" style={{ fontFamily: "Manrope, sans-serif", lineHeight: 1.6 }}>
             {getContent("automotive.hero.description", "Bespoke interior reimagining, imported technical enhancements, and cinematic detailing for the discerning collector.")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -50,8 +54,8 @@ export default function AutomotivePage() {
       {/* ─── CURATED VERTICALS ─── */}
       <section className="py-[60px] md:py-[120px] px-6 md:px-16 max-w-[1280px] mx-auto">
         <motion.div className="mb-12 md:mb-16 text-center md:text-left" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="mb-4" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
-            Curated Verticals
+          <h2 className="mb-4 animate-pulse-subtle" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", letterSpacing: "-0.02em" }}>
+            <AlternatingText text="Curated Verticals" />
           </h2>
           <div className="h-1 w-24 bg-primary mx-auto md:mx-0" />
         </motion.div>
@@ -73,10 +77,10 @@ export default function AutomotivePage() {
             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-background to-transparent" />
             <div className="absolute bottom-0 left-0 p-8 md:p-12 max-w-md">
               <span className="text-primary uppercase tracking-widest mb-4 block text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>Bespoke Design</span>
-              <h3 className="mb-4 uppercase text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+              <h3 className="mb-4 uppercase text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Outfit, sans-serif" }}>
                 {getContent("automotive.vertical.1.title", "Interior Reimagining")}
               </h3>
-              <p className="text-on-surface-variant mb-6 text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>
+              <p className="text-on-surface-variant mb-6 text-sm md:text-base" style={{ fontFamily: "Manrope, sans-serif" }}>
                 {getContent("automotive.vertical.1.description", "Complete cabin redesign using full-grain leathers, custom carbon structures, and tailored stitching.")}
               </p>
               <Link href="/contact" className="inline-flex items-center gap-2 text-primary uppercase tracking-widest hover:gap-4 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
@@ -101,10 +105,10 @@ export default function AutomotivePage() {
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
             <div className="absolute bottom-0 left-0 p-8">
               <span className="text-primary uppercase tracking-widest mb-2 block text-[10px]" style={{ fontFamily: "Geist, monospace" }}>Tuning Node</span>
-              <h3 className="mb-2 uppercase text-xl md:text-2xl" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+              <h3 className="mb-2 uppercase text-xl md:text-2xl" style={{ fontFamily: "Outfit, sans-serif" }}>
                 {getContent("automotive.vertical.2.title", "Technical Enhancements")}
               </h3>
-              <p className="text-on-surface-variant text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+              <p className="text-on-surface-variant text-sm" style={{ fontFamily: "Manrope, sans-serif" }}>
                 {getContent("automotive.vertical.2.description", "Importing and engineering elite exhaust systems, forged wheels, and wind-tunnel tested aero packages.")}
               </p>
             </div>
@@ -112,8 +116,8 @@ export default function AutomotivePage() {
 
           {/* Lower row - Typographic Design */}
           {[
-            { title: "Forged Dynamics", subtitle: "AEROSPACE GRADE ALLOY", pattern: "bg-[radial-gradient(#46e176_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03]" },
-            { title: "Lumina Signature", subtitle: "ADVANCED OPTICS", pattern: "bg-[linear-gradient(45deg,#46e176_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.03]" },
+            { title: "Forged Dynamics", subtitle: "AEROSPACE GRADE ALLOY", pattern: "bg-[radial-gradient(#c8a55a_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03]" },
+            { title: "Lumina Signature", subtitle: "ADVANCED OPTICS", pattern: "bg-[linear-gradient(45deg,#c8a55a_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.03]" },
           ].map((item, i) => (
             <motion.div
               key={item.title}
@@ -126,7 +130,7 @@ export default function AutomotivePage() {
               <div className={`absolute inset-0 ${item.pattern} transition-opacity duration-700 group-hover:opacity-[0.1]`} />
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/80 via-transparent to-transparent opacity-30 group-hover:opacity-100 transition-opacity duration-700" />
               <div className="absolute top-1/2 left-0 -translate-y-1/2 pointer-events-none w-full overflow-hidden">
-                <div className="text-[80px] md:text-[100px] font-bold text-white/[0.02] uppercase tracking-[0.1em] leading-none whitespace-nowrap select-none" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+                <div className="text-[80px] md:text-[100px] font-bold text-white/[0.02] uppercase tracking-[0.1em] leading-none whitespace-nowrap select-none" style={{ fontFamily: "Outfit, sans-serif" }}>
                   {item.title} {item.title}
                 </div>
               </div>
@@ -158,10 +162,10 @@ export default function AutomotivePage() {
             <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
             <div className="relative z-10 flex flex-col gap-1">
               <span className="text-primary uppercase tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>Exquisite Finish</span>
-              <h3 className="mb-2 uppercase text-xl font-bold" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+              <h3 className="mb-2 uppercase text-xl font-bold" style={{ fontFamily: "Outfit, sans-serif" }}>
                 {getContent("automotive.vertical.3.title", "Bespoke Aesthetics")}
               </h3>
-              <p className="text-on-surface-variant text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+              <p className="text-on-surface-variant text-sm" style={{ fontFamily: "Manrope, sans-serif" }}>
                 {getContent("automotive.vertical.3.description", "Self-healing paint protection films, proprietary ceramic seals, and absolute detailing perfection.")}
               </p>
             </div>
@@ -180,17 +184,17 @@ export default function AutomotivePage() {
               alt="Technician working on engine"
             />
             <div className="absolute -bottom-4 -right-4 md:-bottom-8 md:-right-8 w-32 h-32 md:w-44 md:h-44 bg-primary/20 backdrop-blur-2xl p-4 md:p-6 flex flex-col justify-end">
-              <span className="text-primary font-bold leading-none mb-1 md:mb-0 text-[28px] md:text-[36px]" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>12+</span>
+              <span className="text-primary font-bold leading-none mb-1 md:mb-0 text-[28px] md:text-[36px]" style={{ fontFamily: "Outfit, sans-serif" }}>12+</span>
               <span className="uppercase tracking-widest leading-tight text-[9px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>Years of Global Sourcing</span>
             </div>
           </motion.div>
 
-          <motion.div className="text-center md:text-left" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+          <motion.div className="text-center md:text-left" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <span className="text-primary uppercase tracking-widest block mb-6 text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>Uncompromising Quality</span>
-            <h2 className="mb-8 uppercase tracking-tight" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600 }}>
-              Technical Precision for the Global Elite
+            <h2 className="mb-8 uppercase tracking-tight font-black" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 4vw, 48px)" }}>
+              <AlternatingText text="Technical Precision for the Global Elite" />
             </h2>
-            <p className="text-on-surface-variant mb-10 text-sm md:text-lg" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
+            <p className="text-on-surface-variant mb-10 text-sm md:text-lg" style={{ fontFamily: "Manrope, sans-serif", lineHeight: 1.6 }}>
               At MERKANTO, we don't just modify vehicles; we curate experiences. Our global trade network grants us exclusive access to materials unavailable to the mainstream market.
             </p>
             <div className="space-y-6 text-left">
@@ -202,7 +206,7 @@ export default function AutomotivePage() {
                   <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1", fontSize: "20px" }}>{item.icon}</span>
                   <div>
                     <h4 className="font-bold uppercase tracking-widest mb-1 text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>{item.title}</h4>
-                    <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{item.desc}</p>
+                    <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Manrope, sans-serif" }}>{item.desc}</p>
                   </div>
                 </div>
               ))}

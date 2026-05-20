@@ -64,7 +64,7 @@ export default function StartupLoader() {
             >
               <h1 
                 className="text-4xl md:text-5xl font-black tracking-[0.3em] text-white uppercase select-none pl-[0.3em]"
-                style={{ fontFamily: "Hanken Grotesk, sans-serif" }}
+                style={{ fontFamily: "Outfit, sans-serif" }}
               >
                 MERKANTO
               </h1>

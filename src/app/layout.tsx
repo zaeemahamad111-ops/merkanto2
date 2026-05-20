@@ -26,7 +26,7 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=Manrope:wght@300;400;500;600;700;800&family=Geist:wght@400;500;600&display=swap"
         />
       </head>
       <body className="bg-background text-on-surface antialiased min-h-screen flex flex-col overflow-x-hidden w-full">

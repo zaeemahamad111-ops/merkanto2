@@ -245,7 +245,7 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
           <span className="text-primary uppercase tracking-[0.3em] text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>
             Merkanto Console
           </span>
-          <h2 className="text-3xl font-medium mt-3 mb-8" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+          <h2 className="text-3xl font-medium mt-3 mb-8" style={{ fontFamily: "Outfit, sans-serif" }}>
             CMS Gatekeeper
           </h2>
 
@@ -258,7 +258,7 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                style={{ fontFamily: "Inter, sans-serif" }}
+                style={{ fontFamily: "Manrope, sans-serif" }}
                 placeholder="Enter username"
               />
             </div>
@@ -271,7 +271,7 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                style={{ fontFamily: "Inter, sans-serif" }}
+                style={{ fontFamily: "Manrope, sans-serif" }}
                 placeholder="Enter password"
               />
             </div>
@@ -343,9 +343,9 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
           >
             <div className="flex items-center gap-3 text-error">
               <span className="material-symbols-outlined text-3xl">database</span>
-              <h3 className="text-xl font-bold uppercase tracking-wide" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>Database Setup Required</h3>
+              <h3 className="text-xl font-bold uppercase tracking-wide" style={{ fontFamily: "Outfit, sans-serif" }}>Database Setup Required</h3>
             </div>
-            <p className="text-on-surface-variant text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+            <p className="text-on-surface-variant text-sm leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>
               To support live content updates, a database table named <strong>merkanto_content</strong> must be added to your Supabase project. Paste the following SQL script into the SQL Editor in your Supabase Dashboard:
             </p>
             <div className="relative">
@@ -385,9 +385,9 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
           >
             <div className="flex flex-col items-center gap-3 text-primary">
               <span className="material-symbols-outlined text-5xl">cloud_sync</span>
-              <h3 className="text-2xl font-bold uppercase tracking-wide" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>Initialize Website Contents</h3>
+              <h3 className="text-2xl font-bold uppercase tracking-wide" style={{ fontFamily: "Outfit, sans-serif" }}>Initialize Website Contents</h3>
             </div>
-            <p className="text-on-surface-variant text-sm leading-relaxed max-w-md mx-auto" style={{ fontFamily: "Inter, sans-serif" }}>
+            <p className="text-on-surface-variant text-sm leading-relaxed max-w-md mx-auto" style={{ fontFamily: "Manrope, sans-serif" }}>
               Your database table was successfully created but has no contents. Initialize it now with the website's default text Copy, images, and video paths.
             </p>
             <button
@@ -438,7 +438,7 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
             {/* Editing Pane */}
             <div className="lg:col-span-9 space-y-8">
               <div className="flex items-center justify-between border-b border-outline-variant/10 pb-4 mb-6">
-                <h2 className="text-2xl font-semibold uppercase tracking-tight" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+                <h2 className="text-2xl font-semibold uppercase tracking-tight" style={{ fontFamily: "Outfit, sans-serif" }}>
                   Editing {activeTab} Page
                 </h2>
                 <span className="text-[10px] bg-primary/10 text-primary px-3 py-1 font-mono uppercase">
@@ -449,11 +449,11 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
               {missingKeysCount > 0 && (
                 <div className="bg-primary/5 border border-primary/20 p-6 rounded-lg mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                   <div className="space-y-1">
-                    <h4 className="text-sm font-bold uppercase tracking-wider text-primary flex items-center gap-2" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-primary flex items-center gap-2" style={{ fontFamily: "Outfit, sans-serif" }}>
                       <span className="material-symbols-outlined text-[18px]">info</span>
                       New CMS Fields Available ({missingKeysCount})
                     </h4>
-                    <p className="text-xs text-on-surface-variant max-w-xl" style={{ fontFamily: "Inter, sans-serif" }}>
+                    <p className="text-xs text-on-surface-variant max-w-xl" style={{ fontFamily: "Manrope, sans-serif" }}>
                       New editable components (like social media links) have been added to the application. Click to sync your database without resetting any of your existing text or images.
                     </p>
                   </div>
@@ -537,7 +537,7 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
                             onChange={(e) => handleValueChange(item.key, e.target.value)}
                             onBlur={() => saveItem(item.key, item.value)}
                             className="w-full bg-surface border border-outline-variant/30 p-3.5 focus:outline-none focus:border-primary text-on-surface text-sm transition-colors"
-                            style={{ fontFamily: "Inter, sans-serif" }}
+                            style={{ fontFamily: "Manrope, sans-serif" }}
                           />
                         )}
 
@@ -549,7 +549,7 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
                             onBlur={() => saveItem(item.key, item.value)}
                             rows={4}
                             className="w-full bg-surface border border-outline-variant/30 p-3.5 focus:outline-none focus:border-primary text-on-surface text-sm transition-colors resize-none leading-relaxed"
-                            style={{ fontFamily: "Inter, sans-serif" }}
+                            style={{ fontFamily: "Manrope, sans-serif" }}
                           />
                         )}
 
@@ -565,7 +565,7 @@ CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket
                                 onBlur={() => saveItem(item.key, item.value)}
                                 placeholder="Paste direct media URL here"
                                 className="flex-1 bg-surface border border-outline-variant/30 px-3.5 py-3 focus:outline-none focus:border-primary text-on-surface text-sm transition-colors"
-                                style={{ fontFamily: "Inter, sans-serif" }}
+                                style={{ fontFamily: "Manrope, sans-serif" }}
                               />
                               
                               {/* Direct file upload trigger */}

@@ -93,10 +93,10 @@ export default function AdminQAPage() {
       <div className="flex-1 overflow-y-auto custom-scrollbar relative">
         <header className="sticky top-0 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-outline-variant/10 z-40 px-6 md:px-8 py-5">
           <div className="flex items-center justify-between">
-            <div className="ml-12 md:ml-0">
-              <div className="uppercase tracking-[0.2em]" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "18px", fontWeight: 700 }}>Q&A COMMAND CENTER</div>
-              <div className="text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Global Student Inquiries & Support</div>
-            </div>
+             <div className="ml-12 md:ml-0">
+               <div className="uppercase tracking-[0.2em]" style={{ fontFamily: "Outfit, sans-serif", fontSize: "18px", fontWeight: 700 }}>Q&A COMMAND CENTER</div>
+               <div className="text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Global Student Inquiries & Support</div>
+             </div>
           </div>
         </header>
 
@@ -145,7 +145,7 @@ export default function AdminQAPage() {
                     </div>
                   </div>
                   
-                  <p className="text-white text-sm mb-6 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+                  <p className="text-white text-sm mb-6 leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>
                     {q.question_text}
                   </p>
 
@@ -154,7 +154,7 @@ export default function AdminQAPage() {
                     <div className="pl-4 border-l-2 border-primary/30 space-y-3 mb-6">
                       <div className="text-[10px] text-primary font-bold uppercase tracking-widest" style={{ fontFamily: "Geist, monospace" }}>Official Replies</div>
                       {q.replies.map((r, i) => (
-                        <p key={i} className="text-sm text-on-surface-variant leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+                        <p key={i} className="text-sm text-on-surface-variant leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>
                           {r}
                         </p>
                       ))}
@@ -169,7 +169,7 @@ export default function AdminQAPage() {
                         onChange={(e) => setReplyText(e.target.value)}
                         placeholder="Write your official response..."
                         className="w-full bg-background border border-outline-variant/20 focus:border-primary/50 text-white p-3 text-sm resize-none h-24 focus:outline-none"
-                        style={{ fontFamily: "Inter, sans-serif" }}
+                        style={{ fontFamily: "Manrope, sans-serif" }}
                         autoFocus
                       />
                       <div className="flex gap-3 justify-end">

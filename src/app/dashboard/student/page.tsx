@@ -227,7 +227,7 @@ export default function StudentDashboardPage() {
         <header className="sticky top-0 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-outline-variant/10 z-40 px-6 md:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="ml-12 md:ml-0">
-              <div className="text-on-surface uppercase tracking-[0.2em]" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "18px", fontWeight: 700 }}>ACADEMY DASHBOARD</div>
+              <div className="text-on-surface uppercase tracking-[0.2em]" style={{ fontFamily: "Outfit, sans-serif", fontSize: "18px", fontWeight: 700 }}>ACADEMY DASHBOARD</div>
               <div className="text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Student Portal / Learning Center</div>
             </div>
             <div className="flex items-center gap-4">
@@ -245,7 +245,7 @@ export default function StudentDashboardPage() {
                         onChange={e => { setSearchQuery(e.target.value); setActiveTab(1); }}
                         placeholder="Search courses..."
                         className="w-full bg-surface-container border border-outline-variant/40 focus:border-primary focus:outline-none text-white px-4 py-2"
-                        style={{ fontFamily: "Inter, sans-serif", fontSize: "13px" }}
+                        style={{ fontFamily: "Manrope, sans-serif", fontSize: "13px" }}
                       />
                     </motion.div>
                   )}
@@ -278,7 +278,7 @@ export default function StudentDashboardPage() {
                 </AnimatePresence>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold uppercase" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+                <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold uppercase" style={{ fontFamily: "Outfit, sans-serif" }}>
                   {currentStudent.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
                 </div>
                 <div className="hidden md:block">
@@ -320,7 +320,7 @@ export default function StudentDashboardPage() {
                           <div className="text-on-surface-variant text-[11px] uppercase tracking-wider mb-1" style={{ fontFamily: "Geist, monospace" }}>
                             {lastWatchedCourseTitle}
                           </div>
-                          <h3 className="text-white font-bold mb-2" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "20px" }}>
+                          <h3 className="text-white font-bold mb-2" style={{ fontFamily: "Outfit, sans-serif", fontSize: "20px" }}>
                             {lastWatchedSession.title}
                           </h3>
                           <p className="text-on-surface-variant text-sm line-clamp-2 mb-4">
@@ -354,7 +354,7 @@ export default function StudentDashboardPage() {
                       </div>
                       {newestCourse ? (
                         <>
-                          <h3 className="text-white font-bold mb-2" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "20px" }}>
+                          <h3 className="text-white font-bold mb-2" style={{ fontFamily: "Outfit, sans-serif", fontSize: "20px" }}>
                             {newestCourse.title}
                           </h3>
                           <p className="text-on-surface-variant text-sm line-clamp-2 mb-4">
@@ -385,7 +385,7 @@ export default function StudentDashboardPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   {coursesLoaded && courses.length > 0 ? (
                     <div className="lg:col-span-3 glass-card p-6 md:p-8">
-                      <h3 className="mb-4" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "22px", fontWeight: 500 }}>Active Course Library</h3>
+                      <h3 className="mb-4" style={{ fontFamily: "Outfit, sans-serif", fontSize: "22px", fontWeight: 500 }}>Active Course Library</h3>
                       <div className="space-y-4">
                         {courses.map((course, idx) => {
                           const totalS = course.sessions ? course.sessions.length : 0;
@@ -396,7 +396,7 @@ export default function StudentDashboardPage() {
                           return (
                             <div key={course.id} className="p-4 bg-surface-container border border-outline-variant/10 flex justify-between items-center gap-4">
                               <div className="flex-1">
-                                <div className="text-white font-bold text-sm" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{course.title}</div>
+                                <div className="text-white font-bold text-sm" style={{ fontFamily: "Outfit, sans-serif" }}>{course.title}</div>
                                 <div className="h-1 bg-surface-container-highest rounded-full mt-2 w-full">
                                   <div className="h-1 bg-primary rounded-full transition-all" style={{ width: `${courseProg}%` }} />
                                 </div>
@@ -443,7 +443,7 @@ export default function StudentDashboardPage() {
                                 <span className="bg-red-400/20 text-red-400 text-[9px] px-2 py-0.5 font-bold uppercase tracking-wider">Pending Submission</span>
                               )}
                             </div>
-                            <h3 className="text-white font-bold" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "16px" }}>{assign.title}</h3>
+                            <h3 className="text-white font-bold" style={{ fontFamily: "Outfit, sans-serif", fontSize: "16px" }}>{assign.title}</h3>
                             <p className="text-on-surface-variant text-xs mt-1">{assign.description}</p>
                           </div>
                           
@@ -502,7 +502,7 @@ export default function StudentDashboardPage() {
                           </div>
                         </div>
                         <div className="p-5">
-                          <h4 className="mb-2" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "18px" }}>{course.title}</h4>
+                          <h4 className="mb-2" style={{ fontFamily: "Outfit, sans-serif", fontSize: "18px" }}>{course.title}</h4>
                           {course.description && <p className="text-on-surface-variant text-xs line-clamp-2">{course.description}</p>}
                         </div>
                       </div>
@@ -535,7 +535,7 @@ export default function StudentDashboardPage() {
                       <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">description</span>
                       <div>
                         <div className="text-on-surface" style={{ fontFamily: "Geist, monospace", fontSize: "13px" }}>{file}</div>
-                        <div className="text-on-surface-variant" style={{ fontFamily: "Inter, sans-serif", fontSize: "12px" }}>Click to download</div>
+                        <div className="text-on-surface-variant" style={{ fontFamily: "Manrope, sans-serif", fontSize: "12px" }}>Click to download</div>
                       </div>
                     </div>
                     <span className="material-symbols-outlined text-primary">download</span>
@@ -558,7 +558,7 @@ export default function StudentDashboardPage() {
               
               <div className="mb-6">
                 <div className="text-primary uppercase tracking-widest text-xs font-bold" style={{ fontFamily: "Geist, monospace" }}>Course Modules Explorer</div>
-                <h2 className="text-white mt-1 uppercase tracking-widest" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "22px" }}>
+                <h2 className="text-white mt-1 uppercase tracking-widest" style={{ fontFamily: "Outfit, sans-serif", fontSize: "22px" }}>
                   {selectedCourseDetail.title}
                 </h2>
                 {selectedCourseDetail.description && (
@@ -579,7 +579,7 @@ export default function StudentDashboardPage() {
                               <span className="text-xs text-primary font-bold" style={{ fontFamily: "Geist, monospace" }}>Lesson 0{index + 1}</span>
                               {watched && <span className="bg-primary/20 text-primary text-[9px] px-2 py-0.5 font-bold uppercase tracking-wider">✓ Completed</span>}
                             </div>
-                            <div className="text-white font-bold mt-1" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "15px" }}>{session.title}</div>
+                            <div className="text-white font-bold mt-1" style={{ fontFamily: "Outfit, sans-serif", fontSize: "15px" }}>{session.title}</div>
                             {session.description && <p className="text-on-surface-variant text-xs mt-1">{session.description}</p>}
                           </div>
                           <button 
@@ -655,7 +655,7 @@ export default function StudentDashboardPage() {
                 <div className="flex items-center justify-between px-6 py-3 border-b border-outline-variant/10 bg-surface-container-lowest">
                   <div>
                     <span className="text-[10px] text-primary uppercase font-bold tracking-widest" style={{ fontFamily: "Geist, monospace" }}>Active Session</span>
-                    <h3 className="text-white text-sm uppercase tracking-wider font-bold" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{activeSession.title}</h3>
+                    <h3 className="text-white text-sm uppercase tracking-wider font-bold" style={{ fontFamily: "Outfit, sans-serif" }}>{activeSession.title}</h3>
                   </div>
                   <button 
                     onClick={() => { setPlayingUrl(null); setActiveSession(null); }} 
@@ -713,7 +713,7 @@ export default function StudentDashboardPage() {
                         onChange={e => handleSaveNotes(e.target.value)}
                         className="flex-1 w-full min-h-[300px] bg-transparent border border-outline-variant/20 focus:border-primary/40 focus:outline-none text-xs text-white p-3 resize-none line-height-relaxed"
                         placeholder="Write down key takeaways, logistics routes, or pricing structures... Notes are automatically saved client-side for this video session!"
-                        style={{ fontFamily: "Inter, sans-serif" }}
+                        style={{ fontFamily: "Manrope, sans-serif" }}
                       />
                       <div className="text-[10px] text-primary/70 flex items-center gap-1" style={{ fontFamily: "Geist, monospace" }}>
                         <span className="material-symbols-outlined text-[12px]">cloud_done</span>
@@ -729,7 +729,7 @@ export default function StudentDashboardPage() {
                           onChange={e => setNewQuestionText(e.target.value)}
                           className="w-full bg-transparent border border-outline-variant/20 focus:border-primary/40 focus:outline-none text-xs text-white p-2.5 resize-none h-16"
                           placeholder="Ask a question about this lecture..."
-                          style={{ fontFamily: "Inter, sans-serif" }}
+                          style={{ fontFamily: "Manrope, sans-serif" }}
                         />
                         <button 
                           type="submit" 
@@ -756,14 +756,14 @@ export default function StudentDashboardPage() {
                                 {q.upvotes}
                               </button>
                             </div>
-                            <p className="text-xs text-white leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{q.question_text}</p>
+                            <p className="text-xs text-white leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>{q.question_text}</p>
                             
                             {/* Replies */}
                             {q.replies && q.replies.length > 0 && (
                               <div className="pl-3 border-l-2 border-primary/30 mt-2 space-y-1 bg-white/2">
                                 <div className="text-[9px] text-primary uppercase font-bold" style={{ fontFamily: "Geist, monospace" }}>Instructor Answer:</div>
                                 {q.replies.map((r, i) => (
-                                  <p key={i} className="text-[11px] text-on-surface-variant leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{r}</p>
+                                  <p key={i} className="text-[11px] text-on-surface-variant leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>{r}</p>
                                 ))}
                               </div>
                             )}
