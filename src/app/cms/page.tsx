@@ -67,7 +67,7 @@ export default function CMSPage() {
         .select("*");
 
       if (error) {
-        console.error("Supabase query error:", error);
+        console.warn("Supabase query error:", error);
         // PostgREST code for relation/table missing is 42P01
         if (error.code === "42P01") {
           setDbState("table_missing");
@@ -82,7 +82,7 @@ export default function CMSPage() {
         setDbState("ready");
       }
     } catch (err: any) {
-      console.error("Unexpected connection error:", err);
+      console.warn("Unexpected connection error:", err);
       setDbState("table_missing");
       setGeneralError(`An unexpected error occurred connecting to Supabase: ${err?.message || err}`);
     }

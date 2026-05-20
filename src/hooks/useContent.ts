@@ -41,7 +41,7 @@ export function useContent() {
           setContent(map);
         }
       } catch (err) {
-        console.error("Failed to load CMS content from Supabase. Falling back to local copy.", err);
+        console.warn("Failed to load CMS content from Supabase. Falling back to local copy.", err);
       } finally {
         setLoading(false);
       }
