@@ -29,14 +29,19 @@ export default function ContactPage() {
         },
         body: JSON.stringify(formData)
       });
-      const data = await response.json();
-      if (response.ok) {
+      let data: any = {};
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      }
+
+      if (response.ok && data.success) {
         setStatus("success");
         setStatusMessage("Your inquiry has been successfully dispatched to our desk.");
         setFormData({ name: "", email: "", type: "Strategic Trade Partnership", message: "" });
       } else {
         setStatus("error");
-        setStatusMessage(data.error || "Failed to dispatch message. Please retry.");
+        setStatusMessage(data.error || "The email service is temporarily unavailable. Please retry shortly.");
       }
     } catch (err) {
       setStatus("error");
