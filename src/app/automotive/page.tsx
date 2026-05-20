@@ -116,8 +116,8 @@ export default function AutomotivePage() {
 
           {/* Lower row - Typographic Design */}
           {[
-            { title: "Forged Dynamics", subtitle: "AEROSPACE GRADE ALLOY", pattern: "bg-[radial-gradient(#c8a55a_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03]" },
-            { title: "Lumina Signature", subtitle: "ADVANCED OPTICS", pattern: "bg-[linear-gradient(45deg,#c8a55a_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.03]" },
+            { title: "Forged Dynamics", subtitle: "AEROSPACE GRADE ALLOY", pattern: "bg-[radial-gradient(#46e176_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03]" },
+            { title: "Lumina Signature", subtitle: "ADVANCED OPTICS", pattern: "bg-[linear-gradient(45deg,#46e176_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.03]" },
           ].map((item, i) => (
             <motion.div
               key={item.title}

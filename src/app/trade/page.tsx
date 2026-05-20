@@ -235,45 +235,45 @@ export default function TradePage() {
             <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
               <motion.line 
                 x1="45%" y1="30%" x2="65%" y2="25%" 
-                stroke="#c8a55a" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
+                stroke="#46e176" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut" }}
               />
               <motion.line 
                 x1="45%" y1="30%" x2="20%" y2="40%" 
-                stroke="#c8a55a" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
+                stroke="#46e176" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
               />
               <motion.line 
                 x1="45%" y1="30%" x2="52%" y2="60%" 
-                stroke="#c8a55a" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
+                stroke="#46e176" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut", delay: 1 }}
               />
             </svg>
 
             {/* Hub Pins */}
             <div className="absolute top-[30%] left-[45%] group cursor-pointer z-20">
-              <div className="w-4 h-4 bg-primary rounded-full animate-pulse shadow-[0_0_20px_#c8a55a]" />
+              <div className="w-4 h-4 bg-primary rounded-full animate-pulse shadow-[0_0_20px_#46e176]" />
               <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                 <span className="text-white font-bold tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>EMEA CENTRAL</span>
               </div>
             </div>
             
             <div className="absolute top-[25%] left-[65%] group cursor-pointer z-20">
-              <div className="w-3 h-3 bg-primary/80 rounded-full shadow-[0_0_15px_#c8a55a]" />
+              <div className="w-3 h-3 bg-primary/80 rounded-full shadow-[0_0_15px_#46e176]" />
               <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                 <span className="text-white font-bold tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>APAC HUB</span>
               </div>
             </div>
 
             <div className="absolute top-[40%] left-[20%] group cursor-pointer z-20">
-              <div className="w-3 h-3 bg-primary/80 rounded-full shadow-[0_0_15px_#c8a55a]" />
+              <div className="w-3 h-3 bg-primary/80 rounded-full shadow-[0_0_15px_#46e176]" />
               <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                 <span className="text-white font-bold tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>AMERICAS NODE</span>
               </div>
             </div>
 
             <div className="absolute top-[60%] left-[52%] group cursor-pointer z-20">
-              <div className="w-2 h-2 bg-primary/60 rounded-full shadow-[0_0_10px_#c8a55a]" />
+              <div className="w-2 h-2 bg-primary/60 rounded-full shadow-[0_0_10px_#46e176]" />
               <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                 <span className="text-white font-bold tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>AFRICA TRANSIT</span>
               </div>

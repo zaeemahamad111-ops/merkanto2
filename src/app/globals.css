@@ -31,7 +31,7 @@ body {
 }
 
 .accent-glow {
-  background: radial-gradient(circle at center, rgba(200, 165, 90, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(70, 225, 118, 0.08) 0%, transparent 70%);
 }
 
 /* ============================================
@@ -41,21 +41,21 @@ button.bg-primary, a.bg-primary {
   position: relative;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 20px rgba(200, 165, 90, 0.1);
+  box-shadow: 0 4px 20px rgba(70, 225, 118, 0.1);
 }
 
 button.bg-primary:hover, a.bg-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(200, 165, 90, 0.25);
+  box-shadow: 0 8px 30px rgba(70, 225, 118, 0.25);
 }
 
 button.bg-primary:active, a.bg-primary:active {
   transform: translateY(0);
-  box-shadow: 0 4px 15px rgba(200, 165, 90, 0.15);
+  box-shadow: 0 4px 15px rgba(70, 225, 118, 0.15);
 }
 
 ::selection {
-  background-color: rgba(200, 165, 90, 0.3);
+  background-color: rgba(70, 225, 118, 0.3);
   color: #e2e2e2;
 }
 
@@ -98,7 +98,7 @@ button.bg-primary:active, a.bg-primary:active {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   border-left: 1px solid rgba(255, 255, 255, 0.08);
   transform: translateY(-2px);
-  box-shadow: 0 8px 40px rgba(200, 165, 90, 0.05);
+  box-shadow: 0 8px 40px rgba(70, 225, 118, 0.05);
 }
 
 .glass-panel {
@@ -116,23 +116,23 @@ button.bg-primary:active, a.bg-primary:active {
    Background Effects
    ============================================ */
 .hero-gradient {
-  background: radial-gradient(circle at center, rgba(200, 165, 90, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(70, 225, 118, 0.08) 0%, transparent 70%);
 }
 
 .glow-spotlight {
-  background: radial-gradient(circle at center, rgba(200, 165, 90, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(70, 225, 118, 0.08) 0%, transparent 70%);
 }
 
 .cinematic-glow {
-  background: radial-gradient(circle at center, rgba(200, 165, 90, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(70, 225, 118, 0.08) 0%, transparent 70%);
 }
 
 .accent-glow {
-  background: radial-gradient(circle at center, rgba(200, 165, 90, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(70, 225, 118, 0.08) 0%, transparent 70%);
 }
 
 .spotlight {
-  background: radial-gradient(circle at center, rgba(200, 165, 90, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(70, 225, 118, 0.08) 0%, transparent 70%);
 }
 
 .line-pattern {
@@ -159,7 +159,7 @@ button.bg-primary:active, a.bg-primary:active {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #C8A55A;
+  background: #46e176;
   border-radius: 10px;
 }
 
