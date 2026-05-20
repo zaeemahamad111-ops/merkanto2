@@ -270,7 +270,7 @@ export default function ContactPage() {
       {/* ─── MAP SECTION ─── */}
       <section className="max-w-[1280px] mx-auto px-6 md:px-16 pb-[60px] md:pb-[120px]">
         <motion.div
-          className="relative h-[350px] md:h-[500px] w-full overflow-hidden border border-white/10 rounded-lg transition-all duration-500 hover:border-primary/40"
+          className="relative h-[350px] md:h-[500px] w-full overflow-hidden border border-white/10 rounded-lg transition-all duration-500 hover:border-primary/40 group"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -284,8 +284,9 @@ export default function ContactPage() {
             allowFullScreen={true}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            className="w-full h-full grayscale opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+            className="w-full h-full grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
           />
+          <div className="absolute inset-0 bg-black/60 pointer-events-none transition-colors duration-700 group-hover:bg-black/10 mix-blend-multiply" />
         </motion.div>
       </section>
     </div>
