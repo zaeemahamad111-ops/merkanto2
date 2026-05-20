@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useContent } from "@/hooks/useContent";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -20,6 +21,8 @@ const stats = [
 ];
 
 export default function AcademyPage() {
+  const { getContent } = useContent();
+
   return (
     <div className="bg-background min-h-screen">
       {/* ─── HERO ─── */}
@@ -27,7 +30,7 @@ export default function AcademyPage() {
         <div className="absolute inset-0 z-0">
           <img
             className="w-full h-full object-cover opacity-40 mix-blend-luminosity"
-            src="/images/academy.png"
+            src={getContent("academy.hero.img", "/images/academy.png")}
             alt="Academy Background"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
@@ -41,17 +44,18 @@ export default function AcademyPage() {
           animate="visible"
         >
           <motion.div variants={fadeInUp} className="inline-block bg-primary text-on-primary px-3 py-1 mb-6 md:mb-8 font-bold uppercase tracking-[0.2em] text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
-            Intelligence at Scale
+            {getContent("academy.hero.badge", "Intelligence at Scale")}
           </motion.div>
           <motion.h1
             variants={fadeInUp}
             className="max-w-5xl mx-auto mb-6 md:mb-8"
             style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(32px, 8vw, 72px)", fontWeight: 600, lineHeight: 1.1, letterSpacing: "-0.03em" }}
-          >
-            Learn International Trade From <span className="text-primary italic">Real</span> Business Operations
-          </motion.h1>
+            dangerouslySetInnerHTML={{
+              __html: getContent("academy.hero.title", "Learn International Trade From <span class=\"text-primary italic\">Real</span> Business Operations")
+            }}
+          />
           <motion.p variants={fadeInUp} className="text-on-surface-variant max-w-2xl mx-auto mb-10 md:mb-12 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
-            Access the proprietary blueprints of global logistics. We don't just teach theory; we show you the live data streams of Merkanto's own international trade networks.
+            {getContent("academy.hero.description", "Access the proprietary blueprints of global logistics. We don't just teach theory; we show you the live data streams of Merkanto's own international trade networks.")}
           </motion.p>
           <motion.div variants={fadeInUp} className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
             <Link

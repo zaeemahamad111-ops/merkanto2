@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useContent } from "@/hooks/useContent";
 
 const styleItems = [
   {
@@ -30,25 +31,9 @@ const styleItems = [
   },
 ];
 
-const destSteps = [
-  {
-    num: "01",
-    title: "Global Site Sourcing",
-    desc: "Exclusive access to private islands, historical palazzos, and high-altitude sanctuaries across 6 continents.",
-  },
-  {
-    num: "02",
-    title: "Logistical Sovereignty",
-    desc: "Complete management of international charters, customs, and private security for high-profile gatherings.",
-  },
-  {
-    num: "03",
-    title: "Cultural Synthesis",
-    desc: "Designing experiences that respect and elevate local traditions through a lens of modern luxury.",
-  },
-];
-
 export default function EventsPage() {
+  const { getContent } = useContent();
+
   return (
     <div className="bg-background min-h-screen">
       {/* ─── HERO ─── */}
@@ -56,7 +41,7 @@ export default function EventsPage() {
         <div className="absolute inset-0 z-0">
           <img
             className="w-full h-full object-cover"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhCBAspxLpcY-L34jzrzboKs9iwXjEM7wX-gyUgBDNmWukIef8XuWA74-sV3eK17-V3B0VaS-xk8I53JGqMa3NOkWer9cLhbpse9l4fFGjy32VRFKfv-_s0kwCNQVW0X9X_pjx1OaA8zAfpZMDwozHU068ij_kfCDT5fnL5HBOHcC7a_8G9QOjWiTg7jBHWdohxvU5GF9JiACbOjzNkhwAOU-qnlmzVK1sRWb0z9hdFnRsK9ZiiXVCbn_Bp8hTA4tww9xe9sd8K5E"
+            src={getContent("events.hero.img", "https://lh3.googleusercontent.com/aida-public/AB6AXuAhCBAspxLpcY-L34jzrzboKs9iwXjEM7wX-gyUgBDNmWukIef8XuWA74-sV3eK17-V3B0VaS-xk8I53JGqMa3NOkWer9cLhbpse9l4fFGjy32VRFKfv-_s0kwCNQVW0X9X_pjx1OaA8zAfpZMDwozHU068ij_kfCDT5fnL5HBOHcC7a_8G9QOjWiTg7jBHWdohxvU5GF9JiACbOjzNkhwAOU-qnlmzVK1sRWb0z9hdFnRsK9ZiiXVCbn_Bp8hTA4tww9xe9sd8K5E")}
             alt="Grand gala dinner in modern architectural space"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background" />
@@ -70,13 +55,17 @@ export default function EventsPage() {
           transition={{ duration: 0.9 }}
         >
           <span className="text-primary mb-6 block uppercase tracking-[0.4em] text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
-            Merkanto Studios Presents
+            {getContent("events.hero.badge", "Merkanto Studios Presents")}
           </span>
-          <h1 className="text-on-surface mb-8" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(36px, 8vw, 72px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
-            Couture Celebrations. <br />Global Precision.
-          </h1>
+          <h1 
+            className="text-on-surface mb-8" 
+            style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(36px, 8vw, 72px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1 }}
+            dangerouslySetInnerHTML={{
+              __html: getContent("events.hero.title", "Couture Celebrations. <br />Global Precision.")
+            }}
+          />
           <p className="text-on-surface-variant max-w-2xl mx-auto mb-10 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
-            Architectural event design for the world's most discerning visionaries. From high-stakes institutional galas to intimate destination unions.
+            {getContent("events.hero.description", "Architectural event design for the world's most discerning visionaries. From high-stakes institutional galas to intimate destination unions.")}
           </p>
           <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-6">
             <Link href="/contact" className="w-full md:w-auto bg-primary text-on-primary px-10 py-4 font-bold uppercase tracking-widest active:scale-95 transition-all text-center flex items-center justify-center animate-pulse" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
@@ -113,9 +102,9 @@ export default function EventsPage() {
                 </li>
               ))}
             </ul>
-            <a href="/wedding" className="inline-flex items-center gap-2 text-primary uppercase tracking-widest hover:gap-4 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
+            <Link href="/wedding" className="inline-flex items-center gap-2 text-primary uppercase tracking-widest hover:gap-4 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
               Explore The Wedding Atelier <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>arrow_forward</span>
-            </a>
+            </Link>
           </motion.div>
  
           <motion.div
@@ -273,8 +262,6 @@ export default function EventsPage() {
           ))}
         </div>
       </section>
-
-
     </div>
   );
 }

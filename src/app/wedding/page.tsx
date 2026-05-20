@@ -2,76 +2,58 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useContent } from "@/hooks/useContent";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-const processSteps = [
-  {
-    num: "01",
-    title: "Curatorial Session",
-    desc: "We align our visual language with your personal aesthetic, ensuring every shot serves the grand narrative of your union.",
-  },
-  {
-    num: "02",
-    title: "Global Deployment",
-    desc: "Our team travels globally, equipped with cinema-grade optics to capture your wedding in any corner of the world.",
-  },
-  {
-    num: "03",
-    title: "The Editorial Archive",
-    desc: "Your wedding is delivered as a bespoke digital archive and a hand-crafted leather-bound heirloom volume.",
-  },
-];
-
 export default function WeddingPage() {
+  const { getContent } = useContent();
+
   return (
     <div className="bg-background min-h-screen">
       {/* ─── HERO ─── */}
-      <section className="relative min-h-[500px] md:h-screen w-full flex items-center justify-center overflow-hidden">
+      <section className="relative h-[90vh] min-h-[500px] md:min-h-[700px] flex items-center justify-center overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 z-0">
           <img
-            className="w-full h-full object-cover brightness-50"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0wH35p1GxmtACgOpw830FKlkO97pgBsMHfZOMAz8-7MSc-fC2ooXEAxs8zq_166fcCTUsY4fPbcE57ZfPdoxlwqh9elhy0nnPFgnXQGweZkWcrtCLOhSsB2OjFquYrlIYVCEVZXHJOsz-PduoqB2G2SewJhO-JxmDTx1GMylaLFDW1et7Krt3R-tC-wqqFP1go7QrpzCrIv_Rl1mWs_58p-LdYHCO-A-NdhytKPMuNDOYLkZ6SdS-dwM8MKK2donMqXw1bPlkwz4"
-            alt="Cinematic wedding couple at architectural setting"
+            className="w-full h-full object-cover opacity-60"
+            src={getContent("wedding.hero.img", "https://lh3.googleusercontent.com/aida-public/AB6AXuClmYFYOhxjTw17KMDLSnD1y6q-h3RHIrf7eFRA1ZwGgtFIkRnV-QlKZSxKC2hFcS7uxqg370wSqMzqlPN7EGnCmI65PDwfAt4vPjYNIrAY4KjkhsgfRTYYK10DJHH1GMsemYjvANUJ0tx6T2pPKSrC5oBS44tvoLZG7J4uwL_yJdaMa1Nf-j7qbWO9AKhfNB9htBc5DCPvFn-fLq_W8QUmgpa1IyG9seOrKu_2ftFJoUv7E0LRV0EW1mPrlWq5np_nVCUL2la4baM")}
+            alt="Luxury wedding ceremony set"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         </div>
-        <div className="absolute inset-0 spotlight" />
-
         <motion.div
-          className="relative z-10 text-center px-6 pt-20 md:pt-0"
+          className="relative z-10 text-center px-6 md:px-0 pt-20 md:pt-0"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
+          transition={{ duration: 0.8 }}
         >
-          <h1
-            className="text-on-surface mb-6 max-w-4xl mx-auto"
-            style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(36px, 8vw, 72px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1 }}
-          >
-            Archiving the <span className="text-primary italic">Eternal</span>
-          </h1>
-          <p className="text-on-surface-variant max-w-2xl mx-auto mb-10 md:mb-12 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
-            Elite wedding photography for those who view life through a cinematic lens. Precision-crafted imagery for the global aesthetic elite.
+          <div className="inline-block px-3 py-1 mb-6 bg-primary/10 border border-primary/20 text-primary uppercase tracking-widest text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
+            {getContent("wedding.hero.badge", "The Cinema of Love")}
+          </div>
+          <h1 
+            className="mb-6 max-w-4xl mx-auto uppercase tracking-tighter" 
+            style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(32px, 8vw, 72px)", fontWeight: 600, lineHeight: 1.0 }}
+            dangerouslySetInnerHTML={{
+              __html: getContent("wedding.hero.title", "ARCHITECTING <br /><span class=\"text-primary italic\">TIMELESS CELEBRATIONS</span>")
+            }}
+          />
+          <p className="text-on-surface-variant max-w-2xl mx-auto mb-10 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
+            {getContent("wedding.hero.description", "From high-production design systems to premier film creation, Merkanto Weddings is the luxury destination for elite unions.")}
           </p>
-          <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center">
-            <Link href="/contact" className="w-full md:w-auto bg-primary text-on-primary px-10 py-4 font-bold uppercase tracking-[0.2em] active:scale-95 transition-all text-center flex items-center justify-center animate-pulse" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
-              Book the Session
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/contact" className="w-full sm:w-auto bg-primary text-on-primary px-10 py-4 uppercase tracking-widest hover:brightness-110 transition-all text-center flex items-center justify-center animate-pulse" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
+              Request Cinema Profile
             </Link>
           </div>
         </motion.div>
-
-        {/* Scroll line */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-          <span className="text-on-surface-variant uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Scroll to Explore</span>
-          <div className="w-[1px] h-12 bg-primary/50" />
-        </div>
       </section>
 
       {/* ─── GALLERY BENTO ─── */}
       <section className="py-[60px] md:py-[120px] px-6 md:px-16 max-w-[1280px] mx-auto">
-        <div className="grid grid-cols-12 gap-6 md:gap-8">
+        <div className="grid grid-cols-12 gap-6">
           {/* Large ceremony shot */}
           <motion.div
             className="col-span-12 md:col-span-8 h-[350px] md:h-[550px] relative group overflow-hidden"
@@ -82,13 +64,17 @@ export default function WeddingPage() {
           >
             <img
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtMbvWo63uTL2DEg37q8poy27yzL7vpCgrqgqRD2AWWGQoAepwdz3o-kIy50C1coV-oWsU0LBHfitDk_qHTFP_FcOHT7B68p6hpc7XsyNFmTwsxCtKZFLLRA8NpAF09qHy40hpgTGcUxhujLxu8QIzSFVG3m_ByXOUIi1jTDPFPnSucri6FgL8KNB8Y3ylH3MToqECNsxYM91KSPB38f-ko9OwNP_QbsFAvNqYHbArW_80RvdNTD2RqeeyGosxFtl1rt4cjjSHoNM"
+              src={getContent("wedding.ceremony.img", "https://lh3.googleusercontent.com/aida-public/AB6AXuBtMbvWo63uTL2DEg37q8poy27yzL7vpCgrqgqRD2AWWGQoAepwdz3o-kIy50C1coV-oWsU0LBHfitDk_qHTFP_FcOHT7B68p6hpc7XsyNFmTwsxCtKZFLLRA8NpAF09qHy40hpgTGcUxhujLxu8QIzSFVG3m_ByXOUIi1jTDPFPnSucri6FgL8KNB8Y3ylH3MToqECNsxYM91KSPB38f-ko9OwNP_QbsFAvNqYHbArW_80RvdNTD2RqeeyGosxFtl1rt4cjjSHoNM")}
               alt="The Ceremony - Villa Sola Cabiati"
             />
             <div className="absolute inset-0 bg-black/40 md:opacity-0 md:group-hover:opacity-100 transition-opacity flex items-end p-6 md:p-10">
               <div>
-                <span className="text-primary uppercase tracking-widest text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>Lake Como, Italy</span>
-                <h3 className="text-white mt-2 text-xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>The Villa Sola Cabiati Union</h3>
+                <span className="text-primary uppercase tracking-widest text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
+                  {getContent("wedding.ceremony.subtitle", "Lake Como, Italy")}
+                </span>
+                <h3 className="text-white mt-2 text-xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+                  {getContent("wedding.ceremony.title", "The Villa Sola Cabiati Union")}
+                </h3>
               </div>
             </div>
           </motion.div>
@@ -133,15 +119,13 @@ export default function WeddingPage() {
               alt="Wedding reception dancing"
             />
             <div className="absolute inset-0 glass-card md:opacity-0 md:group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <button className="bg-primary text-on-primary px-8 py-3 font-bold uppercase tracking-widest text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
+              <Link href="/contact" className="bg-primary text-on-primary px-8 py-3 font-bold uppercase tracking-widest text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
                 View Wedding Film
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>
       </section>
-
-
 
       {/* ─── CINEMATIC QUOTE ─── */}
       <section className="h-[580px] flex items-center justify-center bg-black relative overflow-hidden">

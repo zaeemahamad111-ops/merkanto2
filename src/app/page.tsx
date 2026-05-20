@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { useContent } from "@/hooks/useContent";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -14,62 +15,63 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.12 } },
 };
 
-const divisions = [
-  {
-    title: "Institutional Trade",
-    description: "Precision-driven commodity trading and supply chain architecture for global markets.",
-    cta: "Discover Trade",
-    href: "/trade",
-    colSpan: "md:col-span-2",
-    height: "h-[400px]",
-    img: "/images/academy.png",
-  },
-  {
-    title: "Academy Hub",
-    description: "Mentorship and curriculum for the next generation of exporters.",
-    cta: "Learn More",
-    href: "/academy",
-    colSpan: "md:col-span-1",
-    height: "h-[400px]",
-    img: "/images/academy.png",
-  },
-  {
-    title: "Automotive",
-    description: "Global vehicle logistics and boutique acquisition services.",
-    cta: "Explore",
-    href: "/automotive",
-    colSpan: "md:col-span-1",
-    height: "h-[300px]",
-    img: "/images/car interior.png",
-  },
-  {
-    title: "Weddings",
-    description: "Architecting timeless, high-production celebratory experiences.",
-    cta: "View Cinema",
-    href: "/wedding",
-    colSpan: "md:col-span-1",
-    height: "h-[300px]",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuClmYFYOhxjTw17KMDLSnD1y6q-h3RHIrf7eFRA1ZwGgtFIkRnV-QlKZSxKC2hFcS7uxqg370wSqMzqlPN7EGnCmI65PDwfAt4vPjYNIrAY4KjkhsgfRTYYK10DJHH1GMsemYjvANUJ0tx6T2pPKSrC5oBS44tvoLZG7J4uwL_yJdaMa1Nf-j7qbWO9AKhfNB9htBc5DCPvFn-fLq_W8QUmgpa1IyG9seOrKu_2ftFJoUv7E0LRV0EW1mPrlWq5np_nVCUL2la4baM",
-  },
-  {
-    title: "Studios & Events",
-    description: "Large-scale event management and creative production house.",
-    cta: "Explore",
-    href: "/events",
-    colSpan: "md:col-span-1",
-    height: "h-[300px]",
-    img: "/images/wedding set.png",
-  },
-];
-
 export default function HomePage() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { getContent } = useContent();
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.9;
     }
   }, []);
+
+  const divisions = [
+    {
+      title: getContent("home.division.0.title", "Institutional Trade"),
+      description: getContent("home.division.0.description", "Precision-driven commodity trading and supply chain architecture for global markets."),
+      cta: "Discover Trade",
+      href: "/trade",
+      colSpan: "md:col-span-2",
+      height: "h-[400px]",
+      img: getContent("home.division.0.img", "/images/academy.png"),
+    },
+    {
+      title: getContent("home.division.1.title", "Academy Hub"),
+      description: getContent("home.division.1.description", "Mentorship and curriculum for the next generation of exporters."),
+      cta: "Learn More",
+      href: "/academy",
+      colSpan: "md:col-span-1",
+      height: "h-[400px]",
+      img: getContent("home.division.1.img", "/images/academy.png"),
+    },
+    {
+      title: getContent("home.division.2.title", "Automotive"),
+      description: getContent("home.division.2.description", "Global vehicle logistics and boutique acquisition services."),
+      cta: "Explore",
+      href: "/automotive",
+      colSpan: "md:col-span-1",
+      height: "h-[300px]",
+      img: getContent("home.division.2.img", "/images/car interior.png"),
+    },
+    {
+      title: getContent("home.division.3.title", "Weddings"),
+      description: getContent("home.division.3.description", "Architecting timeless, high-production celebratory experiences."),
+      cta: "View Cinema",
+      href: "/wedding",
+      colSpan: "md:col-span-1",
+      height: "h-[300px]",
+      img: getContent("home.division.3.img", "https://lh3.googleusercontent.com/aida-public/AB6AXuClmYFYOhxjTw17KMDLSnD1y6q-h3RHIrf7eFRA1ZwGgtFIkRnV-QlKZSxKC2hFcS7uxqg370wSqMzqlPN7EGnCmI65PDwfAt4vPjYNIrAY4KjkhsgfRTYYK10DJHH1GMsemYjvANUJ0tx6T2pPKSrC5oBS44tvoLZG7J4uwL_yJdaMa1Nf-j7qbWO9AKhfNB9htBc5DCPvFn-fLq_W8QUmgpa1IyG9seOrKu_2ftFJoUv7E0LRV0EW1mPrlWq5np_nVCUL2la4baM"),
+    },
+    {
+      title: getContent("home.division.4.title", "Studios & Events"),
+      description: getContent("home.division.4.description", "Large-scale event management and creative production house."),
+      cta: "Explore",
+      href: "/events",
+      colSpan: "md:col-span-1",
+      height: "h-[300px]",
+      img: getContent("home.division.4.img", "/images/wedding set.png"),
+    },
+  ];
 
   return (
     <div className="bg-background min-h-screen">
@@ -80,7 +82,7 @@ export default function HomePage() {
           <video
             ref={videoRef}
             className="w-full h-full object-cover scale-[1.08]"
-            src="/videos/hero_logistics.mp4"
+            src={getContent("home.hero.video", "/videos/hero_logistics.mp4")}
             autoPlay
             loop
             muted
@@ -97,7 +99,7 @@ export default function HomePage() {
         >
           <motion.div variants={fadeInUp} className="inline-block px-3 py-1 mb-6 bg-surface-container-highest/30 border border-primary/20 backdrop-blur-md">
             <span className="text-primary uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
-              Global Logistics Excellence
+              {getContent("home.hero.badge", "Global Logistics Excellence")}
             </span>
           </motion.div>
 
@@ -105,29 +107,30 @@ export default function HomePage() {
             variants={fadeInUp}
             className="text-on-surface mb-6 max-w-4xl mx-auto leading-tight"
             style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(48px, 8vw, 72px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1 }}
-          >
-            Building Global <span className="text-primary">Trade Leaders</span>
-          </motion.h1>
+            dangerouslySetInnerHTML={{
+              __html: getContent("home.hero.title", "Building Global <span class=\"text-primary\">Trade Leaders</span>")
+            }}
+          />
 
           <motion.p
             variants={fadeInUp}
-            className="text-on-surface-variant max-w-2xl mx-auto mb-10 leading-relaxed opacity-90"
-            style={{ fontFamily: "Inter, sans-serif", fontSize: "18px", lineHeight: 1.6 }}
+            className="text-on-surface-variant max-w-2xl mx-auto mb-10 leading-relaxed opacity-90 text-base md:text-[18px]"
+            style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}
           >
-            Merkanto Global Trade Academy equips entrepreneurs and future exporters with practical international trade systems, supplier networks, branding strategies, and real-world import-export operations.
+            {getContent("home.hero.description", "Merkanto Global Trade Academy equips entrepreneurs and future exporters with practical international trade systems, supplier networks, branding strategies, and real-world import-export operations.")}
           </motion.p>
 
           <motion.div variants={fadeInUp} className="flex flex-col md:flex-row items-center justify-center gap-6">
             <Link
               href="/academy"
-              className="w-full md:w-auto bg-primary text-on-primary px-10 py-4 font-bold tracking-widest uppercase text-sm hover:brightness-110 transition-all"
+              className="w-full md:w-auto bg-primary text-on-primary px-10 py-4 font-bold tracking-widest uppercase text-sm hover:brightness-110 transition-all text-center"
               style={{ fontFamily: "Geist, monospace" }}
             >
               Explore Academy
             </Link>
             <Link
               href="/trade"
-              className="w-full md:w-auto border border-white/30 backdrop-blur-md text-on-surface px-10 py-4 font-bold tracking-widest uppercase text-sm hover:bg-white/10 transition-all"
+              className="w-full md:w-auto border border-white/30 backdrop-blur-md text-on-surface px-10 py-4 font-bold tracking-widest uppercase text-sm hover:bg-white/10 transition-all text-center"
               style={{ fontFamily: "Geist, monospace" }}
             >
               Explore Ventures
@@ -155,16 +158,13 @@ export default function HomePage() {
             <motion.h2
               variants={fadeInUp}
               style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1.2 }}
-              className="text-on-surface"
+              className="text-on-surface animate-pulse-subtle"
             >
-              A Synthesis of Intelligence <br className="hidden md:block" />& Structural Integrity.
+              {getContent("home.about.title", "Architecting Global Trade Integration")}
             </motion.h2>
             <motion.div variants={stagger} className="space-y-6 text-on-surface-variant max-w-lg mx-auto md:mx-0 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
-              <motion.p variants={fadeInUp}>
-                Merkanto is more than a trade institution; it is a global ecosystem designed for high-stakes precision. Our philosophy merges the architectural discipline of logistics with the refined aesthetics of luxury operations.
-              </motion.p>
-              <motion.p variants={fadeInUp}>
-                From pioneering <span className="text-on-surface font-semibold">global trade education</span> to redefining <span className="text-on-surface font-semibold">automotive logistics</span> and crafting high-end <span className="text-on-surface font-semibold">wedding experiences</span>, our influence spans across specialized event management and institutional trade.
+              <motion.p variants={fadeInUp} className="leading-relaxed whitespace-pre-line">
+                {getContent("home.about.description", "Merkanto Global is a multi-sector enterprise integrating premium commodity trading, structured academy training, luxury automotive acquisitions, and elite creative production.")}
               </motion.p>
             </motion.div>
             <motion.div variants={fadeInUp} className="flex justify-center md:justify-start gap-8 md:gap-12 pt-4">

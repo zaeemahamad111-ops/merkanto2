@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useContent } from "@/hooks/useContent";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -57,34 +58,36 @@ const regions = [
   { label: "Middle East", sub: "Strategic Transit" },
 ];
 
-const portfolio = [
-  {
-    category: "Category 01",
-    title: "Heavy Industrial Components",
-    desc: "Global supply of tier-1 heavy machinery and industrial automation hardware.",
-    img: "/images/core 1.png",
-  },
-  {
-    category: "Category 02",
-    title: "Raw Commodity Assets",
-    desc: "Strategic sourcing of essential industrial raw materials and base metals.",
-    img: "/images/core 2.png",
-  },
-  {
-    category: "Category 03",
-    title: "Specialized Electronics",
-    desc: "Precision procurement of aerospace-grade components and micro-electronics.",
-    img: "/images/core 3.png",
-  },
-  {
-    category: "Category 04",
-    title: "Sustainable Infrastructure",
-    desc: "Exporting advanced green energy technology and sustainable system components.",
-    img: "/images/core 4.png",
-  },
-];
-
 export default function TradePage() {
+  const { getContent } = useContent();
+
+  const portfolio = [
+    {
+      category: "Category 01",
+      title: getContent("trade.portfolio.0.title", "Heavy Industrial Components"),
+      desc: getContent("trade.portfolio.0.description", "Global supply of tier-1 heavy machinery and industrial automation hardware."),
+      img: getContent("trade.portfolio.0.img", "/images/core 1.png"),
+    },
+    {
+      category: "Category 02",
+      title: getContent("trade.portfolio.1.title", "Raw Commodity Assets"),
+      desc: getContent("trade.portfolio.1.description", "Strategic sourcing of essential industrial raw materials and base metals."),
+      img: getContent("trade.portfolio.1.img", "/images/core 2.png"),
+    },
+    {
+      category: "Category 03",
+      title: getContent("trade.portfolio.2.title", "Specialized Electronics"),
+      desc: getContent("trade.portfolio.2.description", "Precision procurement of aerospace-grade components and micro-electronics."),
+      img: getContent("trade.portfolio.2.img", "/images/core 3.png"),
+    },
+    {
+      category: "Category 04",
+      title: getContent("trade.portfolio.3.title", "Sustainable Infrastructure"),
+      desc: getContent("trade.portfolio.3.description", "Exporting advanced green energy technology and sustainable system components."),
+      img: getContent("trade.portfolio.3.img", "/images/core 4.png"),
+    },
+  ];
+
   return (
     <div className="bg-background min-h-screen">
       {/* ─── HERO ─── */}
@@ -92,7 +95,7 @@ export default function TradePage() {
         <div className="absolute inset-0 z-0">
           <img
             className="w-full h-full object-cover opacity-60"
-            src="/images/brochure_page7_img1.jpeg"
+            src={getContent("trade.hero.img", "/images/brochure_page7_img1.jpeg")}
             alt="Futuristic shipping terminal at dusk"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
@@ -107,17 +110,18 @@ export default function TradePage() {
         >
           <div className="max-w-3xl text-center md:text-left">
             <motion.div variants={fadeInUp} className="inline-block bg-primary/10 border border-primary/20 text-primary px-4 py-1 mb-6 uppercase tracking-widest text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
-              Architectural Global Precision
+              {getContent("trade.hero.subtitle", "Commodity Trading & Supply Chain Architecture")}
             </motion.div>
             <motion.h1
               variants={fadeInUp}
-              className="text-white mb-6 md:mb-8"
+              className="text-white mb-6 md:mb-8 uppercase"
               style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(40px, 8vw, 72px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.0 }}
-            >
-              GLOBAL TRADE <br /><span className="text-primary">INTELLIGENCE</span>
-            </motion.h1>
+              dangerouslySetInnerHTML={{
+                __html: getContent("trade.hero.title", "GLOBAL TRADE <br /><span class=\"text-primary\">INTELLIGENCE</span>")
+              }}
+            />
             <motion.p variants={fadeInUp} className="text-on-surface-variant mb-10 max-w-xl mx-auto md:mx-0 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
-              Facilitating elite-scale import and export operations through a secure, premium ecosystem designed for the world's most sophisticated trading partners.
+              {getContent("trade.hero.description", "We govern primary networks and trade lines across global markets. From origin validation to secure custom routing, Merkanto guarantees absolute execution reliability.")}
             </motion.p>
             <motion.div variants={fadeInUp} className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
               <Link href="/contact" className="w-full md:w-auto bg-primary text-background px-8 py-4 font-bold uppercase tracking-widest hover:opacity-90 transition-all text-center" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
@@ -167,7 +171,7 @@ export default function TradePage() {
                 {card.desc}
               </p>
               {card.stats && (
-               <div className="flex gap-6 md:gap-8">
+                <div className="flex gap-6 md:gap-8">
                   {card.stats.map((s) => (
                     <div key={s.label}>
                       <div className="text-primary font-bold text-2xl md:text-[28px]" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{s.value}</div>
@@ -328,8 +332,6 @@ export default function TradePage() {
           ))}
         </div>
       </section>
-
-
     </div>
   );
 }

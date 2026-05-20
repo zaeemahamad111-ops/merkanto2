@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useContent } from "@/hooks/useContent";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -14,6 +15,8 @@ const stagger = {
 };
 
 export default function AboutPage() {
+  const { getContent } = useContent();
+
   return (
     <div className="bg-background min-h-screen text-white relative overflow-hidden">
       {/* Background spotlights & SVGs */}
@@ -33,7 +36,7 @@ export default function AboutPage() {
             className="inline-block bg-primary/10 border border-primary/20 text-primary px-4 py-1 mb-6 uppercase tracking-widest text-[10px] md:text-[11px]"
             style={{ fontFamily: "Geist, monospace" }}
           >
-            Institutional Profile & Core Philosophy
+            {getContent("about.hero.badge", "Institutional Profile & Core Philosophy")}
           </motion.div>
 
           <motion.h1
@@ -45,17 +48,17 @@ export default function AboutPage() {
               lineHeight: 1.05,
               letterSpacing: "-0.03em",
             }}
-          >
-            Structural Intelligence <br />
-            <span className="text-primary">For Global Commerce</span>
-          </motion.h1>
+            dangerouslySetInnerHTML={{
+              __html: getContent("about.hero.title", "Structural Intelligence <br /> <span class=\"text-primary\">For Global Commerce</span>")
+            }}
+          />
 
           <motion.p
             variants={fadeInUp}
             className="text-on-surface-variant text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light"
             style={{ fontFamily: "Inter, sans-serif" }}
           >
-            Merkanto is a multi-dimensional global enterprise operating at the intersection of international trade, private capital execution, strategic compliance advisory, and elite academic accreditation. We engineer and govern private supply chains with absolute precision.
+            {getContent("about.hero.description", "Merkanto is a multi-dimensional global enterprise operating at the intersection of international trade, private capital execution, strategic compliance advisory, and elite academic accreditation. We engineer and govern private supply chains with absolute precision.")}
           </motion.p>
         </motion.div>
       </section>
@@ -76,10 +79,10 @@ export default function AboutPage() {
                 hub
               </span>
               <h3 className="text-white mb-3 text-xl md:text-2xl font-bold uppercase tracking-wide" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
-                Supply Chain Orchestration
+                {getContent("about.pillar.1.title", "Supply Chain Orchestration")}
               </h3>
               <p className="text-on-surface-variant text-sm md:text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-                We direct primary networks and logistics channels across six continents, implementing real-time verification and rigorous quality control for raw asset and high-value technical shipments.
+                {getContent("about.pillar.1.description", "We direct primary networks and logistics channels across six continents, implementing real-time verification and rigorous quality control for raw asset and high-value technical shipments.")}
               </p>
             </div>
             <div className="text-primary text-xs uppercase tracking-widest font-bold" style={{ fontFamily: "Geist, monospace" }}>
@@ -100,10 +103,10 @@ export default function AboutPage() {
                 verified_user
               </span>
               <h3 className="text-white mb-3 text-xl md:text-2xl font-bold uppercase tracking-wide" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
-                Compliance & Security
+                {getContent("about.pillar.2.title", "Compliance & Security")}
               </h3>
               <p className="text-on-surface-variant text-sm md:text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-                Governance is our foundation. We operate structured compliance layers and automated customs documentation routing to guarantee secure, high-stakes regulatory clearance in complex jurisdictions.
+                {getContent("about.pillar.2.description", "Governance is our foundation. We operate structured compliance layers and automated customs documentation routing to guarantee secure, high-stakes regulatory clearance in complex jurisdictions.")}
               </p>
             </div>
             <div className="text-primary text-xs uppercase tracking-widest font-bold" style={{ fontFamily: "Geist, monospace" }}>
@@ -124,11 +127,11 @@ export default function AboutPage() {
                 school
               </span>
               <h3 className="text-white mb-3 text-xl md:text-2xl font-bold uppercase tracking-wide" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
-                Scholastic Excellence
+                {getContent("about.pillar.3.title", "Scholastic Excellence")}
               </h3>
               <p className="text-on-surface-variant text-sm md:text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-                Our Academy exists to cultivate the next cohort of global trade executives. We provide elite-track accreditation, dynamic video classrooms, and structured case review work.
-              </p>
+                {getContent("about.pillar.3.description", "Our Academy exists to cultivate the next cohort of global trade executives. We provide elite-track accreditation, dynamic video classrooms, and structured case review work.")
+              }</p>
             </div>
             <div className="text-primary text-xs uppercase tracking-widest font-bold" style={{ fontFamily: "Geist, monospace" }}>
               03 / Academic Accreditation
@@ -147,11 +150,15 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-white mb-6 uppercase tracking-tight font-black" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 42px)", lineHeight: 1.1 }}>
-              Governance <br />& Global Standards
-            </h2>
+            <h2 
+              className="text-white mb-6 uppercase tracking-tight font-black" 
+              style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 42px)", lineHeight: 1.1 }}
+              dangerouslySetInnerHTML={{
+                __html: getContent("about.governance.title", "Governance <br />& Global Standards")
+              }}
+            />
             <p className="text-on-surface-variant text-base leading-relaxed mb-6 font-light" style={{ fontFamily: "Inter, sans-serif" }}>
-              Merkanto operates in compliance with strict international trade acts and custom protocols. Our corporate structures protect private client interest and maintain maximum execution efficiency across trade nodes.
+              {getContent("about.governance.description", "Merkanto operates in compliance with strict international trade acts and custom protocols. Our corporate structures protect private client interest and maintain maximum execution efficiency across trade nodes.")}
             </p>
             <Link
               href="/contact"
@@ -208,8 +215,6 @@ export default function AboutPage() {
           </motion.div>
         </div>
       </section>
-
-
     </div>
   );
 }
