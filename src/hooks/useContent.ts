@@ -12,6 +12,11 @@ defaultContent.forEach((item) => {
   defaultMap[item.key] = item.value;
 });
 
+export function clearContentCache() {
+  cachedContent = {};
+  isFetched = false;
+}
+
 export function useContent() {
   const [content, setContent] = useState<Record<string, string>>(cachedContent);
   const [loading, setLoading] = useState(!isFetched);

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { defaultContent, ContentItem } from "@/utils/defaultContent";
 import { motion, AnimatePresence } from "framer-motion";
+import { clearContentCache } from "@/hooks/useContent";
 
 const categories = ["Home", "About", "Trade", "Academy", "Automotive", "Weddings", "Events"];
 
@@ -108,6 +109,7 @@ export default function CMSPage() {
         setGeneralError(`Failed to seed database: ${error.message}`);
         setDbState("empty");
       } else {
+        clearContentCache();
         checkDatabaseStatus();
       }
     } catch (err) {
@@ -136,6 +138,7 @@ export default function CMSPage() {
         setSavingStatus((prev) => ({ ...prev, [key]: "error" }));
       } else {
         setSavingStatus((prev) => ({ ...prev, [key]: "success" }));
+        clearContentCache();
         setTimeout(() => {
           setSavingStatus((prev) => ({ ...prev, [key]: "idle" }));
         }, 2000);
@@ -161,11 +164,12 @@ export default function CMSPage() {
         .from("merkanto_media")
         .upload(fileName, file, {
           cacheControl: "3600",
-          upsert: true
+          upsert: false
         });
 
       if (error) {
-        alert(`Media Upload Failed: ${error.message}\n\nMake sure a public bucket named 'merkanto_media' exists in Supabase Storage.`);
+        alert(`Media Upload Failed: ${error.message}\n\nEnsure that:\n1. The bucket 'merkanto_media' exists.\n2. The bucket is set to PUBLIC in the Supabase Dashboard.\n3. You have run the Storage RLS SQL policies script.`);
+        console.warn("Storage upload error details:", error);
       } else if (data) {
         // 3. Fetch the public URL of the uploaded media
         const { data: urlData } = supabase.storage
@@ -175,12 +179,17 @@ export default function CMSPage() {
         if (urlData?.publicUrl) {
           handleValueChange(key, urlData.publicUrl);
           await saveItem(key, urlData.publicUrl);
+        } else {
+          alert("Media uploaded, but failed to retrieve its public URL.");
         }
       }
     } catch (err: any) {
       alert(`Media upload failed: ${err.message || err}`);
+      console.warn("Media upload exception:", err);
     } finally {
       setUploadingKey(null);
+      // Reset input element value so that uploading the same file again triggers onChange
+      e.target.value = "";
     }
   };
 
