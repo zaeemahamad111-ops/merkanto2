@@ -33,7 +33,6 @@ export default function LoginPage() {
     setTimeout(() => {
       if (role === "admin") {
         const localAdmins = [
-          { email: "admin@merkanto.com", password: "admin123" },
           { email: "merkantopvtltd@gmail.com", password: "Merkanto@123" }
         ];
         const foundAdmin = admins.find(a => a.email.toLowerCase() === email.toLowerCase() && a.password === password) ||
@@ -65,19 +64,7 @@ export default function LoginPage() {
     }, 800);
   };
 
-  const fillCredentials = () => {
-    if (role === "admin") {
-      const demoAdmin = admins[0] || { email: "admin@merkanto.com", password: "admin123" };
-      setEmail(demoAdmin.email);
-      setPassword(demoAdmin.password || "admin123");
-    } else {
-      const demoStudent = students.find(s => s.email === "student@merkanto.com") || students[0];
-      if (demoStudent) {
-        setEmail(demoStudent.email);
-        setPassword(demoStudent.password || "student123");
-      }
-    }
-  };
+
 
   const handleForgotPasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -151,27 +138,7 @@ export default function LoginPage() {
                   ))}
                 </div>
 
-                {/* Demo credentials hint */}
-                <div className="bg-primary/10 border border-primary/20 px-4 py-3 mb-6 flex items-center justify-between">
-                  <div className="flex-1 min-w-0 pr-2">
-                    <div className="text-primary" style={{ fontFamily: "Geist, monospace", fontSize: "10px", letterSpacing: "0.1em" }}>DEMO CREDENTIALS</div>
-                    <div className="text-on-surface-variant mt-1 truncate" style={{ fontFamily: "Manrope, sans-serif", fontSize: "12px" }}>
-                      {role === "admin" 
-                        ? (() => {
-                            const demoA = admins[0] || { email: "admin@merkanto.com", password: "admin123" };
-                            return `${demoA.email} / ${demoA.password || "admin123"}`;
-                          })()
-                        : (() => {
-                            const demoS = students.find(s => s.email === "student@merkanto.com") || students[0];
-                            return demoS ? `${demoS.email} / ${demoS.password || "student123"}` : "No students enrolled";
-                          })()
-                      }
-                    </div>
-                  </div>
-                  <button onClick={fillCredentials} className="text-primary border border-primary/40 px-3 py-1 hover:bg-primary/10 transition-colors shrink-0 text-xs font-bold" style={{ fontFamily: "Geist, monospace" }}>
-                    FILL
-                  </button>
-                </div>
+
 
                 <form onSubmit={handleLogin} className="space-y-6">
                   <div>

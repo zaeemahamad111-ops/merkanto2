@@ -106,7 +106,7 @@ export function useAdmins() {
       });
 
       if (signUpError) {
-        console.error("Error signing up admin auth:", signUpError.message || signUpError);
+        console.warn("Notice signing up admin auth:", signUpError.message || signUpError);
         return { success: false, error: signUpError.message };
       }
 
@@ -116,25 +116,20 @@ export function useAdmins() {
         // Wait 300ms to ensure the trigger has created the profile row
         await new Promise((resolve) => setTimeout(resolve, 300));
 
-        // Use tempClient (authenticated as new user) to update their password and role in profiles table
-        const { error: updateError } = await tempClient
+        // UPSERT the profile record to ensure it exists and has the correct data, fixing orphaned auth users
+        const { error: upsertError } = await supabase
           .from("profiles")
-          .update({ 
+          .upsert({ 
+            id: signUpData.user.id,
+            email: data.email,
+            name: data.name,
             password: data.password || "admin123",
-            role: "admin"
-          })
-          .eq("id", signUpData.user.id);
+            role: "admin",
+            joined_date: today
+          });
 
-        if (updateError) {
-          console.error("Error saving admin details in profiles:", updateError.message || updateError);
-          // Retry using main client just in case
-          await supabase
-            .from("profiles")
-            .update({ 
-              password: data.password || "admin123",
-              role: "admin"
-            })
-            .eq("id", signUpData.user.id);
+        if (upsertError) {
+          console.error("Error upserting admin details in profiles:", upsertError.message || upsertError);
         }
       }
 

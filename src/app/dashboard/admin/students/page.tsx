@@ -58,11 +58,21 @@ export default function StudentManagementPage() {
     setModalOpen(true);
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (editingId) { updateStudent(editingId, form); showToast("Student updated."); }
-    else { addStudent(form); showToast("Student enrolled successfully."); }
-    setModalOpen(false);
+    if (editingId) { 
+      updateStudent(editingId, form); 
+      showToast("Student updated."); 
+      setModalOpen(false);
+    } else { 
+      const result = await addStudent(form); 
+      if (result && result.success) {
+        showToast("Student enrolled successfully.");
+        setModalOpen(false);
+      } else {
+        showToast(result?.error || "Failed to enroll student.");
+      }
+    }
   };
 
   const handleDelete = (id: string, name: string) => {

@@ -105,22 +105,50 @@ export function useAssignments() {
     }
   };
 
-  const submitAssignment = async (assignmentId: string, studentId: string, answer: string) => {
+  const submitAssignment = async (assignmentId: string, studentId: string, answer: string): Promise<{ success: boolean; error?: string }> => {
     try {
-      // Upsert student answer in the submissions table
-      const { error } = await supabase
+      // First check if a submission already exists
+      const { data: existing, error: checkError } = await supabase
         .from("submissions")
-        .upsert([{
-          assignment_id: assignmentId,
-          student_id: studentId,
-          answer: answer,
-          status: "Submitted"
-        }], { onConflict: 'assignment_id, student_id' });
+        .select("id")
+        .eq("assignment_id", assignmentId)
+        .eq("student_id", studentId)
+        .maybeSingle();
 
-      if (error) throw error;
+      let error;
+      if (existing) {
+        // Update existing submission
+        const { error: updateError } = await supabase
+          .from("submissions")
+          .update({
+            answer: answer,
+            status: "Submitted"
+          })
+          .eq("id", existing.id);
+        error = updateError;
+      } else {
+        // Insert new submission
+        const { error: insertError } = await supabase
+          .from("submissions")
+          .insert([{
+            assignment_id: assignmentId,
+            student_id: studentId,
+            answer: answer,
+            status: "Submitted"
+          }]);
+        error = insertError;
+      }
+
+      if (error) {
+        console.warn("Notice submitting assignment:", error.message || error);
+        return { success: false, error: error.message || "Database security blocked submission." };
+      }
+      
       await fetchAssignments();
-    } catch (e) {
-      console.error(e);
+      return { success: true };
+    } catch (e: any) {
+      console.warn("Exception in submitAssignment:", e);
+      return { success: false, error: e.message || "Failed to submit assignment." };
     }
   };
 

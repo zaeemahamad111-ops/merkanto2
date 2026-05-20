@@ -174,16 +174,20 @@ export default function StudentDashboardPage() {
     setSubmissionText("");
   };
 
-  const handlePublishSubmission = (e: React.FormEvent) => {
+  const handlePublishSubmission = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!submissionText || submissionText.trim() === "") {
       showToast("Please enter submission text.");
       return;
     }
     if (submittingAssignmentId && currentStudent.id) {
-      submitAssignment(submittingAssignmentId, currentStudent.id, submissionText);
-      showToast("Assignment submitted successfully!");
-      setSubmittingAssignmentId(null);
+      const result = await submitAssignment(submittingAssignmentId, currentStudent.id, submissionText);
+      if (result && result.success) {
+        showToast("Assignment submitted successfully!");
+        setSubmittingAssignmentId(null);
+      } else {
+        showToast(result?.error || "Failed to submit assignment.");
+      }
     }
   };
 

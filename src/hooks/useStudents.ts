@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/utils/supabaseClient";
+import { createClient } from "@supabase/supabase-js";
+import { supabase, supabaseUrl, supabaseAnonKey } from "@/utils/supabaseClient";
 
 export interface Student {
   id: string;
@@ -54,9 +55,53 @@ export function useStudents() {
     fetchStudents();
   }, []);
 
-  const addStudent = async (s: Omit<Student, "id" | "joinedDate">) => {
+  const addStudent = async (s: Omit<Student, "id" | "joinedDate">): Promise<{ success: boolean; error?: string }> => {
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const today = new Date().toISOString().split("T")[0];
+
+      // 1. Check if the email already exists in profiles table
+      const { data: existing, error: checkError } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("email", s.email)
+        .maybeSingle();
+
+      if (checkError) {
+        console.error("Error checking existing profile:", checkError);
+      }
+
+      if (existing) {
+        console.log("Email already exists in profiles. Enrolling directly...");
+        // Update their role and password directly
+        const { error: promoteError } = await supabase
+          .from("profiles")
+          .update({
+            role: "student",
+            name: s.name,
+            track: s.track,
+            progress: s.progress || 0,
+            password: s.password || "student123"
+          })
+          .eq("id", existing.id);
+
+        if (promoteError) {
+          console.error("Error promoting user to student:", promoteError);
+          return { success: false, error: promoteError.message || "Failed to enroll existing profile." };
+        }
+        await fetchStudents();
+        return { success: true };
+      }
+
+      // 2. Create a temporary client with persistSession: false to avoid overwriting current session
+      const tempClient = createClient(supabaseUrl, supabaseAnonKey, {
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false,
+          detectSessionInUrl: false
+        }
+      });
+
+      const { data: signUpData, error: signUpError } = await tempClient.auth.signUp({
         email: s.email,
         password: s.password || "student123", // Use custom form password or fallback
         options: {
@@ -68,45 +113,40 @@ export function useStudents() {
         }
       });
 
-      if (error) {
-        console.error("Error signing up student auth:", error.message || error);
+      if (signUpError) {
+        console.warn("Notice signing up student auth:", signUpError.message || signUpError);
+        return { success: false, error: signUpError.message };
+      }
+      
+      if (signUpData.user) {
+        console.log("Successfully signed up student auth user!");
         
-        // Fallback: If auth signUp is rate limited or blocked, insert the profile record directly to make CRUD work instantly
-        const tempId = typeof window !== "undefined" && window.crypto?.randomUUID 
-          ? window.crypto.randomUUID() 
-          : "student_" + Math.random().toString(36).substring(2, 9);
-          
-        const { error: insertError } = await supabase
+        // Wait 300ms to ensure the trigger has created the profile row
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        
+        // UPSERT the profile record to ensure it exists and has the correct data, fixing orphaned auth users
+        const { error: upsertError } = await supabase
           .from("profiles")
-          .insert({
-            id: tempId,
+          .upsert({ 
+            id: signUpData.user.id,
             email: s.email,
             name: s.name,
+            password: s.password || "student123",
             role: "student",
             track: s.track,
             progress: 0,
-            password: s.password, // Added password here
-            joined_date: new Date().toISOString().split('T')[0]
+            joined_date: today
           });
           
-        if (insertError) {
-          console.error("Fallback profiles insert failed (likely due to auth foreign key):", insertError.message || insertError);
-        } else {
-          console.log("Successfully created student profile via fallback direct insert!");
-        }
-      } else {
-        console.log("Successfully signed up student auth user!");
-        if (data.user) {
-          // Update the profile record with the plain text password for login fallback
-          await supabase
-            .from("profiles")
-            .update({ password: s.password || "student123" })
-            .eq("id", data.user.id);
+        if (upsertError) {
+          console.error("Error upserting student details in profiles:", upsertError.message || upsertError);
         }
       }
       await fetchStudents();
-    } catch (e) {
-      console.error(e);
+      return { success: true };
+    } catch (e: any) {
+      console.error("Failed to enroll student:", e);
+      return { success: false, error: e.message || "Failed to enroll scholar." };
     }
   };
 
