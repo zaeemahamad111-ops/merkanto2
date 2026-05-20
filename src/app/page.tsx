@@ -148,7 +148,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── ABOUT ─── */}
-      <section className="py-[60px] md:py-[120px] px-6 md:px-16 bg-surface">
+      <section className="py-[60px] md:py-[120px] px-6 md:px-16">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-6 items-center">
           <motion.div
             className="space-y-8 text-center md:text-left"
@@ -217,7 +217,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── DIVISIONS BENTO ─── */}
-      <section className="py-[60px] md:py-[120px] px-6 md:px-16 bg-surface-container-low">
+      <section className="py-[60px] md:py-[120px] px-6 md:px-16 relative overflow-hidden">
         <motion.div
           className="max-w-[1280px] mx-auto mb-12 md:mb-16 text-center"
           initial={{ opacity: 0, y: 20 }}
