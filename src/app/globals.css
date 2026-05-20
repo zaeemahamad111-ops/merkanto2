@@ -22,11 +22,46 @@ html {
 }
 
 body {
-  background-color: #121414;
+  background-color: #050505;
   color: #e2e2e2;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: "Inter", sans-serif;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.8;
+}
+
+.accent-glow {
+  background: radial-gradient(circle at center, rgba(70, 225, 118, 0.08) 0%, transparent 70%);
+}
+
+/* ============================================
+   Micro-interactions
+   ============================================ */
+button.bg-primary, a.bg-primary {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(70, 225, 118, 0.1);
+}
+
+button.bg-primary:hover, a.bg-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(70, 225, 118, 0.25);
+}
+
+button.bg-primary:active, a.bg-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(70, 225, 118, 0.15);
 }
 
 ::selection {
@@ -57,23 +92,30 @@ body {
    Glassmorphism Components
    ============================================ */
 .glass-card {
-  background: rgba(18, 20, 20, 0.15);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: border-color 0.3s ease, background 0.3s ease;
+  background: rgba(10, 10, 10, 0.4);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid rgba(255, 255, 255, 0.04);
+  border-right: 1px solid rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .glass-card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(18, 20, 20, 0.25);
+  background: rgba(20, 20, 20, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(70, 225, 118, 0.05);
 }
 
 .glass-panel {
-  background: rgba(18, 20, 20, 0.15);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(5, 5, 5, 0.6);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .inner-glow {

@@ -10,8 +10,15 @@ export default function Footer() {
   if (isDashboard) return null;
 
   return (
-    <footer className="bg-surface border-t border-outline-variant/10">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center px-6 md:px-16 py-12 max-w-[1280px] mx-auto gap-12 md:gap-8">
+    <footer className="relative bg-surface border-t border-outline-variant/10 overflow-hidden">
+      {/* Oversized Background Watermark */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.02] select-none overflow-hidden">
+        <span className="text-[20vw] font-black uppercase text-white whitespace-nowrap" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+          MERKANTO
+        </span>
+      </div>
+
+      <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center px-6 md:px-16 py-20 max-w-[1280px] mx-auto gap-12 md:gap-8">
         <div className="space-y-6 md:space-y-4">
           <Image 
             src="/images/merkanto_logo_new.png" 

@@ -33,8 +33,10 @@ export default function Navbar() {
   if (isDashboard) return null;
 
   return (
-    <header className="bg-surface/15 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
-      <nav className="flex justify-between items-center w-full px-6 md:px-16 py-2 max-w-[1280px] mx-auto">
+    <header className="bg-surface/50 backdrop-blur-2xl border-b border-white/5 sticky top-0 z-50">
+      {/* Subtle bottom gradient glow */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+      <nav className="relative flex justify-between items-center w-full px-6 md:px-16 py-2 max-w-[1280px] mx-auto z-10">
         {/* Logo */}
         <Link href="/" className="hover:opacity-80 transition-opacity flex items-center">
           <Image 
@@ -94,7 +96,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden absolute top-full left-0 w-full border-t border-white/10 bg-surface-container-low/95 backdrop-blur-xl shadow-2xl overflow-hidden z-50"
+            className="md:hidden absolute top-full left-0 w-full border-t border-white/5 bg-surface/95 backdrop-blur-2xl shadow-2xl overflow-hidden z-50"
           >
             <div className="flex flex-col py-4 max-h-[calc(100vh-80px)] overflow-y-auto custom-scrollbar">
               {navLinks.map((link) => {
