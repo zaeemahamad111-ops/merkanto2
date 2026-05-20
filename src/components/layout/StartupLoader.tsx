@@ -8,15 +8,8 @@ export default function StartupLoader() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Check session storage to see if we've already loaded this session on the client
-    const hasLoaded = sessionStorage.getItem("merkanto_has_loaded");
-    if (hasLoaded === "true") {
-      setLoading(false);
-      return;
-    }
-
     // Premium progress loading simulation
-    const duration = 2200; // 2.2 seconds loading animation
+    const duration = 3000; // 3 seconds loading animation
     const intervalTime = 20;
     const step = 100 / (duration / intervalTime);
 
@@ -26,7 +19,6 @@ export default function StartupLoader() {
           clearInterval(timer);
           setTimeout(() => {
             setLoading(false);
-            sessionStorage.setItem("merkanto_has_loaded", "true");
           }, 350);
           return 100;
         }
