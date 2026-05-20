@@ -35,8 +35,8 @@ export default function LoginPage() {
         const localAdmins = [
           { email: "merkantopvtltd@gmail.com", password: "Merkanto@123" }
         ];
-        const foundAdmin = admins.find(a => a.email.toLowerCase() === email.toLowerCase() && a.password === password) ||
-                           localAdmins.find(la => la.email === email.toLowerCase() && la.password === password);
+        const foundAdmin = admins.find(a => a.email.toLowerCase().trim() === email.toLowerCase().trim() && a.password === password) ||
+                           localAdmins.find(la => la.email.toLowerCase().trim() === email.toLowerCase().trim() && la.password === password);
         if (foundAdmin) {
           localStorage.setItem("merkanto_role", "admin");
           localStorage.setItem("merkanto_user", foundAdmin.email);

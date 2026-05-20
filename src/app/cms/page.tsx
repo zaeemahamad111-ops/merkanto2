@@ -43,14 +43,14 @@ export default function CMSPage() {
   // 2. Authenticate admin credentials
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.toLowerCase() === "admin" && password === "admin") {
+    if (username.toLowerCase().trim() === "merkantopvtltd@gmail.com" && password === "Merkanto@123") {
       setIsAuthorized(true);
       if (typeof window !== "undefined") {
         sessionStorage.setItem("merkanto_admin_session", "authorized");
       }
       checkDatabaseStatus();
     } else {
-      setLoginError("Invalid administrator credentials.");
+      setLoginError("INVALID ADMINISTRATOR CREDENTIALS.");
     }
   };
 
