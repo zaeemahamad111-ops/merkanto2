@@ -217,7 +217,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── DIVISIONS BENTO ─── */}
-      <section className="py-[60px] md:py-[120px] px-6 md:px-16 relative overflow-hidden">
+      <section className="py-[60px] md:py-[120px] px-6 md:px-16 bg-background relative overflow-hidden">
         <motion.div
           className="max-w-[1280px] mx-auto mb-12 md:mb-16 text-center"
           initial={{ opacity: 0, y: 20 }}
