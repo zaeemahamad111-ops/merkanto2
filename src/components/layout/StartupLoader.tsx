@@ -4,16 +4,18 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function StartupLoader() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Check session storage to see if we've already loaded this session
+    // Check session storage to see if we've already loaded this session on the client
     const hasLoaded = sessionStorage.getItem("merkanto_has_loaded");
     if (hasLoaded === "true") {
-      setLoading(false);
       return;
     }
+
+    // Since this is the initial entry, display the loading screen
+    setLoading(true);
 
     // Premium progress loading simulation
     const duration = 2200; // 2.2 seconds loading animation
