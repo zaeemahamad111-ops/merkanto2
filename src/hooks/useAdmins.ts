@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/utils/supabaseClient";
+import { createClient } from "@supabase/supabase-js";
+import { supabase, supabaseUrl, supabaseAnonKey } from "@/utils/supabaseClient";
 
 export interface Admin {
   id: string;
@@ -49,25 +50,66 @@ export function useAdmins() {
 
   const addAdmin = async (data: Omit<Admin, "id" | "joinedDate" | "role"> & { password?: string }) => {
     try {
-      const newId = crypto.randomUUID();
       const today = new Date().toISOString().split("T")[0];
 
-      const { error } = await supabase
-        .from("profiles")
-        .insert({
-          id: newId,
-          name: data.name,
-          email: data.email,
-          password: data.password || "admin123",
-          role: "admin",
-          track: "Global Command",
-          joined_date: today
-        });
+      // Create a temporary client with persistSession: false to avoid overwriting current session
+      const tempClient = createClient(supabaseUrl, supabaseAnonKey, {
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false,
+          detectSessionInUrl: false
+        }
+      });
 
-      if (error) {
-        console.error("Error creating admin profile:", error);
-        return false;
+      // Sign up the new user in Supabase auth
+      const { data: signUpData, error: signUpError } = await tempClient.auth.signUp({
+        email: data.email,
+        password: data.password || "admin123",
+        options: {
+          data: {
+            name: data.name,
+            role: "admin",
+            track: "Global Command"
+          }
+        }
+      });
+
+      if (signUpError) {
+        console.error("Error signing up admin auth:", signUpError.message || signUpError);
+        
+        // Fallback: If auth signUp is blocked, try to insert profile directly (matches original attempt)
+        const tempId = crypto.randomUUID();
+        const { error: insertError } = await supabase
+          .from("profiles")
+          .insert({
+            id: tempId,
+            name: data.name,
+            email: data.email,
+            password: data.password || "admin123",
+            role: "admin",
+            track: "Global Command",
+            joined_date: today
+          });
+
+        if (insertError) {
+          console.error("Fallback profiles insert failed:", insertError.message || insertError);
+          return false;
+        }
+        console.log("Successfully created admin profile via fallback direct insert!");
+      } else if (signUpData.user) {
+        console.log("Successfully signed up admin auth user!");
+        
+        // Use tempClient (authenticated as new user) to update their password in profiles table
+        const { error: updateError } = await tempClient
+          .from("profiles")
+          .update({ password: data.password || "admin123" })
+          .eq("id", signUpData.user.id);
+
+        if (updateError) {
+          console.error("Error saving admin plaintext password:", updateError.message || updateError);
+        }
       }
+
       await fetchAdmins();
       return true;
     } catch (e) {
