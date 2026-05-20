@@ -277,7 +277,7 @@ export default function ContactPage() {
           transition={{ duration: 0.8 }}
         >
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.875647573177!2d75.81525997486164!3d11.267798950005705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba65922338276f5%3A0x62955f284e36630f!2sHiLITE%20Business%20Park!5e0!3m2!1sen!2sin!4v1716216000000!5m2!1sen!2sin"
+            src="https://maps.google.com/maps?q=HiLITE%20Business%20Park,%20Thondayad,%20Kozhikode,%20Kerala&t=m&z=15&output=embed&iwloc=near"
             width="100%"
             height="100%"
             style={{ border: 0 }}
