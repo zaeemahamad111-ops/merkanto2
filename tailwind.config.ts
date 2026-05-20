@@ -32,7 +32,7 @@ const config: Config = {
         outline: "#869585",
         "on-secondary": "#2a303e",
         "on-error": "#690005",
-        "on-surface-variant": "#bbcbb9",
+        "on-surface-variant": "#cbc5b9",
         "surface-tint": "#46e176",
         "inverse-on-surface": "#2f3131",
         "primary-fixed-dim": "#46e176",
