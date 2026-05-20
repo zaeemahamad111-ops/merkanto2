@@ -274,17 +274,17 @@ export default function AdminHubPage() {
       showToast("Please fill in all details.");
       return;
     }
-    const success = await addAdmin({
+    const result = await addAdmin({
       name: adminForm.name,
       email: adminForm.email,
       password: adminForm.password
     });
-    if (success) {
+    if (result.success) {
       setIsAdminModalOpen(false);
       setAdminForm({ name: "", email: "", password: "" });
       showToast(`Administrator account for ${adminForm.name} created successfully.`);
     } else {
-      showToast("Failed to create administrator. Please try again.");
+      showToast(result.error || "Failed to create administrator. Please try again.");
     }
   };
 

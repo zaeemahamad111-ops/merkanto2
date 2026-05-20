@@ -48,11 +48,42 @@ export function useAdmins() {
     fetchAdmins();
   }, []);
 
-  const addAdmin = async (data: Omit<Admin, "id" | "joinedDate" | "role"> & { password?: string }) => {
+  const addAdmin = async (data: Omit<Admin, "id" | "joinedDate" | "role"> & { password?: string }): Promise<{ success: boolean; error?: string }> => {
     try {
       const today = new Date().toISOString().split("T")[0];
 
-      // Create a temporary client with persistSession: false to avoid overwriting current session
+      // 1. Check if the email already exists in profiles table
+      const { data: existing, error: checkError } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("email", data.email)
+        .maybeSingle();
+
+      if (checkError) {
+        console.error("Error checking existing profile:", checkError);
+      }
+
+      if (existing) {
+        console.log("Email already exists in profiles. Promoting to admin directly...");
+        // Directly update their role to admin and set their name/password
+        const { error: promoteError } = await supabase
+          .from("profiles")
+          .update({
+            role: "admin",
+            name: data.name,
+            password: data.password || "admin123"
+          })
+          .eq("id", existing.id);
+
+        if (promoteError) {
+          console.error("Error promoting user to admin:", promoteError);
+          return { success: false, error: promoteError.message || "Failed to promote existing profile." };
+        }
+        await fetchAdmins();
+        return { success: true };
+      }
+
+      // 2. Create a temporary client with persistSession: false to avoid overwriting current session
       const tempClient = createClient(supabaseUrl, supabaseAnonKey, {
         auth: {
           persistSession: false,
@@ -76,45 +107,42 @@ export function useAdmins() {
 
       if (signUpError) {
         console.error("Error signing up admin auth:", signUpError.message || signUpError);
-        
-        // Fallback: If auth signUp is blocked, try to insert profile directly (matches original attempt)
-        const tempId = crypto.randomUUID();
-        const { error: insertError } = await supabase
-          .from("profiles")
-          .insert({
-            id: tempId,
-            name: data.name,
-            email: data.email,
-            password: data.password || "admin123",
-            role: "admin",
-            track: "Global Command",
-            joined_date: today
-          });
+        return { success: false, error: signUpError.message };
+      }
 
-        if (insertError) {
-          console.error("Fallback profiles insert failed:", insertError.message || insertError);
-          return false;
-        }
-        console.log("Successfully created admin profile via fallback direct insert!");
-      } else if (signUpData.user) {
+      if (signUpData.user) {
         console.log("Successfully signed up admin auth user!");
         
-        // Use tempClient (authenticated as new user) to update their password in profiles table
+        // Wait 300ms to ensure the trigger has created the profile row
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
+        // Use tempClient (authenticated as new user) to update their password and role in profiles table
         const { error: updateError } = await tempClient
           .from("profiles")
-          .update({ password: data.password || "admin123" })
+          .update({ 
+            password: data.password || "admin123",
+            role: "admin"
+          })
           .eq("id", signUpData.user.id);
 
         if (updateError) {
-          console.error("Error saving admin plaintext password:", updateError.message || updateError);
+          console.error("Error saving admin details in profiles:", updateError.message || updateError);
+          // Retry using main client just in case
+          await supabase
+            .from("profiles")
+            .update({ 
+              password: data.password || "admin123",
+              role: "admin"
+            })
+            .eq("id", signUpData.user.id);
         }
       }
 
       await fetchAdmins();
-      return true;
-    } catch (e) {
+      return { success: true };
+    } catch (e: any) {
       console.error("Failed to create admin:", e);
-      return false;
+      return { success: false, error: e.message || "Failed to create administrator." };
     }
   };
 
