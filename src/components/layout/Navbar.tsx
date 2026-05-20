@@ -94,9 +94,9 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden border-t border-white/10 bg-surface-container-low overflow-hidden"
+            className="md:hidden absolute top-full left-0 w-full border-t border-white/10 bg-surface-container-low/95 backdrop-blur-xl shadow-2xl overflow-hidden z-50"
           >
-            <div className="flex flex-col py-4">
+            <div className="flex flex-col py-4 max-h-[calc(100vh-80px)] overflow-y-auto custom-scrollbar">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
