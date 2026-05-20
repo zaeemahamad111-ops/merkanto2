@@ -33,8 +33,8 @@ export default function WhatsAppButton() {
     message = "Hello, I'm interested in your event production services.";
   }
 
-  // Placeholder number - update this to the client's actual WhatsApp number
-  const phoneNumber = "1234567890";
+  // Corporate WhatsApp number
+  const phoneNumber = "919746957077";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (

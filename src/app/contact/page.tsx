@@ -59,7 +59,7 @@ export default function ContactPage() {
     }
   };
 
-  const whatsappUrl = "https://wa.me/1234567890?text=Hello%2C%20I'm%20interested%20in%20arranging%20a%20priority%20consultation%20with%20Merkanto.";
+  const whatsappUrl = "https://wa.me/919746957077?text=Hello%2C%20I'm%20interested%20in%20arranging%20a%20priority%20consultation%20with%20Merkanto.";
 
   return (
     <div className="bg-background min-h-screen line-pattern">
@@ -216,8 +216,13 @@ export default function ContactPage() {
                     <span className="material-symbols-outlined text-primary">location_on</span>
                   </div>
                   <div>
-                    <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Global Headquarters</h4>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px" }}>101 Marina Financial Center<br />Dubai, UAE</p>
+                    <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Corporate Headquarters</h4>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", lineHeight: "1.6" }}>
+                      1003, T1, Business Park<br />
+                      HiLITE City, National Highway 66,<br />
+                      Bypass, Thondayad,<br />
+                      Kozhikode, Kerala 673014
+                    </p>
                   </div>
                 </div>
                 <div className="flex gap-6">
@@ -226,16 +231,22 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Operations Hours</h4>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px" }}>Mon — Fri: 08:00 - 22:00 GST<br />Saturday: Limited Support</p>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", lineHeight: "1.6" }}>
+                      Monday — Saturday: 10:00 AM - 06:00 PM<br />
+                      Sunday: Off
+                    </p>
                   </div>
                 </div>
                 <div className="flex gap-6">
                   <div className="w-12 h-12 shrink-0 bg-primary-container/20 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-primary">language</span>
+                    <span className="material-symbols-outlined text-primary">mail</span>
                   </div>
                   <div>
-                    <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Global Desk</h4>
-                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px" }}>London • Singapore • New York<br />Tokyo • Zurich</p>
+                    <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Support Desk</h4>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", lineHeight: "1.6" }}>
+                      merkantopvtltd@gmail.com<br />
+                      +91 9746957077
+                    </p>
                   </div>
                 </div>
               </div>
@@ -254,9 +265,9 @@ export default function ContactPage() {
           transition={{ duration: 0.8 }}
         >
           <img
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAklxDLivXSlTJapUZyU05UNuqGcWBiyUqcQcG8sg_obhZL4UDszwxmA_DTyND47Hnua6-rTsANhPSfqsUdyAvyae8U8zFbyq3R-hMIu6a5WicDJohvOFth4lpuQEFzGBa4WWibfy-eYJVsDPo2-uxPYs7QiBOGIOOz4KDKiIY_h3isLDY-3S7AnRWQ5olr_Rd6Tz5NWvGqtOMGY3fkPbrW_uJjQPx2ykVnU63mkcyQbO8nNncQqqGnY71p37KE65qXKbtvOf0OG1E"
-            alt="Dubai Marina aerial view"
+            className="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-1000 opacity-60"
+            src="/images/world_map_vector.png"
+            alt="Merkanto Office Location Map"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
  
