@@ -192,23 +192,23 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <div className="absolute inset-0 bg-primary/5 rounded-full blur-[100px]" />
+            <div className="absolute inset-0 bg-[#10b981]/5 rounded-full blur-[100px]" />
             <div className="relative h-full w-full glass-card flex items-center justify-center p-8 md:p-12 overflow-hidden">
               <div className="grid grid-cols-2 gap-4 w-full h-full opacity-60">
                 {[
-                  { icon: "architecture", color: "text-primary" },
+                  { icon: "architecture", color: "text-[#10b981]" },
                   { icon: "token", color: "text-on-surface" },
                   { icon: "deployed_code", color: "text-on-surface" },
-                  { icon: "hub", color: "text-primary" },
+                  { icon: "hub", color: "text-[#10b981]" },
                 ].map(({ icon, color }) => (
                   <div key={icon} className="border border-white/10 p-4 flex items-center justify-center">
                     <span className={`material-symbols-outlined ${color}`} style={{ fontSize: "60px" }}>{icon}</span>
                   </div>
                 ))}
               </div>
-              <div className="absolute border-2 border-primary/20 w-48 h-48 rotate-45 flex items-center justify-center">
-                <div className="border border-primary/40 w-32 h-32 -rotate-12 flex items-center justify-center">
-                  <div className="bg-primary/10 w-16 h-16 blur-xl" />
+              <div className="absolute border-2 border-[#10b981]/20 w-48 h-48 rotate-45 flex items-center justify-center">
+                <div className="border border-[#10b981]/40 w-32 h-32 -rotate-12 flex items-center justify-center">
+                  <div className="bg-[#10b981]/15 w-16 h-16 blur-xl" />
                 </div>
               </div>
             </div>
