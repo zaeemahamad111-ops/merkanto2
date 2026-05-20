@@ -105,7 +105,7 @@ export default function EventsPage() {
                 </li>
               ))}
             </ul>
-            <Link href="/wedding" className="inline-flex items-center gap-2 text-primary uppercase tracking-widest hover:gap-4 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
+            <Link href="/wedding" className="inline-flex items-center gap-2 text-[#cbc5b9] uppercase tracking-widest hover:text-white hover:gap-4 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
               Explore The Wedding Atelier <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>arrow_forward</span>
             </Link>
           </motion.div>

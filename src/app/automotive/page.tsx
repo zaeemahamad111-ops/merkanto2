@@ -83,7 +83,7 @@ export default function AutomotivePage() {
               <p className="text-on-surface-variant mb-6 text-sm md:text-base" style={{ fontFamily: "Manrope, sans-serif" }}>
                 {getContent("automotive.vertical.1.description", "Complete cabin redesign using full-grain leathers, custom carbon structures, and tailored stitching.")}
               </p>
-              <Link href="/contact" className="inline-flex items-center gap-2 text-primary uppercase tracking-widest hover:gap-4 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
+              <Link href="/contact" className="inline-flex items-center gap-2 text-[#cbc5b9] uppercase tracking-widest hover:text-white hover:gap-4 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
                 View Details <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>arrow_forward</span>
               </Link>
             </div>

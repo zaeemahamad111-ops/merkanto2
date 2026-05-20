@@ -166,7 +166,7 @@ export default function AboutPage() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-[11px]"
+              className="inline-flex items-center gap-2 text-[#cbc5b9] font-bold uppercase tracking-widest text-[11px] hover:text-white transition-colors"
               style={{ fontFamily: "Geist, monospace" }}
             >
               Verify Legal Protocols

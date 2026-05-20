@@ -184,7 +184,7 @@ export default function TradePage() {
                 </div>
               )}
               {card.link && (
-                <a href="/contact" className="flex items-center gap-2 text-primary uppercase tracking-widest mt-4" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
+                <a href="/contact" className="flex items-center gap-2 text-[#cbc5b9] uppercase tracking-widest hover:text-white hover:gap-4 transition-all mt-4" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
                   {card.link} <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>arrow_forward</span>
                 </a>
               )}

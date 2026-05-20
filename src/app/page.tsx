@@ -260,7 +260,7 @@ export default function HomePage() {
                   </p>
                   <Link
                     href={div.href}
-                    className="mt-6 flex items-center gap-2 text-primary font-bold uppercase tracking-widest"
+                    className="mt-6 flex items-center gap-2 text-[#cbc5b9] font-bold uppercase tracking-widest hover:text-white transition-colors"
                     style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}
                   >
                     {div.cta} <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>arrow_forward</span>
