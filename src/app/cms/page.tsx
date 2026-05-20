@@ -185,7 +185,8 @@ export default function CMSPage() {
   };
 
   // Render SQL command snippet helper for setup
-  const sqlCommand = `CREATE TABLE public.merkanto_content (
+  const sqlCommand = `-- 1. CREATE WEBSITE CONTENT TABLE
+CREATE TABLE IF NOT EXISTS public.merkanto_content (
   key text PRIMARY KEY,
   value text NOT null,
   category text NOT null,
@@ -195,10 +196,27 @@ export default function CMSPage() {
 
 -- Enable select (read) for everyone
 ALTER TABLE public.merkanto_content ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow public read" ON public.merkanto_content;
 CREATE POLICY "Allow public read" ON public.merkanto_content FOR SELECT USING (true);
 
--- Enable insert/update/delete (write) for everyone (authorized client-side)
-CREATE POLICY "Allow public write" ON public.merkanto_content FOR ALL USING (true) WITH CHECK (true);`;
+-- Enable insert/update/delete (write) for everyone
+DROP POLICY IF EXISTS "Allow public write" ON public.merkanto_content;
+CREATE POLICY "Allow public write" ON public.merkanto_content FOR ALL USING (true) WITH CHECK (true);
+
+
+-- 2. CREATE STORAGE BUCKET & RLS POLICIES FOR MEDIA UPLOADS
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('merkanto_media', 'merkanto_media', true)
+ON CONFLICT (id) DO NOTHING;
+
+DROP POLICY IF EXISTS "Public Read Access" ON storage.objects;
+CREATE POLICY "Public Read Access" ON storage.objects FOR SELECT USING (bucket_id = 'merkanto_media');
+
+DROP POLICY IF EXISTS "Public Upload Access" ON storage.objects;
+CREATE POLICY "Public Upload Access" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'merkanto_media');
+
+DROP POLICY IF EXISTS "Public Update Access" ON storage.objects;
+CREATE POLICY "Public Update Access" ON storage.objects FOR UPDATE USING (bucket_id = 'merkanto_media');`;
 
   // ─── LOGIN SCREEN ───
   if (!isAuthorized) {
