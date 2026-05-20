@@ -62,25 +62,25 @@ const portfolio = [
     category: "Category 01",
     title: "Heavy Industrial Components",
     desc: "Global supply of tier-1 heavy machinery and industrial automation hardware.",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBU5JmztIoquFrxec7PAmnB3s0QGw3UlFe2Tzqnela6kWqfv1CKG6Ux__MjKfwwYqabiHDZD0ZjhBfJPeWvBJxu1yqkC5f_Ga3TxX0Psz30EshLFbqYNIjuqS3W_dU1mBx2KUJmx2Ji2bw_i79rYr3laGKmCn5i6qDPCFD5S470XqjiXuJnHygjLmy88uePKNVJzuJ9kOW9mb8XPAh2Vn-bq30Ybc0hi_fZMOx2DsBwCAIZLHeu1bWK5lE5RVmzgMnZlvRA-mrGi4o",
+    img: "/images/core 1.png",
   },
   {
     category: "Category 02",
     title: "Raw Commodity Assets",
     desc: "Strategic sourcing of essential industrial raw materials and base metals.",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAthzySRoiujyrhe58zhofYwrkSyQ0AyKew2hI4aOgGkl6iu_heDmYX-jyqRbBq9ff-2L_qbsXEHkyEW2wa46cF7aPCAH3F4iqmFL4CJCW53zahkdvZiN-v01euMFdQuq1nJ5kK29eLbdk6gQL5L2RPjpFNrg-2Wj6vjMYaR7bLcQYohb1aFVAcv1r4tCUpADCasMBTvbaYWjn-oFaw2bl8J-TdCUUbhDDJyUYYQcCwvKKbFo8t4jpSsvpPb49BD5sLKobQjQPW0Zc",
+    img: "/images/core 2.png",
   },
   {
     category: "Category 03",
     title: "Specialized Electronics",
     desc: "Precision procurement of aerospace-grade components and micro-electronics.",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDbYL4qMuWFUUXx8opuZqc8sYW1LoY_5YvQlQ-AtPzkfIu7SnEGkTWSgLy_jRe0FRnDK5T_i7rXz185BcgwT0R_GlDG_4ngg6IgY6sAFPct8qL5hfjohFvKgflUoRujpE30u1LXR0qxMegdOzmb1B13BjFN_g9lo_gCAYAUXXC3kKoVloOjJDBeZieoqqp8eFKK12A-1_2mgl_9NvlgTmKkwrJHaBQNtbGiovvkmI-auC5-CccdqCdt7_TaeSc3P01KuYzsob-4VEw",
+    img: "/images/core 3.png",
   },
   {
     category: "Category 04",
     title: "Sustainable Infrastructure",
     desc: "Exporting advanced green energy technology and sustainable system components.",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDkX91DQCPp1-8WZCWRANXHUt1FJzPeoUWxzYmefCRuPIvjVvFjNA7QPkTnZz54K0kMrXCctDTznJo929H6JuoUvz_4aJIt9o2cGBPfqjR2ria6sfCW7u9rbFdG9QP5GlezvzO2PZTwWL53dUf7KVALZHfPsO7uRgL-QJZLrPSUpbaq-OUxyKI4LWhv_K32d_RTxES0vVYzJAUxo5S3raPlU0QTAuaVT0-Gu4Yl3LtUjBCgJUGUzoqNI-ET_9tDiLkxabs_dhmzoi0",
+    img: "/images/core 4.png",
   },
 ];
 
@@ -92,7 +92,7 @@ export default function TradePage() {
         <div className="absolute inset-0 z-0">
           <img
             className="w-full h-full object-cover opacity-60"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIS_XXZEdyc4X_TjQ0j2jFwwhbN2IBRWXTed_znHlmdrsvzjIiyretvhJ1qlntdwbjH_fAsMW-Kex6I3_wXNqxLetnBrptc7iyo5xHN10JGNpZ1PqS_M0LOHlUD4ov2ny-u_h8B8cz1Cg1ozlHBJ3l8k7TSKDzKt7aJS3milJqhUDgHrQ9R0pGQqfOTSZABWDOXdEeufsC1plzMGddT1BLrJPND-T1jIV05TKegE2yM6rrbb0lhPmk8AbxOCkUgpYJ01abfCOO-mk"
+            src="/images/brochure_page7_img1.jpeg"
             alt="Futuristic shipping terminal at dusk"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
@@ -203,7 +203,7 @@ export default function TradePage() {
           </motion.div>
 
           <motion.div
-            className="relative glass-card w-full overflow-hidden"
+            className="relative glass-card w-full overflow-hidden border-primary/20"
             style={{ aspectRatio: "21/9" }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -211,27 +211,65 @@ export default function TradePage() {
             transition={{ duration: 0.8 }}
           >
             <img
-              className="w-full h-full object-cover opacity-20 grayscale invert"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw1438A-DcvYoumLLBxNzbWXWJdwBP85jDh0CnRrRz_jeZeKu3Ru_ZdH0gkOnFw7qp4oLcNAIBWntzVsXsU4P_t_c0djv3WKiJ30n3Yk35xU8spJJjRAA6cCZ1Yy9mMfjmEqBGmyPqElsMG2NdXcnTwYQ2AQbKBiogr7e8lf0-w-bvPYsPa3MpU1Xao_Qavr7M85JTggp3fsbRbuzHALJCxI-BfPLcQqj0pR8faMz28fULUBPffGfDHUTEgnziYS0h2xpOevkOv0g"
+              className="w-full h-full object-cover opacity-80"
+              src="/images/world_map_vector.png"
               alt="Global trade map"
             />
+            {/* Dark overlay for contrast */}
+            <div className="absolute inset-0 bg-background/50 pointer-events-none" />
+
             {/* Orbit circles */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-full h-full border-primary/20 border-dashed border-2 rounded-full absolute scale-[0.8] opacity-10" />
-              <div className="w-full h-full border-primary/10 border-dashed border-2 rounded-full absolute scale-[0.6] opacity-10" />
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="w-[80%] aspect-square border-primary/20 border-dashed border rounded-full absolute scale-[0.8] opacity-10 animate-[spin_60s_linear_infinite]" />
+              <div className="w-[120%] aspect-square border-primary/10 border-dashed border rounded-full absolute scale-[0.6] opacity-10 animate-[spin_90s_linear_infinite_reverse]" />
             </div>
-            {/* Hub Pin */}
-            <div className="absolute top-[30%] left-[45%] group cursor-pointer">
-              <div className="w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_15px_#46e176]" />
-              <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="text-white uppercase" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>EMEA CENTRAL</span>
+
+            {/* SVG Connections */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
+              <motion.line 
+                x1="45%" y1="30%" x2="65%" y2="25%" 
+                stroke="#46e176" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
+                initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut" }}
+              />
+              <motion.line 
+                x1="45%" y1="30%" x2="20%" y2="40%" 
+                stroke="#46e176" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
+                initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
+              />
+              <motion.line 
+                x1="45%" y1="30%" x2="52%" y2="60%" 
+                stroke="#46e176" strokeWidth="1.5" strokeDasharray="6 6" className="opacity-50"
+                initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut", delay: 1 }}
+              />
+            </svg>
+
+            {/* Hub Pins */}
+            <div className="absolute top-[30%] left-[45%] group cursor-pointer z-20">
+              <div className="w-4 h-4 bg-primary rounded-full animate-pulse shadow-[0_0_20px_#46e176]" />
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                <span className="text-white font-bold tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>EMEA CENTRAL</span>
               </div>
             </div>
-            <div className="absolute top-[25%] left-[65%] group cursor-pointer">
-              <div className="w-2 h-2 bg-primary/60 rounded-full animate-pulse" />
+            
+            <div className="absolute top-[25%] left-[65%] group cursor-pointer z-20">
+              <div className="w-3 h-3 bg-primary/80 rounded-full shadow-[0_0_15px_#46e176]" />
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                <span className="text-white font-bold tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>APAC HUB</span>
+              </div>
             </div>
-            <div className="absolute top-[40%] left-[20%] group cursor-pointer">
-              <div className="w-2 h-2 bg-primary/60 rounded-full animate-pulse" />
+
+            <div className="absolute top-[40%] left-[20%] group cursor-pointer z-20">
+              <div className="w-3 h-3 bg-primary/80 rounded-full shadow-[0_0_15px_#46e176]" />
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                <span className="text-white font-bold tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>AMERICAS NODE</span>
+              </div>
+            </div>
+
+            <div className="absolute top-[60%] left-[52%] group cursor-pointer z-20">
+              <div className="w-2 h-2 bg-primary/60 rounded-full shadow-[0_0_10px_#46e176]" />
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 glass-card px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                <span className="text-white font-bold tracking-widest text-[10px]" style={{ fontFamily: "Geist, monospace" }}>AFRICA TRANSIT</span>
+              </div>
             </div>
           </motion.div>
 
@@ -291,72 +329,7 @@ export default function TradePage() {
         </div>
       </section>
 
-      {/* ─── PARTNERSHIP CTA ─── */}
-      <section className="py-[60px] md:py-[120px] px-6 md:px-16 max-w-[1280px] mx-auto border-t border-outline-variant/20">
-        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
-          <motion.div className="flex-1 text-center md:text-left" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <h2 className="text-white mb-6" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
-              STRATEGIC PARTNERSHIP PROTOCOL
-            </h2>
-            <p className="text-on-surface-variant mb-10 text-base md:text-[18px]" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
-              Join an elite network of global trade entities. We offer bespoke partnership frameworks designed for institutional investors, manufacturing giants, and sovereign logistics providers.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-6 text-left">
-              {[
-                { title: "Shared Intelligence", desc: "Real-time market volatility data." },
-                { title: "Preferred Routing", desc: "Priority logistics lane access." },
-                { title: "Joint Compliance", desc: "Unified regulatory clearance systems." },
-                { title: "Revenue Sharing", desc: "Transparent co-investment models." },
-              ].map((item) => (
-                <div key={item.title} className="flex items-start gap-4 mx-auto md:mx-0 max-w-[280px] md:max-w-none">
-                  <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1", fontSize: "20px" }}>check_circle</span>
-                  <div>
-                    <div className="text-white uppercase mb-1 text-[11px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>{item.title}</div>
-                    <div className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{item.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
 
-          <motion.div
-            className="w-full md:w-[420px] glass-card p-8 md:p-10 relative overflow-hidden"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl -mr-16 -mt-16" />
-            <h3 className="text-white mb-8 text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>INITIATE INQUIRY</h3>
-            <form className="space-y-6">
-              {[
-                { label: "Organization Name", type: "text" },
-                { label: "Contact Email", type: "email" },
-              ].map((field) => (
-                <div key={field.label}>
-                  <label className="text-on-surface-variant uppercase tracking-widest mb-2 block text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>
-                    {field.label}
-                  </label>
-                  <input className="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all text-white py-2 px-0 outline-none" type={field.type} />
-                </div>
-              ))}
-              <div>
-                <label className="text-on-surface-variant uppercase tracking-widest mb-2 block text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>
-                  Strategic Interest
-                </label>
-                <select className="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all text-white py-2 px-0 outline-none appearance-none">
-                  <option className="bg-surface">Supply Chain Partnership</option>
-                  <option className="bg-surface">Institutional Trade</option>
-                  <option className="bg-surface">Academy Accreditation</option>
-                </select>
-              </div>
-              <button className="w-full bg-primary text-background font-bold uppercase tracking-widest py-4 mt-6 hover:opacity-90 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
-                Submit Professional Brief
-              </button>
-            </form>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 }

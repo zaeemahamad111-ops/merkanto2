@@ -82,9 +82,9 @@ export default function Footer() {
           <button className="hover:text-primary transition-colors" aria-label="Website">
             <span className="material-symbols-outlined">language</span>
           </button>
-          <button className="hover:text-primary transition-colors" aria-label="Email">
+          <a href="mailto:merkantopvtltd@gmail.com" className="hover:text-primary transition-colors flex items-center justify-center" aria-label="Email">
             <span className="material-symbols-outlined">mail</span>
-          </button>
+          </a>
           <button className="hover:text-primary transition-colors" aria-label="Network">
             <span className="material-symbols-outlined">hub</span>
           </button>

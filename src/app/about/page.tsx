@@ -209,40 +209,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── STRATEGIC CALL TO ACTION ─── */}
-      <section className="py-16 md:py-24 px-6 md:px-16 max-w-[1000px] mx-auto text-center z-10 relative">
-        <motion.div
-          className="glass-card p-10 md:p-16 border border-primary/20 relative overflow-hidden"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="absolute top-0 right-0 w-48 h-48 bg-primary/10 blur-[100px] rounded-full -mr-24 -mt-24 pointer-events-none" />
-          <h2 className="text-white mb-6 uppercase tracking-tight font-black" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(26px, 3.5vw, 38px)" }}>
-            Establish a Partnership Node
-          </h2>
-          <p className="text-on-surface-variant text-sm md:text-base max-w-xl mx-auto mb-10 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-            Connect with our institutional coordinators. We establish custom partnership protocols for private logistics providers, manufacturers, and corporate scholars.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="bg-primary text-background px-8 py-4 font-bold uppercase tracking-widest text-[12px] hover:opacity-90 active:scale-[0.98] transition-all"
-              style={{ fontFamily: "Geist, monospace" }}
-            >
-              Initiate Inquiry
-            </Link>
-            <Link
-              href="/academy"
-              className="border border-outline text-on-surface px-8 py-4 font-medium uppercase tracking-widest text-[12px] hover:bg-white/5 active:scale-[0.98] transition-all"
-              style={{ fontFamily: "Geist, monospace" }}
-            >
-              Explore Academy
-            </Link>
-          </div>
-        </motion.div>
-      </section>
+
     </div>
   );
 }

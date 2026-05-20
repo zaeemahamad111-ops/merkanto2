@@ -64,12 +64,9 @@ export default function AutomotivePage() {
             Bespoke interior reimagining, imported technical enhancements, and cinematic detailing for the discerning collector.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="w-full sm:w-auto bg-primary text-on-primary px-10 py-4 uppercase tracking-widest hover:brightness-110 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
-              Explore Portfolio
-            </button>
-            <button className="w-full sm:w-auto border border-outline-variant text-on-surface px-10 py-4 uppercase tracking-widest hover:bg-white/5 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
+            <Link href="/contact" className="w-full sm:w-auto bg-primary text-on-primary px-10 py-4 uppercase tracking-widest hover:brightness-110 transition-all text-center flex items-center justify-center animate-pulse" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
               Request Consultation
-            </button>
+            </Link>
           </div>
         </motion.div>
       </section>
@@ -130,23 +127,41 @@ export default function AutomotivePage() {
             </div>
           </motion.div>
 
-          {/* Lower row */}
+          {/* Lower row - Typographic Design */}
           {[
-            { title: "Forged Dynamics", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBdNatPKTepQMbDiL-3C3MKZFcSM_rdnm56jtCfk2UTJ26VRSXZrt50xRiOD8kB0hVJqw9ftgY4Ete-jFaqRV9zI4TRrM5E6myOM3rMcMo59yl1YVronV_QKO1SU58j4EM3x7tDyPiUC6_9chyTP3D6ZEtpo11M-UddMYK66ZZ4VSSSqoV-whWTTp7oGsfX-kLGDqkQfx8BxW6ORynkvikQV4_XuQgxa2vdYAl4US7Mv2IWZo24lDSAQmVPqvS-cb95SAY1xWdiLYEE" },
-            { title: "Lumina Signature", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDKrtrAntjc1HbBR8TKStV1u6oG5P2padfHg1IJJG1b303b9O1nIpwu75C46ovtHrirKa4X4BlRjpHeNHA20ihkmC8SlSC7yJcqtsk6E6TqT8DTJjPtHBxTsUHS3acOlgk6o8J1thF2vFQkdg063o4T-oAspWJ6tZW086CtB5rDwrqWcGEC8T3ggVuB0Blqv7i8TbanIo3zj3VBINWnwWLxgGEwNCb9uXJxwfDZjH3-1iQ0JnI2qA1U4yqsyn22qys0VtGP3ZK2tvc" },
+            { title: "Forged Dynamics", subtitle: "AEROSPACE GRADE ALLOY", pattern: "bg-[radial-gradient(#46e176_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03]" },
+            { title: "Lumina Signature", subtitle: "ADVANCED OPTICS", pattern: "bg-[linear-gradient(45deg,#46e176_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.03]" },
           ].map((item, i) => (
             <motion.div
               key={item.title}
-              className="md:col-span-4 group relative overflow-hidden glass-card h-[350px]"
+              className="md:col-span-4 group relative overflow-hidden glass-card h-[350px] flex flex-col justify-end p-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 + 0.2 }}
             >
-              <img className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" src={item.img} alt={item.title} />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background" />
-              <div className="absolute bottom-0 p-8">
-                <h3 className="font-bold uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>{item.title}</h3>
+              {/* Abstract Pattern Background */}
+              <div className={`absolute inset-0 ${item.pattern} transition-opacity duration-700 group-hover:opacity-[0.1]`} />
+              
+              {/* Top accent line */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/80 via-transparent to-transparent opacity-30 group-hover:opacity-100 transition-opacity duration-700" />
+              
+              {/* Huge background text watermark */}
+              <div className="absolute top-1/2 left-0 -translate-y-1/2 pointer-events-none w-full overflow-hidden">
+                <div className="text-[80px] md:text-[100px] font-bold text-white/[0.02] uppercase tracking-[0.1em] leading-none whitespace-nowrap select-none" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
+                  {item.title} {item.title}
+                </div>
+              </div>
+
+              {/* Foreground content */}
+              <div className="relative z-10 flex flex-col gap-1">
+                <div className="text-primary text-[10px] uppercase tracking-widest opacity-80" style={{ fontFamily: "Geist, monospace" }}>
+                  {item.subtitle}
+                </div>
+                <h3 className="font-bold text-white uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "14px" }}>
+                  {item.title}
+                </h3>
+                <div className="w-8 h-[1px] bg-primary/40 mt-4 group-hover:w-16 group-hover:bg-primary transition-all duration-500" />
               </div>
             </motion.div>
           ))}
@@ -169,47 +184,7 @@ export default function AutomotivePage() {
         </div>
       </section>
 
-      {/* ─── ACCESSORY VAULT ─── */}
-      <section className="bg-surface-container-low py-[60px] md:py-[120px]">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-16">
-          <motion.div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 md:mb-16 gap-6 text-center md:text-left" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <div>
-              <h2 className="mb-2 uppercase tracking-tighter" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600 }}>
-                The Accessory Vault
-              </h2>
-              <p className="text-on-surface-variant text-sm md:text-lg" style={{ fontFamily: "Inter, sans-serif" }}>Technological artifacts for the modern cockpit.</p>
-            </div>
-          </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.map((p, i) => (
-              <motion.div
-                key={p.title}
-                className="glass-card inner-glow group"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ y: -4 }}
-              >
-                <div className="aspect-square overflow-hidden">
-                  <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={p.img} alt={p.title} />
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-2">
-                    <h4 className="uppercase" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "20px" }}>{p.title}</h4>
-                    <span className="text-primary" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>{p.price}</span>
-                  </div>
-                  <p className="text-on-surface-variant mb-6" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px" }}>{p.desc}</p>
-                  <button className="w-full py-3 border border-outline-variant uppercase tracking-widest hover:bg-primary hover:text-on-primary hover:border-primary transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
-                    Add to Cart
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ─── QUALITY COMMITMENT ─── */}
       <section className="py-[60px] md:py-[120px]">
@@ -256,34 +231,7 @@ export default function AutomotivePage() {
         </div>
       </section>
 
-      {/* ─── NEWSLETTER CTA ─── */}
-      <section className="py-[60px] md:py-[120px] px-6 md:px-16">
-        <motion.div
-          className="max-w-4xl mx-auto glass-card p-10 md:p-20 text-center relative overflow-hidden"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <h2 className="mb-6 uppercase tracking-tighter relative z-10" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(24px, 4vw, 48px)", fontWeight: 600 }}>
-            Join the Inner Circle
-          </h2>
-          <p className="text-on-surface-variant mb-10 relative z-10 text-sm md:text-lg" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
-            Receive exclusive early access to our limited-run imports and private collection events.
-          </p>
-          <form className="flex flex-col sm:flex-row gap-4 relative z-10">
-            <input
-              className="flex-grow bg-transparent border-b-2 border-outline-variant focus:border-primary text-on-surface py-4 outline-none placeholder:text-on-surface-variant/50 uppercase tracking-widest"
-              placeholder="ENTER YOUR EMAIL"
-              type="email"
-              style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}
-            />
-            <button className="bg-primary text-on-primary px-12 py-4 uppercase tracking-widest hover:brightness-110 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
-              Subscribe
-            </button>
-          </form>
-        </motion.div>
-      </section>
+
     </div>
   );
 }

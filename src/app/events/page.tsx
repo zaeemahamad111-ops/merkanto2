@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 const styleItems = [
@@ -78,12 +79,9 @@ export default function EventsPage() {
             Architectural event design for the world's most discerning visionaries. From high-stakes institutional galas to intimate destination unions.
           </p>
           <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-6">
-            <button className="w-full md:w-auto bg-primary text-on-primary px-10 py-4 font-bold uppercase tracking-widest active:scale-95 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
+            <Link href="/contact" className="w-full md:w-auto bg-primary text-on-primary px-10 py-4 font-bold uppercase tracking-widest active:scale-95 transition-all text-center flex items-center justify-center animate-pulse" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
               Inquire Now
-            </button>
-            <button className="w-full md:w-auto border border-outline text-on-surface px-10 py-4 uppercase tracking-widest hover:bg-white/5 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
-              View Portfolio
-            </button>
+            </Link>
           </div>
         </motion.div>
       </section>
@@ -173,7 +171,7 @@ export default function EventsPage() {
               transition={{ duration: 0.6 }}
             >
               <img
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover transition-all duration-700"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ8qYYNsTsUlNjK7jonpK1TlyhkMXrmXptZ0dd-Tz6WBL6-pIDu8kYhvFq44GeA3wPP0bTBCdE_8HrmC7Tutd0VLsMacmSIq7myfMgJSZrvSwlY62_OLMzIdSBmPJo_O41AH_or0etdq1jBfeoEZnNg0n7TQ6mSy1lWGR7Cw0sxic92gtjC_u5iQWQ9yCXG2M2gQQ-TW48XwG9ZH4Xc_4PobrzzlYQwIZkZ3OquhR9RAwPL_GMQhrSZRiNgrT3vx0sCLQrjUV3v9k"
                 alt="Corporate leadership summit"
               />
@@ -215,7 +213,7 @@ export default function EventsPage() {
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMzzdoUeKNp6Q9O0zK8nw6mLWprm6-pGtzN_vpnhysPGeT8K-fXL7HK60eFeZbkkEkWLjbFnDLvg6x1-_TFxQOc-VYOVQv7-BU5Cg1oUi0jRMx4lXt7ZmGnrB-4E4oDWyiTO3uv5UkAYWAKxuMl-a2X4pfsutschk6bn3h1shap8oNcQyaP96ACvU-4Tvz01NVaPnMfiCPbxy1cT6y3xAXs_sF1coGGvgh4-9cQmjGhJNoFHMWc1FGOjVgAxHu6S9qrw1CDfVs_p0"
                 alt="Networking gala"
               />
-              <div className="absolute inset-0 bg-background/40 group-hover:bg-background/10 transition-colors" />
+
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="bg-background/80 px-4 py-2 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>Networking Galas</span>
               </div>
@@ -246,58 +244,11 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* ─── DESTINATION EVENTS ─── */}
-      <section className="py-[60px] md:py-[120px]">
-        <div className="flex flex-col md:flex-row w-full min-h-[500px] md:min-h-[700px]">
-          <motion.div
-            className="w-full md:w-1/2 h-[350px] md:h-auto relative"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <img
-              className="w-full h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnrhpBolQVDoi3T12GYzFq-Lx2fZiEOS09xiN_coFuDwLcjd_Aea-4mOekRg0p0s4Bjf01Bl398Mxk43k7Y6dLwcaYeRaljjbPU_OUWuxZ1qsQN51HgheRRM9Szqz11upVwBdY4jsNrX6D5NpwrYUyTARdYAUjn-exT7UYgicpBb02ScsFR58ulm7ES1koel4sZXhhnzlSuCmr87a3zU8rqfM-0D_EV2bzQsDk-FTDsHu0KOLLGvd2tojrSDg1Gihal46fPwIk5ZN9Jmgr3Ek4wsguTlC4cd4DbtHDA"
-              alt="Luxury desert campsite"
-            />
-            <div className="absolute inset-0 bg-background/20" />
-          </motion.div>
-          <motion.div
-            className="w-full md:w-1/2 bg-surface flex items-center p-8 md:p-20"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="max-w-xl text-center md:text-left">
-              <span className="text-primary uppercase tracking-widest mb-4 block text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
-                03 / Beyond Borders
-              </span>
-              <h2 className="mb-8" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
-                Destination Events
-              </h2>
-              <div className="space-y-10 md:space-y-12 text-left">
-                {destSteps.map((step) => (
-                  <div key={step.num} className="flex gap-6">
-                    <span className="text-primary opacity-30 shrink-0 text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{step.num}</span>
-                    <div>
-                      <h4 className="mb-2 text-xl md:text-2xl" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{step.title}</h4>
-                      <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{step.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* ─── PRODUCTION & STYLING ─── */}
       <section className="py-[60px] md:py-[120px] px-6 md:px-16 max-w-[1280px] mx-auto">
         <motion.div className="text-center mb-12 md:mb-20" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <span className="text-primary uppercase tracking-widest mb-4 block text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>
-            04 / Aesthetic Integrity
+            03 / Aesthetic Integrity
           </span>
           <h2 style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
             Production & Styling
@@ -313,7 +264,7 @@ export default function EventsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <div className="overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 group cursor-pointer" style={{ aspectRatio: "3/4" }}>
+              <div className="overflow-hidden transition-all duration-500 group cursor-pointer" style={{ aspectRatio: "3/4" }}>
                 <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={item.img} alt={item.title} />
               </div>
               <h4 style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "20px" }}>{item.title}</h4>
@@ -323,23 +274,7 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* ─── CTA ─── */}
-      <section className="py-[80px] md:py-[120px] px-6 md:px-16 text-center" style={{ background: "radial-gradient(circle at center, rgba(70,225,118,0.1) 0%, transparent 60%)" }}>
-        <motion.div className="max-w-3xl mx-auto" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-          <h2 className="leading-tight mb-8" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(32px, 6vw, 64px)", fontWeight: 600, letterSpacing: "-0.03em" }}>
-            Begin Your Legacy
-          </h2>
-          <p className="text-on-surface-variant mb-12 text-sm md:text-lg" style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.6 }}>
-            Merkanto Studios accepts a limited number of commissions annually to ensure unparalleled execution. Secure your date for 2025/2026.
-          </p>
-          <div className="flex flex-col items-center gap-4">
-            <button className="w-full md:w-auto bg-primary text-on-primary px-12 py-5 font-bold uppercase tracking-widest hover:opacity-90 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "14px" }}>
-              Initiate Consultation
-            </button>
-            <p className="text-on-surface-variant text-xs md:text-sm" style={{ fontFamily: "Geist, monospace" }}>Estimated Response: 24 Business Hours</p>
-          </div>
-        </motion.div>
-      </section>
+
     </div>
   );
 }

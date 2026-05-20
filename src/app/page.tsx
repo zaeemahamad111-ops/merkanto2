@@ -22,7 +22,7 @@ const divisions = [
     href: "/trade",
     colSpan: "md:col-span-2",
     height: "h-[400px]",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCPfuZU7T4CFYMMMLBuoof9eeZBsrW8y1ofLcADv1rqwVliwdffpC1idHPO8fjsHqMdT6vuwzUmqH_pSli-9q_IH2JTZt9XjC8p2NoiqKEENhLuZawwL3cjrJm2J3UKl0weBKlJ6QL9k_HfC3Hu_QLNaR2_PpI_GuKKYLoHDYE",
+    img: "/images/academy.png",
   },
   {
     title: "Academy Hub",
@@ -31,7 +31,7 @@ const divisions = [
     href: "/academy",
     colSpan: "md:col-span-1",
     height: "h-[400px]",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCklkeF4ZuMkBb75fsxKi5nNkwJbIhrHIfNrxc6miByGr7FpA4eCJjXy8z_KyvgKdU9Vgsg0I_REtweRpXHgVzsxFBhAluhenfRbhDS8tYaTVc4Mfx9PLYrGgntSE0cWyF2fbIryXFXGkShzU8jQptEPPYrx35C-BpX1nM2yFBdqXP1yHMZ2Bibq3eTXcynJBrjvUcLi7qFDaOX0BEa-EaMaR9vDB1idAOkW_dvivnre8ApnLwmHG4xZrWHFH9JZ2Vsbe7p-KHwJw",
+    img: "/images/academy.png",
   },
   {
     title: "Automotive",
@@ -40,7 +40,7 @@ const divisions = [
     href: "/automotive",
     colSpan: "md:col-span-1",
     height: "h-[300px]",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDalyPcDWkknvbAb6Mt1hoCGOPd7DmJtFw7xuS4FlXYfVmuZOD5d1oUrrerd08F7rBV3EJO2aF0tzVYLVrR233k5yTyArv5bL71mnZdc51g-FK_HdFRmL0T4A4yt4LaLdAOB8W-m3W8FesNBx807ZcbWQYeRUgIsF2rS5VAH3FopCxvCgyM9lYcFz5JRiZH-FuYXf14ErI9pEajZy0WM7ZW_cbrLD8wzy08M-keiHNgxbQFSy9Db-152E4clPFols7XiIlmNVN6xpk",
+    img: "/images/car interior.png",
   },
   {
     title: "Weddings",
@@ -58,7 +58,7 @@ const divisions = [
     href: "/events",
     colSpan: "md:col-span-1",
     height: "h-[300px]",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCl85-vP-xo30Mnzg9j7I4JCpg8faK5di_bIYMIeJSJh5IX4JcNhK5BTHSdlVzszBnzujJ0yoPhDKjApAd4FPg4RpAaJrO_y8aQHbY8L-ymB7B3LwNZGvGDLrERSOvbn9bS663Ojp-72RcEkf8Mn2Ns8RZviNc7I8ZGXB1HL4KHz1GcbmnyZZ79puEjjgE8LaqqrtbjsZnB7ULTzQKt45diCDk5aDsfTxrzG_dVMPkGa-MB4bMEIopZefM-uPql9s1ID0XJnrTW06A",
+    img: "/images/wedding set.png",
   },
 ];
 
@@ -265,43 +265,6 @@ export default function HomePage() {
             </motion.div>
           ))}
         </div>
-      </section>
-
-      {/* ─── CTA ─── */}
-      <section className="py-[80px] md:py-[120px] px-6 md:px-16 bg-background border-t border-white/5 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 blur-[120px]" />
-        <motion.div
-          className="max-w-[1280px] mx-auto relative z-10 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <h2
-            className="text-on-surface mb-8"
-            style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(36px, 8vw, 72px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1 }}
-          >
-            Ready to Scale?
-          </h2>
-          <p className="text-on-surface-variant max-w-2xl mx-auto mb-12" style={{ fontFamily: "Inter, sans-serif", fontSize: "18px", lineHeight: 1.6 }}>
-            Join the elite network of entrepreneurs redefining the boundaries of global commerce.
-          </p>
-          <div className="inline-flex flex-col md:flex-row gap-6 md:gap-4 w-full md:w-auto">
-            <input
-              className="bg-transparent border-b border-primary/40 focus:border-primary text-on-surface px-6 py-4 w-full md:min-w-[300px] outline-none transition-all text-center md:text-left"
-              placeholder="Institutional Email"
-              type="email"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            />
-            <Link
-              href="/contact"
-              className="bg-primary text-on-primary px-12 py-4 font-bold tracking-widest uppercase hover:brightness-110 transition-all text-center"
-              style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}
-            >
-              Request Consultation
-            </Link>
-          </div>
-        </motion.div>
       </section>
     </div>
   );

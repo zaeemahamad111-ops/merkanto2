@@ -1,8 +1,51 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    type: "Strategic Trade Partnership",
+    message: ""
+  });
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [statusMessage, setStatusMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus("error");
+      setStatusMessage("Please populate all fields before dispatching.");
+      return;
+    }
+    setStatus("submitting");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setStatus("success");
+        setStatusMessage("Your inquiry has been successfully dispatched to our desk.");
+        setFormData({ name: "", email: "", type: "Strategic Trade Partnership", message: "" });
+      } else {
+        setStatus("error");
+        setStatusMessage(data.error || "Failed to dispatch message. Please retry.");
+      }
+    } catch (err) {
+      setStatus("error");
+      setStatusMessage("Network error. Please verify your connection.");
+    }
+  };
+
+  const whatsappUrl = "https://wa.me/1234567890?text=Hello%2C%20I'm%20interested%20in%20arranging%20a%20priority%20consultation%20with%20Merkanto.";
+
   return (
     <div className="bg-background min-h-screen line-pattern">
       {/* ─── HERO HEADER ─── */}
@@ -39,7 +82,17 @@ export default function ContactPage() {
             <h2 className="mb-10 text-center md:text-left" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(24px, 3vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
               Direct Inquiry
             </h2>
-            <form className="space-y-10">
+
+            {status !== "idle" && (
+              <div className={`mb-8 p-4 border text-sm uppercase tracking-wider ${
+                status === "success" ? "bg-primary/10 border-primary text-primary" :
+                status === "error" ? "bg-error/10 border-error text-error" : "bg-surface-container border-outline/30 text-on-surface-variant"
+              }`} style={{ fontFamily: "Geist, monospace" }}>
+                {statusMessage || "Processing inquiry..."}
+              </div>
+            )}
+
+            <form className="space-y-10" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-8">
                 <div className="flex flex-col gap-2">
                   <label className="text-on-surface-variant uppercase tracking-widest text-[10px] md:text-[11px]" style={{ fontFamily: "Geist, monospace" }}>Full Name</label>
@@ -47,6 +100,9 @@ export default function ContactPage() {
                     className="bg-transparent border-b border-outline-variant/40 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface text-sm md:text-base"
                     placeholder="Alexander Sterling"
                     type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     style={{ fontFamily: "Inter, sans-serif" }}
                   />
                 </div>
@@ -56,6 +112,9 @@ export default function ContactPage() {
                     className="bg-transparent border-b border-outline-variant/40 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface text-sm md:text-base"
                     placeholder="as@merkanto.global"
                     type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     style={{ fontFamily: "Inter, sans-serif" }}
                   />
                 </div>
@@ -65,6 +124,8 @@ export default function ContactPage() {
                 <label className="text-on-surface-variant uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Inquiry Type</label>
                 <select
                   className="bg-transparent border-b border-outline-variant/40 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface appearance-none"
+                  value={formData.type}
+                  onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                   style={{ fontFamily: "Inter, sans-serif" }}
                 >
                   <option className="bg-surface">Strategic Trade Partnership</option>
@@ -82,17 +143,21 @@ export default function ContactPage() {
                   className="bg-transparent border-b border-outline-variant/40 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface resize-none"
                   placeholder="Describe the scope of your vision..."
                   rows={4}
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   style={{ fontFamily: "Inter, sans-serif" }}
                 />
               </div>
 
               <div className="pt-4">
                 <button
-                  className="w-full bg-primary text-on-primary py-5 font-bold uppercase tracking-[0.3em] hover:brightness-110 active:scale-[0.99] transition-all shadow-xl shadow-primary/10"
+                  className="w-full bg-primary text-on-primary py-5 font-bold uppercase tracking-[0.3em] hover:brightness-110 active:scale-[0.99] transition-all shadow-xl shadow-primary/10 disabled:opacity-50"
                   type="submit"
+                  disabled={status === "submitting"}
                   style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}
                 >
-                  Dispatch Message
+                  {status === "submitting" ? "Dispatching..." : "Dispatch Message"}
                 </button>
               </div>
             </form>
@@ -118,7 +183,9 @@ export default function ContactPage() {
               </div>
               <a
                 className="inline-flex items-center justify-center md:justify-start gap-4 text-primary uppercase tracking-widest border border-primary px-8 py-4 hover:bg-primary hover:text-on-primary transition-all self-center md:self-start w-full md:w-auto"
-                href="#"
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}
               >
                 Connect on WhatsApp

@@ -246,7 +246,7 @@ export default function AdminHubPage() {
     const coursePayload = {
       title: formData.title,
       description: formData.description,
-      img: formData.img || "https://lh3.googleusercontent.com/aida-public/AB6AXuCklkeF4ZuMkBb75fsxKi5nNkwJbIhrHIfNrxc6miByGr7FpA4eCJjXy8z_KyvgKdU9Vgsg0I_REtweRpXHgVzsxFBhAluhenfRbhDS8tYaTVc4Mfx9PLYrGgntSE0cWyF2fbIryXFXGkShzU8jQptEPPYrx35C-BpX1nM2yFBdqXP1yHMZ2Bibq3eTXcynJBrjvUcLi7qFDaOX0BEa-EaMaR9vDB1idAOkW_dvivnre8ApnLwmHG4xZrWHFH9JZ2Vsbe7p-KHwJw",
+      img: formData.img || "/images/brochure_page24_img1.jpeg",
       sessions: cleanedSessions
     };
 
@@ -428,7 +428,7 @@ export default function AdminHubPage() {
               {coursesLoaded && displayedCourses.map((mod) => (
                 <div key={mod.id} className="glass-card group overflow-hidden flex flex-col">
                   <div className="h-40 overflow-hidden shrink-0">
-                    <img className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src={mod.img || "https://lh3.googleusercontent.com/aida-public/AB6AXuCklkeF4ZuMkBb75fsxKi5nNkwJbIhrHIfNrxc6miByGr7FpA4eCJjXy8z_KyvgKdU9Vgsg0I_REtweRpXHgVzsxFBhAluhenfRbhDS8tYaTVc4Mfx9PLYrGgntSE0cWyF2fbIryXFXGkShzU8jQptEPPYrx35C-BpX1nM2yFBdqXP1yHMZ2Bibq3eTXcynJBrjvUcLi7qFDaOX0BEa-EaMaR9vDB1idAOkW_dvivnre8ApnLwmHG4xZrWHFH9JZ2Vsbe7p-KHwJw"} alt={mod.title} />
+                    <img className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src={mod.img || "/images/brochure_page24_img1.jpeg"} alt={mod.title} />
                   </div>
                   <div className="p-5 flex-1 flex flex-col justify-between">
                     <div>

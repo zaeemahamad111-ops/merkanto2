@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 const fadeInUp = {
@@ -55,12 +56,9 @@ export default function WeddingPage() {
             Elite wedding photography for those who view life through a cinematic lens. Precision-crafted imagery for the global aesthetic elite.
           </p>
           <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center">
-            <button className="w-full md:w-auto bg-primary text-on-primary px-10 py-4 font-bold uppercase tracking-[0.2em] active:scale-95 transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
+            <Link href="/contact" className="w-full md:w-auto bg-primary text-on-primary px-10 py-4 font-bold uppercase tracking-[0.2em] active:scale-95 transition-all text-center flex items-center justify-center animate-pulse" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
               Book the Session
-            </button>
-            <button className="w-full md:w-auto border border-on-surface/30 text-on-surface px-10 py-4 uppercase tracking-[0.2em] hover:bg-on-surface hover:text-background transition-all" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
-              View Filmography
-            </button>
+            </Link>
           </div>
         </motion.div>
 
@@ -121,20 +119,9 @@ export default function WeddingPage() {
             </div>
           </motion.div>
 
-          {/* Groom portrait */}
-          <motion.div
-            className="col-span-12 md:col-span-4 h-[300px] md:h-[380px] overflow-hidden"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <img className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5VIeFrKVUWYcMNSotbx3XBnnfgka7NTmnUgstz9lNzWmHzed2tcdxBvvzohNh8HljPPPApWA17s3opz9ySmlDJfEdkjkRoK4VHCkqUpXdJcPe4PZNvQ59X8kR5rTr0fDokkxqZzX5Jqwgpk_MAiYLrssjG_WtKdq9sg1h1e68Ny4H7T_5X_EQsE29wYkFyshaiPktdz8Akfa9nOOP1c9RuCpesIZ5s9Qnc6rIkayfBTbqd0dIDgIR4BT5i0lGfZ-TzhvU2IAITwk" alt="Groom portrait" />
-          </motion.div>
-
           {/* Dancing couple */}
           <motion.div
-            className="col-span-12 md:col-span-8 h-[300px] md:h-[380px] relative overflow-hidden group"
+            className="col-span-12 md:col-span-12 h-[300px] md:h-[380px] relative overflow-hidden group"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -154,48 +141,7 @@ export default function WeddingPage() {
         </div>
       </section>
 
-      {/* ─── NARRATIVE ─── */}
-      <section className="bg-surface-container-low py-[60px] md:py-[120px] relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
-          <motion.div className="relative" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <div className="overflow-hidden border border-white/5" style={{ aspectRatio: "3/4" }}>
-              <img
-                className="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsknHLj2YDnBd9CqA5eJp3meCF80iDol4aP-4MWj7icGowKHT42NBUdGiMUu1dG1hw7fEKIkjNLVFuxRUHvhv0D49oFYxjd_6t61m1MG_RxO4dHY9OQfChK7snx4r9E1xaKJmqoTjetpbR_pIa7sk4Q2oKKjjdy-PTxVtMuhayuoe4Y20NqmKi6V95arr4ABm20TzA4qPtRrFvBCwObuxJ8ka6JuoFmrBLi3az3THJFsijBae8X7xc4ULw9n1Hy4wVu4QCYSlrL0k"
-                alt="Lead Creative photographer"
-              />
-            </div>
-            <div className="absolute -bottom-10 -right-10 glass-card p-8 max-w-xs hidden md:block">
-              <p className="text-on-surface italic" style={{ fontFamily: "Inter, sans-serif", fontSize: "16px" }}>
-                "The most beautiful moments are often found in the silence between the frames."
-              </p>
-              <p className="mt-4 text-primary uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
-                Julian Merkanto — Lead Creative
-              </p>
-            </div>
-          </motion.div>
- 
-          <motion.div className="text-center md:text-left" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <span className="text-primary uppercase tracking-[0.3em] mb-4 block text-[10px] md:text-[12px]" style={{ fontFamily: "Geist, monospace" }}>The Process</span>
-            <h2 className="text-on-surface mb-8" style={{ fontFamily: "Hanken Grotesk, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, letterSpacing: "-0.02em" }}>
-              Architectural Storytelling
-            </h2>
-            <div className="space-y-10 md:space-y-12 text-left">
-              {processSteps.map((step) => (
-                <div key={step.num} className="flex gap-6">
-                  <span className="text-on-surface/10 leading-none shrink-0 text-[32px] md:text-[48px] font-semibold" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>
-                    {step.num}
-                  </span>
-                  <div>
-                    <h4 className="text-on-surface mb-2 text-2xl md:text-[28px] font-medium" style={{ fontFamily: "Hanken Grotesk, sans-serif" }}>{step.title}</h4>
-                    <p className="text-on-surface-variant text-sm md:text-base" style={{ fontFamily: "Inter, sans-serif" }}>{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+
 
       {/* ─── CINEMATIC QUOTE ─── */}
       <section className="h-[580px] flex items-center justify-center bg-black relative overflow-hidden">

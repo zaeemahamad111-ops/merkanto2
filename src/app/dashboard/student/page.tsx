@@ -496,7 +496,7 @@ export default function StudentDashboardPage() {
                     <div key={course.id} className="glass-card group overflow-hidden flex flex-col justify-between">
                       <div>
                         <div className="h-40 overflow-hidden shrink-0 relative">
-                          <img className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src={course.img || "https://lh3.googleusercontent.com/aida-public/AB6AXuCklkeF4ZuMkBb75fsxKi5nNkwJbIhrHIfNrxc6miByGr7FpA4eCJjXy8z_KyvgKdU9Vgsg0I_REtweRpXHgVzsxFBhAluhenfRbhDS8tYaTVc4Mfx9PLYrGgntSE0cWyF2fbIryXFXGkShzU8jQptEPPYrx35C-BpX1nM2yFBdqXP1yHMZ2Bibq3eTXcynJBrjvUcLi7qFDaOX0BEa-EaMaR9vDB1idAOkW_dvivnre8ApnLwmHG4xZrWHFH9JZ2Vsbe7p-KHwJw"} alt={course.title} />
+                          <img className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src={course.img || "/images/brochure_page24_img1.jpeg"} alt={course.title} />
                           <div className="absolute top-2 right-2 bg-background/80 text-primary text-[10px] px-2 py-1 font-bold uppercase tracking-widest" style={{ fontFamily: "Geist, monospace" }}>
                             {watchedS}/{totalS} Lessons Done
                           </div>
