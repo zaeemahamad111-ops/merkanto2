@@ -8,6 +8,7 @@ import { useContent } from "@/hooks/useContent";
 export default function WhatsAppButton() {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
+  const { getContent } = useContent();
 
   useEffect(() => {
     setMounted(true);
@@ -33,8 +34,6 @@ export default function WhatsAppButton() {
   } else if (pathname === "/events") {
     message = "Hello, I'm interested in your event production services.";
   }
-
-  const { getContent } = useContent();
 
   // Corporate WhatsApp number
   const phoneNumber = getContent("social.whatsapp", "919746957077");
