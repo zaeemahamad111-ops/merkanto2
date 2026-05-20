@@ -25,7 +25,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-12">
+        <div className="grid grid-cols-2 gap-8 md:gap-12">
           <div className="flex flex-col gap-3">
             <span className="text-on-surface font-bold mb-2 uppercase tracking-widest" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
               Ventures

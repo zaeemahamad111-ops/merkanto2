@@ -88,7 +88,7 @@ export default function TradePage() {
   return (
     <div className="bg-background min-h-screen">
       {/* ─── HERO ─── */}
-      <section className="relative h-[90vh] min-h-[700px] flex items-center overflow-hidden">
+      <section className="relative h-[90vh] min-h-[500px] md:min-h-[700px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             className="w-full h-full object-cover opacity-60"

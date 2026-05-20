@@ -210,7 +210,7 @@ export default function StudentDashboardPage() {
 
   if (!mounted || !authChecked) {
     return (
-      <div className="flex h-screen bg-background items-center justify-center">
+      <div className="flex min-h-screen md:h-screen bg-background items-center justify-center">
         <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>
           Authenticating Session...
         </div>
@@ -219,7 +219,7 @@ export default function StudentDashboardPage() {
   }
 
   return (
-    <div className="flex h-screen bg-background overflow-hidden">
+    <div className="flex min-h-screen md:h-screen bg-background overflow-hidden">
       <DashboardSidebar activeIndex={0} brandLabel="Academy Portal" role="student" />
 
       <div className="flex-1 overflow-y-auto custom-scrollbar">
@@ -261,7 +261,7 @@ export default function StudentDashboardPage() {
                 </button>
                 <AnimatePresence>
                   {notifOpen && (
-                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="absolute right-0 top-10 w-72 bg-[#121414] border border-outline-variant/20 p-4 z-[100] shadow-2xl">
+                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="absolute right-0 top-10 w-64 md:w-72 bg-[#121414] border border-outline-variant/20 p-4 z-[100] shadow-2xl -mr-12 md:mr-0">
                       <div className="text-on-surface uppercase tracking-widest mb-3" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>NOTIFICATIONS</div>
                       {studentNotifications.length === 0 ? (
                         <div className="text-on-surface-variant text-xs py-2">No new scholastic notifications.</div>
@@ -289,9 +289,9 @@ export default function StudentDashboardPage() {
             </div>
           </div>
           {/* Tabs */}
-          <div className="flex gap-8 mt-4 border-b border-outline-variant/10 -mb-[1px]">
+          <div className="flex gap-6 md:gap-8 mt-4 border-b border-outline-variant/10 -mb-[1px] overflow-x-auto custom-scrollbar">
             {TABS.map((tab, i) => (
-              <button key={tab} onClick={() => setActiveTab(i)} className={`pb-3 uppercase tracking-widest transition-colors ${activeTab === i ? "text-primary border-b-2 border-primary" : "text-on-surface-variant hover:text-on-surface"}`} style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
+              <button key={tab} onClick={() => setActiveTab(i)} className={`pb-3 uppercase tracking-widest transition-colors whitespace-nowrap ${activeTab === i ? "text-primary border-b-2 border-primary" : "text-on-surface-variant hover:text-on-surface"}`} style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
                 {tab}
               </button>
             ))}

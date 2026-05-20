@@ -339,7 +339,7 @@ export default function AdminHubPage() {
 
   if (!mounted || !authChecked) {
     return (
-      <div className="flex h-screen bg-background items-center justify-center">
+      <div className="flex min-h-screen md:h-screen bg-background items-center justify-center">
         <div className="text-primary font-bold uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>
           Authenticating Session...
         </div>
@@ -348,7 +348,7 @@ export default function AdminHubPage() {
   }
 
   return (
-    <div className="flex h-screen bg-background overflow-hidden">
+    <div className="flex min-h-screen md:h-screen bg-background overflow-hidden">
       <DashboardSidebar activeIndex={0} brandLabel="Global Operations" role="admin" onNewVenture={openAddModal} />
 
       <div className="flex-1 overflow-y-auto custom-scrollbar">
@@ -572,9 +572,9 @@ export default function AdminHubPage() {
               <div className="space-y-5">
                 {students.slice(0, 4).map((student) => (
                   <div key={student.id}>
-                    <div className="flex justify-between mb-1">
-                      <div className="text-on-surface" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>{student.name} ({student.email})</div>
-                      <div className="text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
+                    <div className="flex flex-col md:flex-row justify-between mb-1 gap-1">
+                      <div className="text-on-surface truncate" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>{student.name} ({student.email})</div>
+                      <div className="text-on-surface-variant shrink-0" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
                         {student.watchedVideos ? student.watchedVideos.length : 0} Lessons Watched · {student.progress}%
                       </div>
                     </div>

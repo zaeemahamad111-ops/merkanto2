@@ -29,7 +29,7 @@ export default function WeddingPage() {
   return (
     <div className="bg-background min-h-screen">
       {/* ─── HERO ─── */}
-      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[500px] md:h-screen w-full flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             className="w-full h-full object-cover brightness-50"
