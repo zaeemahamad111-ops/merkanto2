@@ -6,7 +6,7 @@ import { defaultContent, ContentItem } from "@/utils/defaultContent";
 import { motion, AnimatePresence } from "framer-motion";
 import { clearContentCache } from "@/hooks/useContent";
 
-const categories = ["Home", "About", "Trade", "Academy", "Automotive", "Weddings", "Events", "Socials"];
+const categories = ["Home", "About", "Trade", "Academy", "Automotive", "Weddings", "Events", "Socials", "SEO"];
 
 export default function CMSPage() {
   // Authentication states

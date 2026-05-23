@@ -671,5 +671,142 @@ export const defaultContent: ContentItem[] = [
     category: "Socials",
     label: "Working Hours & Days",
     type: "text"
+  },
+  
+  // ─── SEO (META TAGS) ───
+  {
+    key: "seo.home.title",
+    value: "MERKANTO | Global Trade Leaders",
+    category: "SEO",
+    label: "Home Page Meta Title",
+    type: "text"
+  },
+  {
+    key: "seo.home.description",
+    value: "MERKANTO is a luxury global trade ecosystem — combining institutional trade, premium education, automotive excellence, cinematic weddings, and elite event management.",
+    category: "SEO",
+    label: "Home Page Meta Description",
+    type: "textarea"
+  },
+  {
+    key: "seo.home.keywords",
+    value: "global trade, export, trade academy, luxury, automotive, wedding cinema",
+    category: "SEO",
+    label: "Home Page Meta Keywords",
+    type: "textarea"
+  },
+  {
+    key: "seo.about.title",
+    value: "About MERKANTO | Institutional Profile & Philosophy",
+    category: "SEO",
+    label: "About Page Meta Title",
+    type: "text"
+  },
+  {
+    key: "seo.about.description",
+    value: "Learn about MERKANTO's global enterprise, structural intelligence for global commerce, private capital execution, and strategic compliance advisory.",
+    category: "SEO",
+    label: "About Page Meta Description",
+    type: "textarea"
+  },
+  {
+    key: "seo.trade.title",
+    value: "Institutional Trade | MERKANTO",
+    category: "SEO",
+    label: "Trade Page Meta Title",
+    type: "text"
+  },
+  {
+    key: "seo.trade.description",
+    value: "Precision-driven commodity trading, heavy industrial components, and sustainable infrastructure supply chain architecture for global markets.",
+    category: "SEO",
+    label: "Trade Page Meta Description",
+    type: "textarea"
+  },
+  {
+    key: "seo.academy.title",
+    value: "Global Trade Academy | MERKANTO",
+    category: "SEO",
+    label: "Academy Page Meta Title",
+    type: "text"
+  },
+  {
+    key: "seo.academy.description",
+    value: "Learn international trade from real business operations. Access proprietary blueprints of global logistics and live data streams of Merkanto's networks.",
+    category: "SEO",
+    label: "Academy Page Meta Description",
+    type: "textarea"
+  },
+  {
+    key: "seo.automotive.title",
+    value: "Automotive Excellence | MERKANTO",
+    category: "SEO",
+    label: "Automotive Page Meta Title",
+    type: "text"
+  },
+  {
+    key: "seo.automotive.description",
+    value: "Luxury vehicle customization, interior reimagining, technical enhancements, and bespoke aesthetics for the discerning collector.",
+    category: "SEO",
+    label: "Automotive Page Meta Description",
+    type: "textarea"
+  },
+  {
+    key: "seo.wedding.title",
+    value: "Cinematic Weddings | MERKANTO Studios",
+    category: "SEO",
+    label: "Wedding Page Meta Title",
+    type: "text"
+  },
+  {
+    key: "seo.wedding.description",
+    value: "Elite wedding photography and cinematic filmography for those who view life through a cinematic lens. Precision-crafted imagery for the global aesthetic elite.",
+    category: "SEO",
+    label: "Wedding Page Meta Description",
+    type: "textarea"
+  },
+  {
+    key: "seo.events.title",
+    value: "Global Event Production | MERKANTO Studios",
+    category: "SEO",
+    label: "Events Page Meta Title",
+    type: "text"
+  },
+  {
+    key: "seo.events.description",
+    value: "Architectural event design, corporate galas, summits, and couture celebrations for the world's most discerning visionaries.",
+    category: "SEO",
+    label: "Events Page Meta Description",
+    type: "textarea"
+  },
+  {
+    key: "seo.contact.title",
+    value: "Contact MERKANTO | Global Headquarters",
+    category: "SEO",
+    label: "Contact Page Meta Title",
+    type: "text"
+  },
+  {
+    key: "seo.contact.description",
+    value: "Get in touch with MERKANTO Global Trade Leaders. Contact our corporate office in Kerala, India for trade, academy, automotive, or studio inquiries.",
+    category: "SEO",
+    label: "Contact Page Meta Description",
+    type: "textarea"
+  },
+  
+  // ─── ADVANCED SEO (GLOBAL SCRIPTS) ───
+  {
+    key: "seo.global.schema",
+    value: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"MERKANTO\",\n  \"url\": \"https://merkanto2.vercel.app/\",\n  \"logo\": \"https://merkanto2.vercel.app/images/merkanto_logo_new.png\",\n  \"sameAs\": [\n    \"https://facebook.com/merkanto\",\n    \"https://instagram.com/merkantopvtltd\"\n  ]\n}",
+    category: "SEO",
+    label: "Global Schema.org (JSON-LD)",
+    type: "textarea"
+  },
+  {
+    key: "seo.global.analytics",
+    value: "console.log('Analytics loaded'); // Replace with your GTM or Analytics script",
+    category: "SEO",
+    label: "Global Analytics/Head Script",
+    type: "textarea"
   }
 ];

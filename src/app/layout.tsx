@@ -5,18 +5,51 @@ import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import StartupLoader from "@/components/layout/StartupLoader";
 
-export const metadata: Metadata = {
-  title: "MERKANTO | Global Trade Leaders",
-  description:
-    "MERKANTO is a luxury global trade ecosystem — combining institutional trade, premium education, automotive excellence, cinematic weddings, and elite event management.",
-  keywords: ["global trade", "export", "trade academy", "luxury", "automotive", "wedding cinema"],
-};
+import { supabase } from "@/utils/supabaseClient";
 
-export default function RootLayout({
+export async function generateMetadata(): Promise<Metadata> {
+  // Fetch SEO configuration directly from Supabase (bypassing client-side hooks)
+  const { data } = await supabase
+    .from("merkanto_content")
+    .select("key, value")
+    .in("key", ["seo.home.title", "seo.home.description", "seo.home.keywords"]);
+
+  const getVal = (key: string, fallback: string) => {
+    const item = data?.find((d) => d.key === key);
+    return item ? item.value : fallback;
+  };
+
+  const title = getVal("seo.home.title", "MERKANTO | Global Trade Leaders");
+  const description = getVal("seo.home.description", "MERKANTO is a luxury global trade ecosystem — combining institutional trade, premium education, automotive excellence, cinematic weddings, and elite event management.");
+  const keywords = getVal("seo.home.keywords", "global trade, export, trade academy, luxury, automotive, wedding cinema");
+
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://merkanto2.vercel.app'),
+    title,
+    description,
+    keywords: keywords.split(",").map((k) => k.trim()),
+    openGraph: {
+      title,
+      description,
+      images: ["/images/merkanto_logo_new.png"],
+    },
+  };
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Fetch global scripts for the head tag
+  const { data } = await supabase
+    .from("merkanto_content")
+    .select("key, value")
+    .in("key", ["seo.global.schema", "seo.global.analytics"]);
+
+  const schemaStr = data?.find((d) => d.key === "seo.global.schema")?.value || "";
+  const analyticsStr = data?.find((d) => d.key === "seo.global.analytics")?.value || "";
+
   return (
     <html lang="en" className="dark">
       <head>
@@ -28,6 +61,8 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=Manrope:wght@300;400;500;600;700;800&family=Geist:wght@400;500;600&display=swap"
         />
+        {schemaStr && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaStr }} />}
+        {analyticsStr && <script dangerouslySetInnerHTML={{ __html: analyticsStr }} />}
       </head>
       <body className="bg-background line-pattern text-on-surface antialiased min-h-screen flex flex-col overflow-x-hidden w-full">
         <StartupLoader />
