@@ -7,9 +7,9 @@ export async function generateMetadata(): Promise<Metadata> {
     .select("key, value")
     .in("key", ["seo.trade.title", "seo.trade.description", "seo.trade.keywords"]);
 
-  const getVal = (key: string, fallback: string) => {
+  const getVal = (key: string, fallback: string): string => {
     const item = data?.find((d) => d.key === key);
-    return item ? item.value : fallback;
+    return item ? String(item.value) : fallback;
   };
 
   const title = getVal("seo.trade.title", "Institutional Trade | MERKANTO");
