@@ -77,7 +77,7 @@ export default function Footer() {
               </div>
               <div>
                 <span className="block font-semibold text-[9px] uppercase tracking-wider text-on-surface/60 font-mono mb-0.5">Hours</span>
-                <span className="text-on-surface-variant block leading-relaxed">{workingHours}</span>
+                <span className="text-on-surface-variant block whitespace-pre-line leading-relaxed">{workingHours}</span>
               </div>
             </div>
           </div>

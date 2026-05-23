@@ -659,6 +659,13 @@ export const defaultContent: ContentItem[] = [
     type: "text"
   },
   {
+    key: "contact.phone",
+    value: "+91 9746957077",
+    category: "Socials",
+    label: "Contact Phone Number",
+    type: "text"
+  },
+  {
     key: "contact.address",
     value: "1003, T1, Business Park\nHiLITE City, Kozhikode, Kerala 673014",
     category: "Socials",
@@ -667,10 +674,10 @@ export const defaultContent: ContentItem[] = [
   },
   {
     key: "contact.hours",
-    value: "Mon — Sat: 10:00 AM - 06:00 PM (Sun Off)",
+    value: "Monday — Saturday: 10:00 AM - 06:00 PM\nSunday: Off",
     category: "Socials",
     label: "Working Hours & Days",
-    type: "text"
+    type: "textarea"
   },
   
   // ─── SEO (META TAGS) ───

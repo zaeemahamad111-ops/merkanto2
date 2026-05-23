@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import AlternatingText from "@/components/AlternatingText";
+import { useContent } from "@/hooks/useContent";
 
 export default function ContactPage() {
+  const { getContent } = useContent();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -220,11 +222,8 @@ export default function ContactPage() {
                    </div>
                    <div>
                      <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Corporate Headquarters</h4>
-                     <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "15px", lineHeight: "1.6" }}>
-                       1003, T1, Business Park<br />
-                       HiLITE City, National Highway 66,<br />
-                       Bypass, Thondayad,<br />
-                       Kozhikode, Kerala 673014
+                     <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "15px", lineHeight: "1.6" }} className="whitespace-pre-line">
+                       {getContent("contact.address", "1003, T1, Business Park\nHiLITE City, National Highway 66,\nBypass, Thondayad,\nKozhikode, Kerala 673014")}
                      </p>
                      <a 
                        href="https://www.google.com/maps/place/HiLITE+Business+Park+,/data=!4m2!3m1!1s0x0:0xbb7abc23c1ea8a?sa=X&ved=1t:2428&ictx=111"
@@ -243,9 +242,8 @@ export default function ContactPage() {
                    </div>
                    <div>
                      <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Operations Hours</h4>
-                     <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "15px", lineHeight: "1.6" }}>
-                       Monday — Saturday: 10:00 AM - 06:00 PM<br />
-                       Sunday: Off
+                     <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "15px", lineHeight: "1.6" }} className="whitespace-pre-line">
+                       {getContent("contact.hours", "Monday — Saturday: 10:00 AM - 06:00 PM\nSunday: Off")}
                      </p>
                    </div>
                  </div>
@@ -256,8 +254,8 @@ export default function ContactPage() {
                    <div>
                      <h4 className="text-on-surface-variant uppercase tracking-widest mb-1" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Support Desk</h4>
                      <p style={{ fontFamily: "Manrope, sans-serif", fontSize: "15px", lineHeight: "1.6" }}>
-                       merkantopvtltd@gmail.com<br />
-                       +91 9746957077
+                       {getContent("social.email", "merkantopvtltd@gmail.com")}<br />
+                       {getContent("contact.phone", "+91 9746957077")}
                      </p>
                    </div>
                  </div>
