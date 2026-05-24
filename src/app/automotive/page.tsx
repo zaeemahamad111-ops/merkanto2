@@ -10,6 +10,29 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
+const products = [
+  {
+    title: "Carbon Chrono",
+    desc: "Aerospace titanium enclosure with sapphire crystal.",
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDfydbqSpr6ndYnQGENcpXDXAWUVd3SaR6oo2rKS4EMTpbmAOEXUlsA8a1uBd6bzU9HMKDdZeIhjuvDfvbN2Z4J0Z5U19_H4hsQr7vnk7Yiji48rMlUP6dI4_rIua4LPJX9DkVGndT2LpzKQj7KtI_O3Ty-zQIyorW2mroODMAsn496dRmlbu_bKiGV_eFtAPCZV3vWS-Awx9GI8Ij2gB_hKrQ1lj-uet9FMFTTWuGkMWgQ_T03BDpGt0IT1WLHW4TbPeM8I0_6vz8",
+  },
+  {
+    title: "Bespoke Fob",
+    desc: "Hand-stitched Alcantara and surgical steel hardware.",
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAnSilJuA1b74RnEsLbjwZdBxpmyT8l4S82cDBRD0nJAMHlrPZpOFNUJqZ6rBKqXnICjiRAgBqn9yfFpl7oUEj-hcRG8GQU448OlyRHGDyleRt8EbInkwHdtwdNPeylRtW00UMFbNzBXMgDbMxhbtHY9k6hJGfAWkbVsB-Uxrhi0XzwZhQjXk0e41j4AyGBATwwQhpgJxZ8pS5xVjRbj9yCgUDajeweOIQJdDO7utSU8rcb_hbjg9oYuA_k4HFKuCZ5IKGD4vGrl_8",
+  },
+  {
+    title: "Grip Series",
+    desc: "CNC-machined performance pedals with anti-slip texture.",
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBvBBR3-4UoHWbbmAV2EMES3Qg6uwOCIhDGc67G4rSDY5oD78mxxCQeLPkgMEfh-0HTynigxf3nHlvOPdMWBQXqJAugOza2Hh54R_IhzqWyEjLdtm8U4iNvFI9UuQfCbF4sImx5W5lht-H1zPHxrO7Pig-emAmpAKdKfOtVx3Z5kJ__Q58ABnHs-jm1F35trhT1AohFqkOkemlo5ULpAshPH94Wp4xMePDnvuh4ODdduRPKOCWGNOVFbrnroHQHE5UIMqxnxUiMvkE",
+  },
+  {
+    title: "Aero Diffuser",
+    desc: "Dry carbon fiber aerodynamic enhancement system.",
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCtnDF-l73h9Cel1bjYarVIigBQRmBD2LPqxRwbUrgJFKyNIkmx3BgLQ-tRhyD6neXeWhxJSHfCWoa-Kh2uQ0cnx2FBGoE7MCyLWB7KVCZW5qXQ9kx86UyWkLhVPFVJ1afGoO4Qd_f3EozS-EKxU7N6fPukiuahtsHz9Mr5dSUhG4vlwmxqCobEfywpmSjjYntXnU7ilQoBI25sBVIxaDefd74YKAnX1uRvCgJiBSEyVe47_a7WddeGnQqN8H0EBTRQ6CHdEX0mMX8",
+  },
+];
+
 export default function AutomotivePage() {
   const { getContent } = useContent();
 
@@ -170,6 +193,47 @@ export default function AutomotivePage() {
               </p>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ─── ACCESSORY VAULT ─── */}
+      <section className="bg-surface-container-low py-[60px] md:py-[120px]">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-16">
+          <motion.div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 md:mb-16 gap-6 text-center md:text-left" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div>
+              <h2 className="mb-2 uppercase tracking-tighter" style={{ fontFamily: "Outfit, sans-serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600 }}>
+                The Accessory Vault
+              </h2>
+              <p className="text-on-surface-variant text-sm md:text-lg" style={{ fontFamily: "Manrope, sans-serif" }}>Technological artifacts for the modern cockpit.</p>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {products.map((p, i) => (
+              <motion.div
+                key={p.title}
+                className="glass-card inner-glow group flex flex-col h-full"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ y: -4 }}
+              >
+                <div className="aspect-square overflow-hidden">
+                  <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={p.img} alt={p.title} />
+                </div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex justify-between items-start mb-2">
+                    <h4 className="uppercase" style={{ fontFamily: "Outfit, sans-serif", fontSize: "20px", fontWeight: 600 }}>{p.title}</h4>
+                  </div>
+                  <p className="text-on-surface-variant mb-6 flex-grow" style={{ fontFamily: "Manrope, sans-serif", fontSize: "15px" }}>{p.desc}</p>
+                  <Link href="/contact" className="w-full py-3 border border-outline-variant uppercase tracking-widest hover:bg-primary hover:text-on-primary hover:border-primary transition-all text-center flex items-center justify-center" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>
+                    Enquire Now
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
