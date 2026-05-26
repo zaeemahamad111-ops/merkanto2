@@ -62,7 +62,8 @@ export default function ContactPage() {
     }
   };
 
-  const whatsappUrl = "https://wa.me/919746957077?text=Hello%2C%20I'm%20interested%20in%20arranging%20a%20priority%20consultation%20with%20Merkanto.";
+  const whatsappNumber = getContent("social.whatsapp", "919746957077");
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hello%2C%20I'm%20interested%20in%20arranging%20a%20priority%20consultation%20with%20Merkanto.`;
 
   return (
     <div className="min-h-screen">
