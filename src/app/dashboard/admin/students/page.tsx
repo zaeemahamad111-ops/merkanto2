@@ -16,6 +16,10 @@ const getYouTubeEmbedUrl = (url: string) => {
     const urlObj = new URL(url);
     if (urlObj.hostname.includes("youtube.com")) return `https://www.youtube.com/embed/${urlObj.searchParams.get("v")}`;
     if (urlObj.hostname.includes("youtu.be")) return `https://www.youtube.com/embed/${urlObj.pathname.slice(1)}`;
+    if (urlObj.hostname.includes("vimeo.com") && !urlObj.hostname.includes("player.vimeo.com")) {
+      const videoId = urlObj.pathname.split("/").pop();
+      return `https://player.vimeo.com/video/${videoId}${urlObj.search}`;
+    }
   } catch (e) { return url; }
   return url;
 };

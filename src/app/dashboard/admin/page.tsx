@@ -729,8 +729,8 @@ export default function AdminHubPage() {
                             <input type="text" required value={session.title} onChange={e => handleSessionChange(index, "title", e.target.value)} className="w-full bg-transparent border-b border-outline-variant/30 focus:border-primary focus:outline-none text-white text-xs py-1" placeholder="e.g. Session 1: Basics" />
                           </div>
                           <div>
-                            <label className="text-on-surface-variant uppercase tracking-widest mb-1 block" style={{ fontFamily: "Geist, monospace", fontSize: "9px" }}>YouTube Link *</label>
-                            <input type="url" required value={session.youtubeUrl} onChange={e => handleSessionChange(index, "youtubeUrl", e.target.value)} className="w-full bg-transparent border-b border-outline-variant/30 focus:border-primary focus:outline-none text-white text-xs py-1" placeholder="https://youtube.com/watch?v=..." />
+                            <label className="text-on-surface-variant uppercase tracking-widest mb-1 block" style={{ fontFamily: "Geist, monospace", fontSize: "9px" }}>Video Embed Link (YouTube/Vimeo) *</label>
+                            <input type="url" required value={session.youtubeUrl} onChange={e => handleSessionChange(index, "youtubeUrl", e.target.value)} className="w-full bg-transparent border-b border-outline-variant/30 focus:border-primary focus:outline-none text-white text-xs py-1" placeholder="https://youtube.com/... or https://vimeo.com/..." />
                           </div>
                         </div>
                         
