@@ -87,7 +87,7 @@ export default function LoginPage() {
       });
 
       const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail.trim(), {
-        redirectTo: `${window.location.origin}/reset-password`,
+        redirectTo: "https://merkanto.in/reset-password",
       });
 
       if (error) {
