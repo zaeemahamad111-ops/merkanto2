@@ -730,7 +730,7 @@ export default function AdminHubPage() {
                           </div>
                           <div>
                             <label className="text-on-surface-variant uppercase tracking-widest mb-1 block" style={{ fontFamily: "Geist, monospace", fontSize: "9px" }}>Video Embed Link (YouTube/Vimeo) *</label>
-                            <input type="url" required value={session.youtubeUrl} onChange={e => handleSessionChange(index, "youtubeUrl", e.target.value)} className="w-full bg-transparent border-b border-outline-variant/30 focus:border-primary focus:outline-none text-white text-xs py-1" placeholder="https://youtube.com/... or https://vimeo.com/..." />
+                            <input type="text" required value={session.youtubeUrl} onChange={e => handleSessionChange(index, "youtubeUrl", e.target.value)} className="w-full bg-transparent border-b border-outline-variant/30 focus:border-primary focus:outline-none text-white text-xs py-1" placeholder="Paste URL or full embed code..." />
                           </div>
                         </div>
                         
