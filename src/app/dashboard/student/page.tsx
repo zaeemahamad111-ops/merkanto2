@@ -9,17 +9,24 @@ import { useStudents } from "@/hooks/useStudents";
 import { useAssignments } from "@/hooks/useAssignments";
 import { useQA } from "@/hooks/useQA";
 
-const getEmbedUrl = (url: string) => {
+const getEmbedUrl = (input: string) => {
   try {
-    const u = new URL(url);
-    if (u.hostname.includes("youtube.com")) return `https://www.youtube.com/embed/${u.searchParams.get("v")}`;
+    let urlStr = input;
+    const srcMatch = input.match(/src="([^"]+)"/);
+    if (srcMatch) urlStr = srcMatch[1];
+    
+    // Unescape HTML entities like &amp; just in case it came from HTML
+    urlStr = urlStr.replace(/&amp;/g, '&');
+
+    const u = new URL(urlStr);
+    if (u.hostname.includes("youtube.com") && u.searchParams.get("v")) return `https://www.youtube.com/embed/${u.searchParams.get("v")}`;
     if (u.hostname.includes("youtu.be")) return `https://www.youtube.com/embed/${u.pathname.slice(1)}`;
     if (u.hostname.includes("vimeo.com") && !u.hostname.includes("player.vimeo.com")) {
       const videoId = u.pathname.split("/").pop();
       return `https://player.vimeo.com/video/${videoId}${u.search}`;
     }
-  } catch { return url; }
-  return url;
+    return urlStr;
+  } catch { return input; }
 };
 
 const files = ["Trade Finance Guide.pdf", "Global Operations customs_template.xlsx", "Merkanto Supplier Checklist.docx"];

@@ -11,17 +11,24 @@ const TRACKS = ["Executive Track", "Foundation Track", "Advanced Track"];
 
 const emptyForm = { name: "", email: "", password: "", progress: 0, lastModule: "Module 01" };
 
-const getYouTubeEmbedUrl = (url: string) => {
+const getYouTubeEmbedUrl = (input: string) => {
   try {
-    const urlObj = new URL(url);
-    if (urlObj.hostname.includes("youtube.com")) return `https://www.youtube.com/embed/${urlObj.searchParams.get("v")}`;
+    let urlStr = input;
+    const srcMatch = input.match(/src="([^"]+)"/);
+    if (srcMatch) urlStr = srcMatch[1];
+    
+    // Unescape HTML entities like &amp; just in case it came from HTML
+    urlStr = urlStr.replace(/&amp;/g, '&');
+
+    const urlObj = new URL(urlStr);
+    if (urlObj.hostname.includes("youtube.com") && urlObj.searchParams.get("v")) return `https://www.youtube.com/embed/${urlObj.searchParams.get("v")}`;
     if (urlObj.hostname.includes("youtu.be")) return `https://www.youtube.com/embed/${urlObj.pathname.slice(1)}`;
     if (urlObj.hostname.includes("vimeo.com") && !urlObj.hostname.includes("player.vimeo.com")) {
       const videoId = urlObj.pathname.split("/").pop();
       return `https://player.vimeo.com/video/${videoId}${urlObj.search}`;
     }
-  } catch (e) { return url; }
-  return url;
+    return urlStr;
+  } catch (e) { return input; }
 };
 
 export default function StudentManagementPage() {
