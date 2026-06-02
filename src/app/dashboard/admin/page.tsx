@@ -575,19 +575,29 @@ export default function AdminHubPage() {
             <motion.div className="glass-card p-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
               <h2 className="mb-6 uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>STUDENT REGISTRY & STATUS</h2>
               <div className="space-y-5">
-                {students.slice(0, 4).map((student) => (
-                  <div key={student.id}>
-                    <div className="flex flex-col md:flex-row justify-between mb-1 gap-1">
-                      <div className="text-on-surface truncate" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>{student.name} ({student.email})</div>
-                      <div className="text-on-surface-variant shrink-0" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
-                        {student.watchedVideos ? student.watchedVideos.length : 0} Lessons Watched · {student.progress}%
+                {students.slice(0, 4).map((student) => {
+                  const totalSessions = courses.reduce((acc, c) => acc + (c.sessions ? c.sessions.length : 0), 0);
+                  const watchedSessions = courses.reduce((acc, c) => {
+                    if (!c.sessions) return acc;
+                    const watched = c.sessions.filter(s => student.watchedVideos?.includes(s.youtubeUrl)).length;
+                    return acc + watched;
+                  }, 0);
+                  const dynamicProgress = totalSessions > 0 ? Math.round((watchedSessions / totalSessions) * 100) : 0;
+                  
+                  return (
+                    <div key={student.id}>
+                      <div className="flex flex-col md:flex-row justify-between mb-1 gap-1">
+                        <div className="text-on-surface truncate" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>{student.name} ({student.email})</div>
+                        <div className="text-on-surface-variant shrink-0" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>
+                          {watchedSessions} Lessons Watched · {dynamicProgress}%
+                        </div>
+                      </div>
+                      <div className="h-1 bg-surface-container-highest rounded-full">
+                        <div className="h-1 bg-primary rounded-full transition-all" style={{ width: `${dynamicProgress}%` }} />
                       </div>
                     </div>
-                    <div className="h-1 bg-surface-container-highest rounded-full">
-                      <div className="h-1 bg-primary rounded-full transition-all" style={{ width: `${student.progress}%` }} />
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
               <button
                 onClick={() => router.push("/dashboard/admin/students")}

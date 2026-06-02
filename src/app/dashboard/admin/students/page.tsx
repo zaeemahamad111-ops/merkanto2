@@ -95,7 +95,17 @@ export default function StudentManagementPage() {
     return matchSearch;
   });
 
-  const avgProgress = students.length ? Math.round(students.reduce((a, s) => a + s.progress, 0) / students.length) : 0;
+  const totalSessionsAll = courses.reduce((acc, c) => acc + (c.sessions ? c.sessions.length : 0), 0);
+  const getDynamicProgress = (s: any) => {
+    if (totalSessionsAll === 0) return 0;
+    const watched = courses.reduce((acc, c) => {
+      if (!c.sessions) return acc;
+      return acc + c.sessions.filter(sess => s.watchedVideos?.includes(sess.youtubeUrl)).length;
+    }, 0);
+    return Math.round((watched / totalSessionsAll) * 100);
+  };
+
+  const avgProgress = students.length ? Math.round(students.reduce((a, s) => a + getDynamicProgress(s), 0) / students.length) : 0;
 
   if (!mounted || !authChecked) {
     return (
@@ -183,9 +193,9 @@ export default function StudentManagementPage() {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3 min-w-[120px]">
                           <div className="flex-1 h-1 bg-surface-container-highest rounded-full">
-                            <div className="h-1 bg-primary rounded-full" style={{ width: `${s.progress}%` }} />
+                            <div className="h-1 bg-primary rounded-full" style={{ width: `${getDynamicProgress(s)}%` }} />
                           </div>
-                          <span className="text-primary shrink-0" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>{s.progress}%</span>
+                          <span className="text-primary shrink-0" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>{getDynamicProgress(s)}%</span>
                         </div>
                       </td>
                       <td className="px-6 py-4 text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>{s.lastModule}</td>

@@ -30,7 +30,7 @@ const getEmbedUrl = (input: string) => {
 };
 
 const files = ["Trade Finance Guide.pdf", "Global Operations customs_template.xlsx", "Merkanto Supplier Checklist.docx"];
-const TABS = ["My Learning", "Course Library", "Resources"];
+const TABS = ["My Learning", "Course Library"];
 
 export default function StudentDashboardPage() {
   const router = useRouter();
@@ -539,26 +539,6 @@ export default function StudentDashboardPage() {
             </motion.section>
           )}
 
-          {/* TAB 2: RESOURCES */}
-          {activeTab === 2 && (
-            <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-              <h2 className="text-on-surface mb-6 uppercase tracking-[0.2em]" style={{ fontFamily: "Geist, monospace", fontSize: "12px" }}>LESSON RESOURCES</h2>
-              <div className="glass-card divide-y divide-outline-variant/10">
-                {files.map((file) => (
-                  <div key={file} onClick={() => showToast(`Downloading ${file}...`)} className="flex items-center justify-between px-6 py-4 hover:bg-white/5 transition-colors cursor-pointer group">
-                    <div className="flex items-center gap-4">
-                      <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">description</span>
-                      <div>
-                        <div className="text-on-surface" style={{ fontFamily: "Geist, monospace", fontSize: "13px" }}>{file}</div>
-                        <div className="text-on-surface-variant" style={{ fontFamily: "Manrope, sans-serif", fontSize: "12px" }}>Click to download</div>
-                      </div>
-                    </div>
-                    <span className="material-symbols-outlined text-primary">download</span>
-                  </div>
-                ))}
-              </div>
-            </motion.section>
-          )}
         </div>
       </div>
 
