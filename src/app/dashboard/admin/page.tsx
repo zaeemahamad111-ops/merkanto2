@@ -744,33 +744,7 @@ export default function AdminHubPage() {
                           </div>
                         </div>
                         
-                        <div className="space-y-2">
-                          <label className="text-on-surface-variant uppercase tracking-widest mb-1 block" style={{ fontFamily: "Geist, monospace", fontSize: "9px" }}>Lesson Description</label>
-                          <input type="text" value={session.description} onChange={e => handleSessionChange(index, "description", e.target.value)} className="w-full bg-transparent border-b border-outline-variant/30 focus:border-primary focus:outline-none text-white text-xs py-1" placeholder="What will they learn?" />
-                        </div>
 
-                        {/* Session Cover Image Uploader (WebP uploader) */}
-                        <div className="p-3 bg-background/50 border border-outline-variant/5 mt-1 space-y-2">
-                          <label className="text-on-surface-variant uppercase tracking-widest block font-bold" style={{ fontFamily: "Geist, monospace", fontSize: "9px" }}>Lesson Cover Thumbnail</label>
-                          <div className="flex items-center gap-3">
-                            <input 
-                              type="text" 
-                              value={session.img} 
-                              onChange={e => handleSessionChange(index, "img", e.target.value)} 
-                              className="flex-1 bg-transparent border-b border-outline-variant/30 focus:border-primary focus:outline-none text-white text-[10px] py-1" 
-                              placeholder="Paste Lesson Cover Thumbnail URL" 
-                            />
-                            <label className="bg-primary/20 text-primary border border-primary/30 px-3 py-1 cursor-pointer hover:bg-primary/30 transition-colors uppercase tracking-widest text-[8px] font-bold select-none shrink-0">
-                              {uploadingField === `sess-${index}` ? "Converting..." : "Upload File"}
-                              <input
-                                type="file"
-                                accept="image/*"
-                                onChange={e => handleFileUpload(e, `sess-${index}`, index)}
-                                className="hidden"
-                              />
-                            </label>
-                          </div>
-                        </div>
                       </div>
                     ))}
                   </div>

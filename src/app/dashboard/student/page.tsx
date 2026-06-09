@@ -62,6 +62,7 @@ export default function StudentDashboardPage() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [reminderSet, setReminderSet] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
 
   // Split Workspace Interactive States
   const [activeSession, setActiveSession] = useState<Session | null>(null);
@@ -541,6 +542,39 @@ export default function StudentDashboardPage() {
 
         </div>
       </div>
+
+      {/* Disclaimer Pop-up */}
+      <AnimatePresence>
+        {showDisclaimer && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/95 backdrop-blur-md overflow-y-auto">
+            <motion.div initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }} className="glass-card w-full max-w-2xl p-6 md:p-8 border border-primary/20 relative my-8">
+              <div className="mb-6">
+                <div className="text-primary uppercase tracking-widest text-xs font-bold" style={{ fontFamily: "Geist, monospace" }}>Important Notice</div>
+                <h2 className="text-white mt-1 uppercase tracking-widest" style={{ fontFamily: "Outfit, sans-serif", fontSize: "22px" }}>
+                  Disclaimer
+                </h2>
+              </div>
+              
+              <div className="space-y-4 text-on-surface-variant text-sm md:text-base leading-relaxed max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar" style={{ fontFamily: "Manrope, sans-serif" }}>
+                <p>This Export Management Course is an independent educational program offered by Merkanto Private Limited for learning and skill-development purposes only. The Certificate of Completion issued upon successful completion of the course is a private certificate issued by Merkanto and is not affiliated with, approved by, recognized by, or endorsed by any government authority, university, regulatory body, or accreditation agency unless explicitly stated otherwise.</p>
+                <p>The information provided in this course is intended for educational purposes only. Completion of this course does not guarantee employment, business success, export licenses, government approvals, certifications, contracts, clients, profits, or income of any kind. Individual results may vary based on personal effort, experience, market conditions, and other factors beyond our control.</p>
+                <p>While every effort is made to ensure the accuracy and relevance of the course content, Merkanto Private Limited and its instructors make no representations or warranties regarding the completeness, accuracy, or future applicability of the information provided. Participants are encouraged to seek professional, legal, financial, tax, or regulatory advice before making business decisions.</p>
+                <p>By enrolling in this course, participants acknowledge and agree that Merkanto Private Limited, its instructors, employees, and affiliates shall not be held liable for any direct or indirect losses, damages, or business decisions arising from the use of the course materials or information provided during the training.</p>
+              </div>
+
+              <div className="mt-8">
+                <button 
+                  onClick={() => setShowDisclaimer(false)}
+                  className="w-full bg-primary text-background font-bold py-3 uppercase tracking-widest hover:brightness-110 transition-all text-sm"
+                  style={{ fontFamily: "Geist, monospace" }}
+                >
+                  I Understand and Agree
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Course Detail / Session Picker Modal */}
       <AnimatePresence>
