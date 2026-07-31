@@ -52,9 +52,20 @@ export default function DemoPage() {
           await fetchProfile(data.user.id);
         }
       } else {
-        // Register flow
+        // Register flow - check existing profile first
+        const { data: existingProfile } = await supabase.from("profiles").select("*").eq("email", email.trim()).maybeSingle();
+        if (existingProfile) {
+          if (!existingProfile.demo_status) {
+            await supabase.from("profiles").update({ demo_status: "pending" }).eq("id", existingProfile.id);
+          }
+          setIsLogin(true);
+          setError("This email is already registered. Please enter your password to Sign In.");
+          setLoading(false);
+          return;
+        }
+
         const { data, error } = await supabase.auth.signUp({ 
-          email, 
+          email: email.trim(), 
           password,
           options: {
             data: { name }
@@ -63,24 +74,36 @@ export default function DemoPage() {
         if (error) throw error;
         
         if (data.user) {
-          // Add to profiles
           const { error: profileError } = await supabase.from("profiles").upsert({
             id: data.user.id,
-            email,
+            email: email.trim(),
             name: name || email.split("@")[0],
             role: "student",
             demo_status: "pending",
             progress: 0,
             joined_date: new Date().toISOString().split('T')[0]
           });
-          if (profileError) throw profileError;
+          if (profileError) {
+            if (profileError.message?.includes("profiles_email_key")) {
+              setIsLogin(true);
+              setError("This email is already registered. Please Sign In below.");
+              setLoading(false);
+              return;
+            }
+            throw profileError;
+          }
           
           setUser(data.user);
           setDemoStatus("pending");
         }
       }
     } catch (err: any) {
-      setError(err.message || "An error occurred");
+      if (err.message?.includes("profiles_email_key")) {
+        setIsLogin(true);
+        setError("This email is already registered. Please Sign In below.");
+      } else {
+        setError(err.message || "An error occurred");
+      }
     } finally {
       setLoading(false);
     }
