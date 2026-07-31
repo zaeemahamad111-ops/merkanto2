@@ -101,6 +101,8 @@ export default function DemoPage() {
       if (err.message?.includes("profiles_email_key")) {
         setIsLogin(true);
         setError("This email is already registered. Please Sign In below.");
+      } else if (err.message?.includes("Email not confirmed")) {
+        setError("Email not confirmed. Please check your email inbox for the confirmation link, or disable 'Confirm email' in Supabase Auth settings.");
       } else {
         setError(err.message || "An error occurred");
       }
