@@ -58,14 +58,14 @@ export function useDemo() {
     try {
       const { error } = await supabase
         .from("profiles")
-        .delete()
+        .update({ demo_status: null })
         .eq("id", id);
         
       if (error) throw error;
       await fetchDemoRequests();
       return true;
     } catch (e) {
-      console.error("Failed to delete demo request:", e);
+      console.error("Failed to clear demo request:", e);
       return false;
     }
   };
@@ -74,7 +74,7 @@ export function useDemo() {
     try {
       const { error } = await supabase
         .from("profiles")
-        .delete()
+        .update({ demo_status: null })
         .not("demo_status", "is", null);
         
       if (error) throw error;
