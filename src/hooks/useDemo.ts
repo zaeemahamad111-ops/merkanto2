@@ -54,5 +54,37 @@ export function useDemo() {
     }
   };
 
-  return { demoRequests, isLoaded, updateDemoStatus, fetchDemoRequests };
+  const deleteDemoRequest = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from("profiles")
+        .delete()
+        .eq("id", id);
+        
+      if (error) throw error;
+      await fetchDemoRequests();
+      return true;
+    } catch (e) {
+      console.error("Failed to delete demo request:", e);
+      return false;
+    }
+  };
+
+  const clearAllDemoRequests = async () => {
+    try {
+      const { error } = await supabase
+        .from("profiles")
+        .delete()
+        .not("demo_status", "is", null);
+        
+      if (error) throw error;
+      await fetchDemoRequests();
+      return true;
+    } catch (e) {
+      console.error("Failed to clear demo requests:", e);
+      return false;
+    }
+  };
+
+  return { demoRequests, isLoaded, updateDemoStatus, deleteDemoRequest, clearAllDemoRequests, fetchDemoRequests };
 }

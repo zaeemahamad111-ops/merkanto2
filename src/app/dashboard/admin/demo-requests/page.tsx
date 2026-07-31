@@ -11,7 +11,7 @@ export default function AdminDemoRequestsPage() {
   const [mounted, setMounted] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
 
-  const { demoRequests, isLoaded, updateDemoStatus } = useDemo();
+  const { demoRequests, isLoaded, updateDemoStatus, deleteDemoRequest, clearAllDemoRequests } = useDemo();
 
   useEffect(() => {
     setMounted(true);
@@ -28,6 +28,18 @@ export default function AdminDemoRequestsPage() {
 
   const handleStatusChange = async (id: string, newStatus: "pending" | "approved" | "paused" | "rejected") => {
     await updateDemoStatus(id, newStatus);
+  };
+
+  const handleDelete = async (id: string, name: string) => {
+    if (window.confirm(`Delete demo request for "${name}"?`)) {
+      await deleteDemoRequest(id);
+    }
+  };
+
+  const handleClearAll = async () => {
+    if (window.confirm("Are you sure you want to delete ALL demo requests?")) {
+      await clearAllDemoRequests();
+    }
   };
 
   if (!mounted || !authChecked) {
@@ -51,6 +63,11 @@ export default function AdminDemoRequestsPage() {
                <div className="uppercase tracking-[0.2em] text-white" style={{ fontFamily: "Outfit, sans-serif", fontSize: "18px", fontWeight: 700 }}>DEMO REQUESTS</div>
                <div className="text-on-surface-variant" style={{ fontFamily: "Geist, monospace", fontSize: "11px" }}>Manage Access to the Course Preview</div>
              </div>
+             {demoRequests.length > 0 && (
+               <button onClick={handleClearAll} className="px-4 py-2 border border-red-500/50 text-red-400 hover:bg-red-500/10 transition-colors uppercase tracking-widest text-xs font-bold" style={{ fontFamily: "Geist, monospace" }}>
+                 Clear All Requests
+               </button>
+             )}
           </div>
         </header>
 
@@ -98,6 +115,9 @@ export default function AdminDemoRequestsPage() {
                               Reject
                             </button>
                           )}
+                          <button onClick={() => handleDelete(req.id, req.name)} className="px-2 py-1 border border-outline-variant text-on-surface-variant hover:text-red-400 hover:border-red-400/50 transition-colors" title="Delete request">
+                            <span className="material-symbols-outlined text-[14px]">delete</span>
+                          </button>
                         </div>
                       </td>
                     </tr>
