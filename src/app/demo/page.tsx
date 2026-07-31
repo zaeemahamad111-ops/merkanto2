@@ -154,9 +154,9 @@ export default function DemoPage() {
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-4">
         
         {/* Header Logo */}
-        <div className="absolute top-8 left-8">
-          <button onClick={() => router.push("/")} className="text-white hover:opacity-80 transition-opacity">
-            <img src="/images/MK_White.png" alt="Merkanto" className="h-8" />
+        <div className="absolute top-6 left-6 md:top-8 md:left-8 z-30">
+          <button onClick={() => router.push("/")} className="text-white hover:opacity-80 transition-opacity flex items-center">
+            <img src="/images/merkanto_logo_transparent_3.png" alt="Merkanto" className="h-8 md:h-10 object-contain" />
           </button>
         </div>
 
