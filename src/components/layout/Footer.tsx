@@ -9,7 +9,8 @@ export default function Footer() {
   const pathname = usePathname();
   const { getContent } = useContent();
   const isDashboard = pathname?.startsWith("/dashboard");
-  if (isDashboard) return null;
+  const isDemo = pathname?.startsWith("/demo");
+  if (isDashboard || isDemo) return null;
 
   const instagramUrl = getContent("social.instagram", "https://instagram.com/merkantopvtltd");
   const facebookUrl = getContent("social.facebook", "https://facebook.com/merkanto");

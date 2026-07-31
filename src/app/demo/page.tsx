@@ -95,17 +95,9 @@ export default function DemoPage() {
   if (!mounted) return null;
 
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden">
-      {/* Background Video */}
-      <div className="absolute inset-0 w-full h-full">
-        {/* Placeholder Demo Video */}
-        <iframe
-          src="https://player.vimeo.com/video/1197817919?h=31d77d474c&badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1"
-          frameBorder="0"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-          className="absolute inset-0 w-[150vw] h-[150vh] -translate-x-[25vw] -translate-y-[25vh] object-cover pointer-events-none opacity-50"
-        ></iframe>
-      </div>
+    <div className="relative w-full h-screen bg-black overflow-hidden flex flex-col items-center justify-center p-4">
+      {/* Subtle background glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-black to-black"></div>
 
       {/* Main UI */}
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-4">
@@ -168,7 +160,7 @@ export default function DemoPage() {
              <motion.div 
                key="approved"
                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-               className="w-full max-w-4xl aspect-video bg-black/80 border border-primary/30 p-2 shadow-2xl relative"
+               className="w-full max-w-5xl aspect-video bg-black/80 border border-primary/30 p-2 shadow-2xl relative z-10"
              >
                 <div className="absolute -top-12 right-0 flex gap-4">
                    <span className="text-primary text-xs uppercase tracking-widest flex items-center gap-1 font-bold bg-black/50 px-3 py-1 border border-primary/20"><span className="material-symbols-outlined text-[14px]">verified</span> Access Granted</span>

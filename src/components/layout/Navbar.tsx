@@ -30,7 +30,8 @@ export default function Navbar() {
   }, [pathname]);
 
   const isDashboard = pathname?.startsWith("/dashboard");
-  if (isDashboard) return null;
+  const isDemo = pathname?.startsWith("/demo");
+  if (isDashboard || isDemo) return null;
 
   const isVenturesActive = ventureLinks.some((link) => link.href === pathname);
 
