@@ -55,6 +55,7 @@ export default function Footer() {
               { href: "/automotive", label: "Automotive" },
               { href: "/wedding", label: "Studios" },
               { href: "/events", label: "Events" },
+              { href: "/demo", label: "Course Demo" },
             ].map((link) => (
               <Link
                 key={link.href}

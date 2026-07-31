@@ -12,6 +12,7 @@ const ventureLinks = [
   { href: "/automotive", label: "Automotive", desc: "Luxury Vehicle Customization", icon: "precision_manufacturing" },
   { href: "/wedding", label: "Studios", desc: "Cinematic Artistry & Filmography", icon: "movie" },
   { href: "/events", label: "Events", desc: "Curated Global Production", icon: "event" },
+  { href: "/demo", label: "Course Demo", desc: "Exclusive Masterclass Preview", icon: "play_circle" },
 ];
 
 export default function Navbar() {
