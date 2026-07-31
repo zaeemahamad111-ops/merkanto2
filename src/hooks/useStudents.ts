@@ -31,19 +31,17 @@ export function useStudents() {
       if (error) {
         console.error("Error loading students:", error.message || error);
       } else {
-        const mapped = (data || [])
-          .filter((p: any) => !p.demo_status)
-          .map((p: any) => ({
-            id: p.id,
-            name: p.name,
-            email: p.email,
-            track: p.track,
-            progress: p.progress,
-            joinedDate: p.joined_date,
-            watchedVideos: p.watched_videos || [],
-            password: p.password,
-            status: p.progress > 0 ? ("Active" as const) : ("Inactive" as const)
-          }));
+        const mapped = (data || []).map((p: any) => ({
+          id: p.id,
+          name: p.name,
+          email: p.email,
+          track: p.track,
+          progress: p.progress,
+          joinedDate: p.joined_date,
+          watchedVideos: p.watched_videos || [],
+          password: p.password,
+          status: p.progress > 0 ? ("Active" as const) : ("Inactive" as const)
+        }));
         setStudents(mapped);
       }
     } catch (e) {
