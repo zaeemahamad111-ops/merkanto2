@@ -4,13 +4,38 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabaseClient";
 import { motion, AnimatePresence } from "framer-motion";
+import { useDemo } from "@/hooks/useDemo";
+
+const getEmbedUrl = (input: string) => {
+  try {
+    let urlStr = input;
+    const srcMatch = input.match(/src="([^"]+)"/);
+    if (srcMatch) urlStr = srcMatch[1];
+    urlStr = urlStr.replace(/&amp;/g, '&');
+    const u = new URL(urlStr);
+    if (u.hostname.includes("youtube.com") && u.searchParams.get("v")) return `https://www.youtube.com/embed/${u.searchParams.get("v")}`;
+    if (u.hostname.includes("youtu.be")) return `https://www.youtube.com/embed/${u.pathname.slice(1)}`;
+    if (u.hostname.includes("vimeo.com") && !u.hostname.includes("player.vimeo.com")) {
+      const videoId = u.pathname.split("/").pop();
+      return `https://player.vimeo.com/video/${videoId}${u.search}`;
+    }
+    return urlStr;
+  } catch { return input; }
+};
 
 export default function DemoPage() {
   const router = useRouter();
+  const { fetchDemoVideos } = useDemo();
   const [mounted, setMounted] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [demoStatus, setDemoStatus] = useState<string | null>(null);
   
+  const [demoVids, setDemoVids] = useState<{ v1: { title: string; url: string }; v2: { title: string; url: string } }>({
+    v1: { title: "Demo Video 1: Masterclass Overview", url: "https://player.vimeo.com/video/1197817919?h=31d77d474c" },
+    v2: { title: "Demo Video 2: Operational Systems Preview", url: "https://player.vimeo.com/video/1197817919?h=31d77d474c" }
+  });
+  const [activeVidIdx, setActiveVidIdx] = useState<0 | 1>(0);
+
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +46,7 @@ export default function DemoPage() {
   useEffect(() => {
     setMounted(true);
     checkSession();
+    fetchDemoVideos().then(vids => setDemoVids(vids));
   }, []);
 
   const checkSession = async () => {
@@ -185,19 +211,52 @@ export default function DemoPage() {
              <motion.div 
                key="approved"
                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-               className="w-full max-w-5xl aspect-video bg-black/80 border border-primary/30 p-2 shadow-2xl relative z-10"
+               className="w-full max-w-5xl bg-black/90 border border-primary/30 p-4 shadow-2xl relative z-10 space-y-4"
              >
-                <div className="absolute -top-12 right-0 flex gap-4">
-                   <span className="text-primary text-xs uppercase tracking-widest flex items-center gap-1 font-bold bg-black/50 px-3 py-1 border border-primary/20"><span className="material-symbols-outlined text-[14px]">verified</span> Access Granted</span>
-                   <button onClick={handleLogout} className="text-on-surface-variant hover:text-white uppercase tracking-widest text-xs">Sign Out</button>
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-2 border-b border-white/10">
+                   <div className="flex items-center gap-2">
+                     <span className="text-primary text-xs uppercase tracking-widest flex items-center gap-1 font-bold bg-primary/10 px-3 py-1 border border-primary/20" style={{ fontFamily: "Geist, monospace" }}>
+                       <span className="material-symbols-outlined text-[14px]">verified</span> Access Granted
+                     </span>
+                   </div>
+                   
+                   {/* Video Switcher Tabs */}
+                   <div className="flex items-center gap-2 bg-surface-container p-1 border border-outline-variant/20 rounded">
+                     <button
+                       onClick={() => setActiveVidIdx(0)}
+                       className={`px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold transition-all ${
+                         activeVidIdx === 0 ? "bg-primary text-background" : "text-on-surface-variant hover:text-white"
+                       }`}
+                       style={{ fontFamily: "Geist, monospace" }}
+                     >
+                       {demoVids.v1.title}
+                     </button>
+                     <button
+                       onClick={() => setActiveVidIdx(1)}
+                       className={`px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold transition-all ${
+                         activeVidIdx === 1 ? "bg-primary text-background" : "text-on-surface-variant hover:text-white"
+                       }`}
+                       style={{ fontFamily: "Geist, monospace" }}
+                     >
+                       {demoVids.v2.title}
+                     </button>
+                   </div>
+
+                   <button onClick={handleLogout} className="text-on-surface-variant hover:text-white uppercase tracking-widest text-xs" style={{ fontFamily: "Geist, monospace" }}>
+                     Sign Out
+                   </button>
                 </div>
-                {/* Real Demo Video Player */}
-                <iframe
-                  src="https://player.vimeo.com/video/1197817919?h=31d77d474c&badge=0&autopause=0&player_id=0&app_id=58479"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                  className="w-full h-full"
-                ></iframe>
+
+                {/* Active Video Player */}
+                <div className="w-full aspect-video bg-black relative">
+                  <iframe
+                    key={activeVidIdx}
+                    src={getEmbedUrl(activeVidIdx === 0 ? demoVids.v1.url : demoVids.v2.url)}
+                    frameBorder="0"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                    className="w-full h-full"
+                  ></iframe>
+                </div>
              </motion.div>
           ) : (
             <motion.div 

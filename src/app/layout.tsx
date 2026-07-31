@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import StartupLoader from "@/components/layout/StartupLoader";
 
+import Script from "next/script";
 import { supabase } from "@/utils/supabaseClient";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -61,8 +62,8 @@ export default async function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=Manrope:wght@300;400;500;600;700;800&family=Geist:wght@400;500;600&display=swap"
         />
-        {schemaStr && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaStr }} />}
-        {analyticsStr && <script dangerouslySetInnerHTML={{ __html: analyticsStr }} />}
+        {schemaStr && <Script id="seo-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaStr }} />}
+        {analyticsStr && <Script id="seo-analytics" dangerouslySetInnerHTML={{ __html: analyticsStr }} />}
       </head>
       <body className="bg-background line-pattern text-on-surface antialiased min-h-screen flex flex-col overflow-x-hidden w-full">
         <StartupLoader />

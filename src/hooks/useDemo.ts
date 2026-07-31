@@ -86,5 +86,50 @@ export function useDemo() {
     }
   };
 
-  return { demoRequests, isLoaded, updateDemoStatus, deleteDemoRequest, clearAllDemoRequests, fetchDemoRequests };
+  const fetchDemoVideos = async () => {
+    try {
+      const { data } = await supabase
+        .from("merkanto_content")
+        .select("key, value")
+        .in("key", ["demo.v1.title", "demo.v1.url", "demo.v2.title", "demo.v2.url"]);
+
+      if (data) {
+        const getVal = (k: string, fb: string) => data.find(d => d.key === k)?.value || fb;
+        return {
+          v1: {
+            title: getVal("demo.v1.title", "Demo Video 1: Masterclass Overview"),
+            url: getVal("demo.v1.url", "https://player.vimeo.com/video/1197817919?h=31d77d474c")
+          },
+          v2: {
+            title: getVal("demo.v2.title", "Demo Video 2: Operational Systems Preview"),
+            url: getVal("demo.v2.url", "https://player.vimeo.com/video/1197817919?h=31d77d474c")
+          }
+        };
+      }
+    } catch (e) {
+      console.error("Failed to load demo videos:", e);
+    }
+    return {
+      v1: { title: "Demo Video 1: Masterclass Overview", url: "https://player.vimeo.com/video/1197817919?h=31d77d474c" },
+      v2: { title: "Demo Video 2: Operational Systems Preview", url: "https://player.vimeo.com/video/1197817919?h=31d77d474c" }
+    };
+  };
+
+  const saveDemoVideos = async (v1: { title: string; url: string }, v2: { title: string; url: string }) => {
+    try {
+      const payload = [
+        { key: "demo.v1.title", value: v1.title, category: "Demo", label: "Demo Video 1 Title", type: "text" },
+        { key: "demo.v1.url", value: v1.url, category: "Demo", label: "Demo Video 1 URL", type: "video" },
+        { key: "demo.v2.title", value: v2.title, category: "Demo", label: "Demo Video 2 Title", type: "text" },
+        { key: "demo.v2.url", value: v2.url, category: "Demo", label: "Demo Video 2 URL", type: "video" },
+      ];
+      await supabase.from("merkanto_content").upsert(payload, { onConflict: "key" });
+      return true;
+    } catch (e) {
+      console.error("Error saving demo videos:", e);
+      return false;
+    }
+  };
+
+  return { demoRequests, isLoaded, updateDemoStatus, deleteDemoRequest, clearAllDemoRequests, fetchDemoRequests, fetchDemoVideos, saveDemoVideos };
 }

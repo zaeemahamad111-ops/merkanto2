@@ -46,22 +46,7 @@ export default function StudentDashboardPage() {
       if (!role || !user || role !== "student") {
         router.push("/login");
       } else {
-        // Check if this profile is a demo user
-        supabase
-          .from("profiles")
-          .select("demo_status")
-          .eq("email", user.toLowerCase().trim())
-          .maybeSingle()
-          .then(({ data }) => {
-            if (data && data.demo_status) {
-              localStorage.removeItem("merkanto_role");
-              localStorage.removeItem("merkanto_user");
-              localStorage.removeItem("merkanto_student_id");
-              router.push("/demo");
-            } else {
-              setAuthChecked(true);
-            }
-          });
+        setAuthChecked(true);
       }
     }
   }, [router]);
