@@ -68,7 +68,7 @@ export default function DemoPage() {
             id: data.user.id,
             email,
             name: name || email.split("@")[0],
-            role: "demo",
+            role: "student",
             demo_status: "pending",
             progress: 0,
             joined_date: new Date().toISOString().split('T')[0]
