@@ -10,6 +10,7 @@ const adminLinks = [
   { href: "/dashboard/admin", icon: "dashboard", label: "Command Center" },
   { href: "/dashboard/admin/students", icon: "group", label: "Students Registry" },
   { href: "/dashboard/admin/qa", icon: "forum", label: "Q&A Forum" },
+  { href: "/dashboard/admin/demo-requests", icon: "pending_actions", label: "Demo Requests" },
 ];
 
 const studentLinks = [
