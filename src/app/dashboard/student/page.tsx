@@ -8,6 +8,7 @@ import { useCourses, Course, Session } from "@/hooks/useCourses";
 import { useStudents } from "@/hooks/useStudents";
 import { useAssignments } from "@/hooks/useAssignments";
 import { useQA } from "@/hooks/useQA";
+import { supabase } from "@/utils/supabaseClient";
 
 const getEmbedUrl = (input: string) => {
   try {
