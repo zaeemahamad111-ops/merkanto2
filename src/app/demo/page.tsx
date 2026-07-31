@@ -248,14 +248,29 @@ export default function DemoPage() {
                 </div>
 
                 {/* Active Video Player */}
-                <div className="w-full aspect-video bg-black relative">
-                  <iframe
-                    key={activeVidIdx}
-                    src={getEmbedUrl(activeVidIdx === 0 ? demoVids.v1.url : demoVids.v2.url)}
-                    frameBorder="0"
-                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                    className="w-full h-full"
-                  ></iframe>
+                <div className="w-full aspect-video bg-black relative overflow-hidden">
+                  {(() => {
+                    const rawUrl = (activeVidIdx === 0 ? demoVids.v1.url : demoVids.v2.url) || "";
+                    const isHtmlEmbed = rawUrl.trim().startsWith("<iframe") || rawUrl.trim().startsWith("<div");
+                    if (isHtmlEmbed) {
+                      return (
+                        <div 
+                          key={activeVidIdx}
+                          className="w-full h-full [&_iframe]:w-full [&_iframe]:h-full [&_iframe]:absolute [&_iframe]:top-0 [&_iframe]:left-0" 
+                          dangerouslySetInnerHTML={{ __html: rawUrl }} 
+                        />
+                      );
+                    }
+                    return (
+                      <iframe
+                        key={activeVidIdx}
+                        src={getEmbedUrl(rawUrl)}
+                        frameBorder="0"
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                        className="w-full h-full"
+                      ></iframe>
+                    );
+                  })()}
                 </div>
              </motion.div>
           ) : (
