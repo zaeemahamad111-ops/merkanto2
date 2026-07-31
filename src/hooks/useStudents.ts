@@ -31,17 +31,19 @@ export function useStudents() {
       if (error) {
         console.error("Error loading students:", error.message || error);
       } else {
-        const mapped = (data || []).map((p: any) => ({
-          id: p.id,
-          name: p.name,
-          email: p.email,
-          track: p.track,
-          progress: p.progress,
-          joinedDate: p.joined_date,
-          watchedVideos: p.watched_videos || [],
-          password: p.password,
-          status: p.progress > 0 ? ("Active" as const) : ("Inactive" as const)
-        }));
+        const mapped = (data || [])
+          .filter((p: any) => !p.demo_status)
+          .map((p: any) => ({
+            id: p.id,
+            name: p.name,
+            email: p.email,
+            track: p.track,
+            progress: p.progress,
+            joinedDate: p.joined_date,
+            watchedVideos: p.watched_videos || [],
+            password: p.password,
+            status: p.progress > 0 ? ("Active" as const) : ("Inactive" as const)
+          }));
         setStudents(mapped);
       }
     } catch (e) {
@@ -72,7 +74,7 @@ export function useStudents() {
 
       if (existing) {
         console.log("Email already exists in profiles. Enrolling directly...");
-        // Update their role and password directly
+        // Update their role and password directly and clear demo_status
         const { error: promoteError } = await supabase
           .from("profiles")
           .update({
@@ -80,7 +82,8 @@ export function useStudents() {
             name: s.name,
             track: s.track,
             progress: s.progress || 0,
-            password: s.password || "student123"
+            password: s.password || "student123",
+            demo_status: null
           })
           .eq("id", existing.id);
 
