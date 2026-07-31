@@ -98,9 +98,9 @@ export default function DemoPage() {
         }
       }
     } catch (err: any) {
-      if (err.message?.includes("profiles_email_key")) {
+      if (err.message?.includes("profiles_email_key") || err.message?.includes("User already registered") || err.message?.includes("already registered")) {
         setIsLogin(true);
-        setError("This email is already registered. Please Sign In below.");
+        setError("This email is already registered. Please enter your password to Sign In below.");
       } else if (err.message?.includes("Email not confirmed")) {
         setError("Email not confirmed. Please check your email inbox for the confirmation link, or disable 'Confirm email' in Supabase Auth settings.");
       } else {
